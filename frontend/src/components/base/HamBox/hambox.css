@@ -1,0 +1,79 @@
+.ham-box-inner {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 30px;
+  height: 2px;
+  @apply rounded;
+  @apply bg-lightWhite;
+  transition-duration: 0.22s;
+  transition-property: transform;
+}
+
+
+.ham-box-inner:before, .ham-box-inner:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: auto;
+  right: 0;
+  height: 2px;
+  @apply rounded;
+  @apply bg-lightWhite;
+  transition-timing-function: ease;
+  transition-duration: 0.15s;
+  transition-property: transform;
+}
+
+.ham-close {
+  transition-delay: 0s;
+  transform: rotate(0deg);
+  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.ham-open {
+  transition-delay: 0.12s;
+  transform: rotate(225deg);
+  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.ham-close:before {
+  width: 120%;
+  top: -10px;
+  opacity: 1;
+  transition: top 0.1s ease-in 0.25s, opacity 0.1s ease-in;
+}
+
+.ham-close:after {
+  width: 80%;
+  bottom: -10px;
+  transform: rotate(0deg);
+  transition: bottom 0.1s ease-in 0.25s, transform 0.22s cubic-bezier(0.55, 0.055, 0,675, 0.19);
+}
+
+.ham-open:before {
+  width: 100%;
+  top: 0px;
+  opacity: 0;
+  transition: top 0.1s ease-out, opacity 0.1s ease-out 0.12s;
+}
+
+.ham-open:after {
+  width: 100%;
+  bottom: 0px;
+  transform: rotate(-90deg);
+  transition: bottom 0.1s ease-out, transform 0.22s cubic-bezier(0.215, 0.61, 0.355, 1) 0.12s;
+}
+
+aside {
+  width: min(75vw, 400px);
+  transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
+  box-shadow: -10px 0px 30px -15px rgba(38, 48, 63, 0.7);
+  transform: translateX(100vw);
+  visibility: hidden;
+}
+
+aside.active {
+  transform: translateX(0vw);
+  visibility: visible;
+}

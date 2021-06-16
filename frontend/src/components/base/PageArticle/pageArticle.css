@@ -1,0 +1,5 @@
+.article-content p {
+  line-height: 1.5;
+  @apply mb-5;
+  @apply text-lg;
+}
