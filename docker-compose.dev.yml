@@ -1,0 +1,21 @@
+services:
+    front:
+        container_name: olivet-front
+        build: ./frontend
+        volumes:
+          - ./frontend/src/:/app/src
+          - /app/node_modules
+        ports:
+          - 3000:3000
+    back:
+        container_name: olivet-back
+        build: ./backend
+        ports:
+            - 4000:4000
+        command: npm run dev
+        volumes:
+            - ./backend/src/:/app/src/
+    mongodb:
+      image: mongo
+      volumes:
+        - ./data:/data/db
