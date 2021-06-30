@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
 import { NavLink } from "react-router-dom";
+import { ChevronDownIcon } from "@heroicons/react/solid";
+import useOnClickOutside from "@Hooks/useOnClickOutside";
 import navLinks from "../../../config";
-import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import "./hambox.css";
 
 const HamBox = (): JSX.Element => {

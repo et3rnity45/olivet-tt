@@ -2,9 +2,9 @@ import React from "react";
 import { ArrowRightIcon, RefreshIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import Article from "../../types/Article";
-import HomeArticle from "../base/HomeArticle";
-import { NewestArticles } from "../../graphql/queries/article";
+import Article from "@Types/Article";
+import HomeArticle from "@Components/base/HomeArticle";
+import { NewestArticles } from "@Queries/article";
 
 const News = (): JSX.Element => {
   const { loading, error, data } = useQuery(NewestArticles);

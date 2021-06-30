@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../assets/logo/olivet-tt.png";
+import logo from "@Assets/logo/olivet-tt.png";
+import HamMenu from "@Components/base/HamBox/HamMenu";
 import navLinks from "../../config";
-import HamMenu from "../base/HamBox/HamMenu";
 
 type NavbarProps = {
   transparent: boolean;

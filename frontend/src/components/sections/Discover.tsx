@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ReactComponent as Gym } from "../../assets/icons/gym.svg";
-import { ReactComponent as PingPong } from "../../assets/icons/ping-pong.svg";
-import { ReactComponent as Trophy } from "../../assets/icons/trophy.svg";
+import { ReactComponent as Gym } from "@Assets/icons/gym.svg";
+import { ReactComponent as PingPong } from "@Assets/icons/ping-pong.svg";
+import { ReactComponent as Trophy } from "@Assets/icons/trophy.svg";
 
 export const activities = [
   {

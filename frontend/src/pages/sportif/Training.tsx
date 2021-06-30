@@ -1,9 +1,9 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { RefreshIcon } from "@heroicons/react/outline";
-import { TrainersQuery } from "../../graphql/queries/trainer";
-import TrainerType from "../../types/Trainer";
-import planning from "../../assets/background/planning.png";
+import { TrainersQuery } from "@Queries/trainer";
+import TrainerType from "@Types/Trainer";
+import planning from "@Assets/background/planning.png";
 
 const Training = (): JSX.Element => {
   const { loading, error, data } = useQuery(TrainersQuery);

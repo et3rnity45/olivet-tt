@@ -1,8 +1,7 @@
-import { CalendarIcon } from "@heroicons/react/outline";
-import moment from "moment";
 import React from "react";
-import Article from "../../../types/Article";
-import "./pageArticle.css";
+import moment from "moment";
+import { CalendarIcon } from "@heroicons/react/outline";
+import Article from "@Types/Article";
 
 type PageArticleProps = {
   article: Article;
@@ -28,9 +27,11 @@ const PageArticle = ({ article }: PageArticleProps): JSX.Element => {
           </span>
         </div>
       </div>
-      <div className="article-content mx-0 md:mx-5 lg:mx-20">
-        <p>{article.content}</p>
-      </div>
+      <div
+        className="prose prose-sm md:prose-lg prose-red max-w-none mx-0 md:mx-5 lg:mx-20 mt-8"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: article.content }}
+      />
     </article>
   );
 };

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { RefreshIcon } from "@heroicons/react/outline";
-import Article from "../types/Article";
-import { ArticlesQuery } from "../graphql/queries/article";
-import ListArticle from "../components/base/ListArticle";
+import Article from "@Types/Article";
+import { ArticlesQuery } from "@Queries/article";
+import ListArticle from "@Components/base/ListArticle";
 
 const options = ["competition", "stage", "autre"];
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { MailIcon, PhoneIcon } from "@heroicons/react/outline";
-import { ReactComponent as Facebook } from "../assets/icons/facebook.svg";
-import { ReactComponent as Youtube } from "../assets/icons/youtube.svg";
+import { ReactComponent as Facebook } from "@Assets/icons/facebook.svg";
+import { ReactComponent as Youtube } from "@Assets/icons/youtube.svg";
 
 const coordinates = {
   mail: "usmo.tennisdetable@wanadoo.fr",

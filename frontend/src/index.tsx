@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import ScrollToTop from "@Components/ScrollToTop";
 import reportWebVitals from "./reportWebVitals";
-import ScrollToTop from "./components/ScrollToTop";
 import App from "./App";
 import "./index.css";
 

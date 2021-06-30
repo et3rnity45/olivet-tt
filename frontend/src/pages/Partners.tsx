@@ -1,8 +1,8 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { RefreshIcon } from "@heroicons/react/outline";
-import { PartnersQuery } from "../graphql/queries/partner";
-import PartnerType from "../types/Partner";
+import PartnerType from "@Types/Partner";
+import { PartnersQuery } from "@Queries/partner";
 
 const Partners = (): JSX.Element => {
   const { loading, error, data } = useQuery(PartnersQuery);

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@Types/*": ["./types/*"],
+      "@Hooks/*": ["./hooks/*"],
+      "@Pages/*": ["./pages/*"],
+      "@Assets/*": ["./assets/*"],
+      "@Components/*": ["./components/*"],
+      "@Queries/*": ["./graphql/queries/*"],
+      "@Mutations/*": ["./graphql/mutations/*"]
+    }
+  }
+}

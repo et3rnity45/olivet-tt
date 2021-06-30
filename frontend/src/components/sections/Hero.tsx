@@ -1,6 +1,6 @@
 import React from "react";
-import heroBackground from "../../assets/background/hero-banner.jpg";
-import waveBottom from "../../assets/background/wave-bottom.svg";
+import heroBackground from "@Assets/background/hero-banner.jpg";
+import waveBottom from "@Assets/background/wave-bottom.svg";
 
 const Hero = (): JSX.Element => {
   return (

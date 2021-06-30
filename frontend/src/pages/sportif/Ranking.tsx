@@ -2,13 +2,14 @@ import React, { useMemo } from "react";
 import DataTable from "react-data-table-component";
 import { useQuery } from "@apollo/client";
 import { RefreshIcon } from "@heroicons/react/outline";
-import { PlayersQuery } from "../../graphql/queries/player";
-import PlayerType from "../../types/Player";
+import { PlayersQuery } from "@Queries/player";
+import PlayerType from "@Types/Player";
 
 const Ranking = (): JSX.Element => {
   const { loading, error, data } = useQuery(PlayersQuery);
-  const players = data?.players.map((player: PlayerType) => ({
+  const players = data?.players.map((player: PlayerType, index: number) => ({
     ...player,
+    index: index + 1,
     fullname: `${player.nom} ${player.prenom}`,
     point: Number(player.point.toFixed(2)),
     evolution: Number((player.point - player.valcla).toFixed(2)),
@@ -16,6 +17,11 @@ const Ranking = (): JSX.Element => {
 
   const columns = useMemo(
     () => [
+      {
+        name: "#",
+        selector: "index",
+        sortable: true,
+      },
       {
         name: "Nom prénom",
         selector: "fullname",
@@ -68,6 +74,7 @@ const Ranking = (): JSX.Element => {
         ) : null}
         {data?.players ? (
           <DataTable
+            className="uppercase"
             data={players}
             columns={columns}
             striped

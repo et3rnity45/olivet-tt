@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { RefreshIcon } from "@heroicons/react/outline";
-import { PartnersQuery } from "../../graphql/queries/partner";
-import PartnerType from "../../types/Partner";
+import { PartnersQuery } from "@Queries/partner";
+import PartnerType from "@Types/Partner";
 
 const Footer = (): JSX.Element => {
   const { loading, error, data } = useQuery(PartnersQuery);

@@ -1,8 +1,8 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import Footer from "./components/layout/Footer";
-import Navbar from "./components/layout/Navbar";
-import Page from "./pages/Page";
+import Footer from "@Components/layout/Footer";
+import Navbar from "@Components/layout/Navbar";
+import Page from "@Pages/Page";
 
 function App(): JSX.Element {
   const isHome = useLocation().pathname === "/";

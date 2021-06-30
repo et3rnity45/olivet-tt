@@ -2,8 +2,7 @@ import React from "react";
 import { ArrowRightIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import "moment/locale/fr";
-import Article from "../../types/Article";
+import Article from "@Types/Article";
 
 type HomeArticleProps = {
   article: Article;
