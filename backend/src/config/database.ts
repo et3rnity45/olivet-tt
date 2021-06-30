@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { connect } from 'mongoose';
 
-const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/workit';
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/usmolivet';
 
 const options = {
   useNewUrlParser: true,

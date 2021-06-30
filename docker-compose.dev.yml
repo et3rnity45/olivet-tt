@@ -10,6 +10,8 @@ services:
     back:
         container_name: olivet-back
         build: ./backend
+        env_file: 
+            - ./backend/.env.docker
         ports:
             - 4000:4000
         command: npm run dev
