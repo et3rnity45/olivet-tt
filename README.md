@@ -58,4 +58,14 @@ Start the server
   yarn start OR npm start
 ```
 
+## Docker
+
+To run this project with Docker :
+
+Add a `.env.docker` file in /backend before running docker-compose.
+
+```bash
+  docker-compose -f docker-compose.dev.yml up --build
+```
+
   
