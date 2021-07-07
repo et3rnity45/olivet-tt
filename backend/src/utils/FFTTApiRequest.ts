@@ -26,37 +26,35 @@ const updateParams = (): void => {
   params.tmc = HmacSHA1(params.tm, key).toString();
 };
 
-const getPlayerInfo = async (licence: string): Promise<Player> => {
-  let player: Player = new Player();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const callApi = async (route: string, addParams: Record<string, unknown>): Promise<any> => {
+  let apiResponse;
 
   updateParams();
-  await axios.get(`${API_URL}/xml_joueur.php`, { params: { ...params, licence }, responseType: 'arraybuffer' })
-    .then((response) => {
-      const decodedReponse = iconv.decode(response.data, 'ISO-8859-1');
-      parseString(decodedReponse, { explicitArray: false }, (err, result) => {
-        player = result.liste.joueur;
+  await axios.get(`${API_URL}/${route}`, { responseType: 'arraybuffer', params: { ...params, ...addParams } })
+    .then((buffer) => {
+      const response = iconv.decode(buffer.data, 'ISO-8859-1');
+      parseString(response, { explicitArray: false }, (err, result) => {
+        apiResponse = result;
       });
     })
     .catch((err) => {
       throw new Error(err);
     });
+
+  return apiResponse;
+};
+
+const getPlayerInfo = async (licence: string): Promise<Player> => {
+  const response = await callApi('xml_joueur.php', { licence });
+  const player: Player = response.liste.joueur;
 
   return player;
 };
 
 export const getClubPlayers = async (): Promise<Player[]> => {
-  let players: Player[] = [];
-
-  updateParams();
-  await axios.get(`${API_URL}/xml_liste_joueur.php`, { params: { ...params, club: NUMCLUB } })
-    .then((response) => {
-      parseString(response.data, { explicitArray: false }, (err, result) => {
-        players = result.liste.joueur;
-      });
-    })
-    .catch((err) => {
-      throw new Error(err);
-    });
+  const response = await callApi('xml_liste_joueur.php', { club: NUMCLUB });
+  let players: Player[] = response.liste.joueur;
   players = await Promise.all(players.map(async (player) => getPlayerInfo(player.licence)));
 
   return players;
@@ -66,40 +64,17 @@ export const getTeamsWithResult = async (poule: Poule): Promise<Team[]> => {
   const variables = poule.liendivision.match(/(?<==)(.*?)(?=&)/g);
   if (!variables) throw new Error('no variables found');
 
-  let teams: Team[] = [];
-
-  updateParams();
-  await axios.get(`${API_URL}/xml_result_equ.php`, {
-    responseType: 'arraybuffer',
-    params: {
-      ...params, action: 'classement', auto: 1, D1: variables[1], cx_poule: variables[0],
-    },
-  })
-    .then((response) => {
-      const decodedReponse = iconv.decode(response.data, 'ISO-8859-1');
-      parseString(decodedReponse, { explicitArray: false }, (err, result) => {
-        teams = result.liste.classement;
-      });
-    });
+  const response = await callApi('xml_result_equ.php', {
+    action: 'classement', auto: 1, D1: variables[1], cx_poule: variables[0],
+  });
+  const teams: Team[] = response.liste.classement;
 
   return teams;
 };
 
 export const getPoules = async (): Promise<Poule[]> => {
-  let poules;
-
-  updateParams();
-  await axios.get(`${API_URL}/xml_equipe.php`, { responseType: 'arraybuffer', params: { ...params, numclu: NUMCLUB, type: 'A' } })
-    .then((response) => {
-      const decodedReponse = iconv.decode(response.data, 'ISO-8859-1');
-      parseString(decodedReponse, { explicitArray: false }, (err, result) => {
-        poules = result.liste.equipe;
-      });
-    })
-    .catch((err) => {
-      throw new Error(err);
-    });
-  if (!poules) throw new Error();
+  const response = await callApi('xml_equipe.php', { numclu: NUMCLUB, type: 'A' });
+  const poules: Poule[] = response.liste.equipe;
 
   return poules;
 };
