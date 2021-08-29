@@ -24,6 +24,7 @@ export default class LoginResolver {
     return { token: generateToken(user) };
   }
 
+  // @Authorized()
   @Mutation(() => Token)
   async register(@Arg('input') input: UserInput): Promise<Token> {
     const { email, password } = input;

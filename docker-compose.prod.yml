@@ -2,6 +2,8 @@ services:
     front:
         container_name: olivet-front
         build: ./frontend
+        env_file:
+            - ./frontend/.env.production
         ports:
             - 3000:80
         volumes:
