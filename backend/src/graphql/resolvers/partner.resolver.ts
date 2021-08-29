@@ -1,5 +1,5 @@
 import {
-  Resolver, Query, Arg, ID, Mutation,
+  Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
 import { ApolloError } from 'apollo-server-express';
@@ -25,6 +25,7 @@ export default class PartnerResolver {
     return partner;
   }
 
+  @Authorized()
   @Mutation(() => Partner)
   async createPartner(
     @Arg('input') input: PartnerInput,
@@ -45,6 +46,7 @@ export default class PartnerResolver {
     return partner;
   }
 
+  @Authorized()
   @Mutation(() => Partner)
   async updatePartner(
     @Arg('id', () => ID) id: string,
@@ -61,6 +63,7 @@ export default class PartnerResolver {
     return partner;
   }
 
+  @Authorized()
   @Mutation(() => Partner)
   async deletePartner(@Arg('id', () => ID) id: string): Promise<Partner> {
     const partner = await PartnerModel.findByIdAndDelete(id);

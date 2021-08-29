@@ -1,7 +1,9 @@
 services:
     front:
         container_name: olivet-front
-        build: ./frontend
+        build:
+          context: ./frontend
+          dockerfile: Dockerfile.dev
         volumes:
           - ./frontend/src/:/app/src
           - /app/node_modules

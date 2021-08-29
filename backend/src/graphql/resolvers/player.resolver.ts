@@ -1,5 +1,5 @@
 import {
-  Resolver, Query, Arg, ID, Mutation,
+  Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
 import { Player, PlayerModel } from '@Entities/player.entity';
 import { getClubPlayers } from '@Utils/FFTTApiRequest';
@@ -22,6 +22,7 @@ export default class PlayerResolver {
     return player;
   }
 
+  @Authorized()
   @Mutation(() => [Player])
   async updateAllPlayers(): Promise<Player[]> {
     await PlayerModel.deleteMany({});

@@ -1,5 +1,5 @@
 import {
-  Resolver, Query, Arg, ID, Mutation,
+  Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
 import { ApolloError } from 'apollo-server-express';
 import UserInput from '@Inputs/user.input';
@@ -7,6 +7,7 @@ import { User, UserModel } from '@Entities/user.entity';
 
 @Resolver(User)
 export default class UserResolver {
+  @Authorized()
   @Query(() => [User])
   async users(): Promise<User[]> {
     const users = await UserModel.find().exec();
@@ -14,6 +15,7 @@ export default class UserResolver {
     return users;
   }
 
+  @Authorized()
   @Query(() => User)
   async user(@Arg('id', () => ID) id: string): Promise<User> {
     const user = await UserModel.findById(id).exec();
@@ -23,15 +25,7 @@ export default class UserResolver {
     return user;
   }
 
-  @Mutation(() => User)
-  async createUser(@Arg('input') input: UserInput): Promise<User> {
-    const user = new UserModel(input);
-
-    await user.save();
-
-    return user;
-  }
-
+  @Authorized()
   @Mutation(() => User)
   async updateUser(
     @Arg('id', () => ID) id: string,
@@ -45,6 +39,7 @@ export default class UserResolver {
     return user;
   }
 
+  @Authorized()
   @Mutation(() => User)
   async deleteUser(@Arg('id', () => ID) id: string): Promise<User> {
     const user = await UserModel.findByIdAndDelete(id);

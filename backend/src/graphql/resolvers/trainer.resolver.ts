@@ -1,5 +1,5 @@
 import {
-  Resolver, Query, Arg, ID, Mutation,
+  Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
 import { ApolloError } from 'apollo-server-express';
@@ -25,6 +25,7 @@ export default class TrainerResolver {
     return trainer;
   }
 
+  @Authorized()
   @Mutation(() => Trainer)
   async createTrainer(
     @Arg('input') input: TrainerInput,
@@ -45,6 +46,7 @@ export default class TrainerResolver {
     return trainer;
   }
 
+  @Authorized()
   @Mutation(() => Trainer)
   async updateTrainer(
     @Arg('id', () => ID) id: string,
@@ -61,6 +63,7 @@ export default class TrainerResolver {
     return trainer;
   }
 
+  @Authorized()
   @Mutation(() => Trainer)
   async deleteTrainer(@Arg('id', () => ID) id: string): Promise<Trainer> {
     const trainer = await TrainerModel.findByIdAndDelete(id);

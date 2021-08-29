@@ -1,5 +1,5 @@
 import {
-  Resolver, Query, Arg, ID, Mutation,
+  Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
 import { Team, TeamModel } from '@Entities/team.entity';
 import { Poule, PouleModel } from '@Entities/poule.entity';
@@ -23,6 +23,7 @@ export default class PouleResolver {
     return poule;
   }
 
+  @Authorized()
   @Mutation(() => [Poule])
   async updateAllPoules(): Promise<Poule[]> {
     await PouleModel.deleteMany({});

@@ -1,17 +1,35 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import ScrollToTop from "@Components/ScrollToTop";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import "./index.css";
 
-const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
-  cache: new InMemoryCache({
-    addTypename: false,
-  }),
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem("token");
+  return {
+    headers: {
+      ...headers,
+      authorization: token,
+    },
+  };
+});
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: authLink.concat(httpLink),
 });
 
 ReactDOM.render(
