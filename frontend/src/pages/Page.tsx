@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
@@ -12,14 +11,7 @@ import Teams from "@Pages/sportif/Teams";
 import Training from "@Pages/sportif/Training";
 import Login from "@Pages/Login";
 import NotFound from "@Pages/NotFound";
-import ProtectedRoute, {
-  ProtectedRouteProps,
-} from "@Components/ProtectedRoute";
-
-const defaultProtectedRouteProps: ProtectedRouteProps = {
-  isAuthenticated: !!localStorage.token,
-  authenticationPath: "/login",
-};
+import ProtectedRoute from "@Components/ProtectedRoute";
 
 const Page = (): JSX.Element => {
   return (
@@ -33,7 +25,8 @@ const Page = (): JSX.Element => {
       <Route path="/articles/:category?" exact component={Articles} />
       <Route path="/article/:id" exact component={Article} />
       <Route path="/login" exact component={Login} />
-      <ProtectedRoute {...defaultProtectedRouteProps} path="/admin" />
+      <ProtectedRoute path="/admin" exact />
+      <ProtectedRoute path="/admin/test" exact component={Contact} />
       <Route component={NotFound} />
     </Switch>
   );
