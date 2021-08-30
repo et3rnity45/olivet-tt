@@ -15,7 +15,7 @@ const Training = (): JSX.Element => {
     >
       <img
         className="rounded-t h-auto"
-        src={`http://images.olivet-tt.fr/${trainer.media}`}
+        src={`https://s3.eu-west-3.amazonaws.com/images.olivet-tt.fr/${trainer.media}`}
         alt={`${trainer.firstname} ${trainer.lastname}`}
       />
       <div className="p-10">
