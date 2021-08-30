@@ -29,7 +29,7 @@ const Footer = (): JSX.Element => {
               <Link className="p-8" to="/partenaires" key={partner.id}>
                 <img
                   className="white-filter logo-max align-middle"
-                  src={`http://images.olivet-tt.fr/${partner.media}`}
+                  src={`https://s3.eu-west-3.amazonaws.com/images.olivet-tt.fr/${partner.media}`}
                   alt={partner.name}
                 />
               </Link>

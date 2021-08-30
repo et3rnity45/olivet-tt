@@ -24,7 +24,7 @@ const HomeArticle = ({
       >
         <img
           className="transition-transform transform scale-101 hover:scale-110 duration-400 ease-in-out"
-          src={`http://images.olivet-tt.fr/${article.media}`}
+          src={`https://s3.eu-west-3.amazonaws.com/images.olivet-tt.fr/${article.media}`}
           alt={article.title}
         />
       </Link>

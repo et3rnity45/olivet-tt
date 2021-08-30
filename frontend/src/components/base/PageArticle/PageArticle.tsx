@@ -12,7 +12,7 @@ const PageArticle = ({ article }: PageArticleProps): JSX.Element => {
     <article>
       <img
         className="w-full h-auto mb-8 lg:mb-16"
-        src={`http://images.olivet-tt.fr/${article.media}`}
+        src={`https://s3.eu-west-3.amazonaws.com/images.olivet-tt.fr/${article.media}`}
         alt={article.id}
       />
       <div className="mx-0 md:mx-5 lg:mx-20 mb-6">

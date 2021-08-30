@@ -17,7 +17,7 @@ const Partners = (): JSX.Element => {
     >
       <img
         className="partner-logo"
-        src={`http://images.olivet-tt.fr/${partner.media}`}
+        src={`https://s3.eu-west-3.amazonaws.com/images.olivet-tt.fr/${partner.media}`}
         alt={`Logo ${partner.name}`}
       />
     </a>
