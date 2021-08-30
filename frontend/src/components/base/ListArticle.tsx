@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import Truncate from "react-truncate-html";
 import { ArrowRightIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import Article from "@Types/Article";
@@ -25,9 +26,9 @@ const ListArticle = ({ article }: ListArticleProps): JSX.Element => {
         <div className="p-6">
           <p className="label mb-4">{article.category}</p>
           <h3 className="text-2xl font-semibold mb-4">{article.title}</h3>
-          <p
+          <Truncate
             className="text-gray line-clamp-4 xl:line-clamp-4 2xl:line-clamp-5"
-            // eslint-disable-next-line react/no-danger
+            lines={4}
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
         </div>

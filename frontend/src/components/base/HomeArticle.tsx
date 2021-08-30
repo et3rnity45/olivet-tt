@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowRightIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
+import Truncate from "react-truncate-html";
 import moment from "moment";
 import Article from "@Types/Article";
 
@@ -31,8 +32,9 @@ const HomeArticle = ({
         <div className="p-6">
           <p className="label mb-4">{article.category}</p>
           <h3 className="text-2xl font-semibold mb-4">{article.title}</h3>
-          <p
+          <Truncate
             className="text-gray line-clamp-5 lg:line-clamp-2 xl:line-clamp-4 2xl:line-clamp-5"
+            lines={4}
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
