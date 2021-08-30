@@ -31,9 +31,11 @@ const HomeArticle = ({
         <div className="p-6">
           <p className="label mb-4">{article.category}</p>
           <h3 className="text-2xl font-semibold mb-4">{article.title}</h3>
-          <p className="text-gray line-clamp-5 lg:line-clamp-2 xl:line-clamp-4 2xl:line-clamp-5">
-            {article.content}
-          </p>
+          <p
+            className="text-gray line-clamp-5 lg:line-clamp-2 xl:line-clamp-4 2xl:line-clamp-5"
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: article.content }}
+          />
         </div>
         <div className="py-6 px-6 sm:px-10 border-t border-1 border-lightGray">
           <span className="text-gray font-light">
