@@ -45,6 +45,7 @@ const Ranking = (): JSX.Element => {
         name: "Evolution mensuelle",
         selector: "evolution",
         sortable: true,
+        // eslint-disable-next-line react/no-unused-prop-types
         cell: ({ evolution }: { evolution: number }) => {
           return evolution < 0 ? (
             <div className="text-red-500">{evolution}</div>
