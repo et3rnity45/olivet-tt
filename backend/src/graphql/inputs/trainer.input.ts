@@ -1,5 +1,5 @@
 import { InputType, Field } from 'type-graphql';
-import { Trainer } from '@Entities/trainer.entity';
+import { Trainer } from '../../entities/trainer.entity';
 
 @InputType()
 export default class TrainerInput implements Partial<Trainer> {

@@ -1,27 +1,32 @@
+version: '3'
+
 services:
-    front:
-        container_name: olivet-front
-        build:
-          context: ./frontend
-          dockerfile: Dockerfile.dev
-        env_file: 
-          - ./frontend/.env
-        volumes:
-          - ./frontend/src/:/app/src
-          - /app/node_modules
-        ports:
-          - 3000:3000
-    back:
+    server:
         container_name: olivet-back
         build: ./backend
         env_file: 
-            - ./backend/.env.docker
+            - ./backend/.env
+        environment:
+            - NODE_ENV=development
+            - SERVER_PORT=4000
+            - DB_URL=mongodb://mongodb:27017/usmolivet
         ports:
             - 4000:4000
         command: npm run dev
         volumes:
-            - ./backend/src/:/app/src/
+            - ./backend/src/:/app/src
+    client:
+        container_name: olivet-front
+        build: ./frontend
+        environment:
+            - NODE_ENV=development
+            - REACT_APP_API_URL=localhost:4000/graphql
+        volumes:
+            - ./frontend/src/:/app/src
+            - /app/node_modules
+        ports:
+            - 3000:3000
     mongodb:
-      image: mongo
-      volumes:
-        - ./data:/data/db
+        image: mongo:4.4.9
+        volumes:
+            - ./data:/data/db

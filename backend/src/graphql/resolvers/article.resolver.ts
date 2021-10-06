@@ -3,9 +3,9 @@ import {
 } from 'type-graphql';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
 import { ApolloError } from 'apollo-server-express';
-import ArticleInput from '@Inputs/article.input';
-import { Article, ArticleModel } from '@Entities/article.entity';
-import { uploadFile, deleteFile } from '@Utils/UploadFile';
+import ArticleInput from '../inputs/article.input';
+import { Article, ArticleModel } from '../../entities/article.entity';
+import { uploadFile, deleteFile } from '../../utils/UploadFile';
 
 @Resolver(Article)
 export default class ArticleResolver {

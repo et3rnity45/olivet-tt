@@ -9,14 +9,6 @@
     "noImplicitAny": true,
     "moduleResolution": "node",
     "baseUrl": "./src",
-    "paths": {
-      "@Config/*": ["config/*"],
-      "@Entities/*": ["entities/*"],
-      "@Resolvers/*": ["graphql/resolvers/*"],
-      "@Inputs/*": ["graphql/inputs/*"],
-      "@Types/*": ["graphql/types/*"],
-      "@Utils/*": ["utils/*"]
-    },
     "typeRoots":  ["node_modules/@types", "src/types"],
     "esModuleInterop": true,
     "experimentalDecorators": true,

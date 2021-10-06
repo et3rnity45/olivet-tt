@@ -24,15 +24,20 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+input LoginInput {
+  email: String!
+  password: String!
+}
+
 type Mutation {
   createArticle(file: Upload!, input: ArticleInput!): Article!
   createPartner(file: Upload!, input: PartnerInput!): Partner!
   createTrainer(file: Upload!, input: TrainerInput!): Trainer!
-  createUser(input: UserInput!): User!
   deleteArticle(id: ID!): Article!
   deletePartner(id: ID!): Partner!
   deleteTrainer(id: ID!): Trainer!
   deleteUser(id: ID!): User!
+  register(input: UserInput!): Token!
   updateAllPlayers: [Player!]!
   updateAllPoules: [Poule!]!
   updateArticle(file: Upload, id: ID!, input: ArticleInput!): Article!
@@ -92,6 +97,7 @@ type Poule {
 type Query {
   article(id: ID!): Article!
   articles: [Article!]!
+  login(input: LoginInput!): Token!
   newestArticles: [Article!]!
   partner(id: ID!): Partner!
   partners: [Partner!]!
@@ -120,6 +126,10 @@ type Team {
   pts: Float!
   updatedAt: DateTime!
   vic: Float!
+}
+
+type Token {
+  token: String!
 }
 
 type Trainer {

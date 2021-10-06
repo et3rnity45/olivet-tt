@@ -10,7 +10,7 @@ import authChecker from './config/auth-checker';
 export default async function initServer(): Promise<void> {
   try {
     const app = express();
-    const PORT = process.env.PORT || 4000;
+    const PORT = process.env.SERVER_PORT || 4000;
     const server = new ApolloServer({
       uploads: false,
       playground: process.env.NODE_ENV === 'development',

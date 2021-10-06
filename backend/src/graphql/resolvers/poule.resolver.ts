@@ -1,9 +1,9 @@
 import {
   Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
-import { Team, TeamModel } from '@Entities/team.entity';
-import { Poule, PouleModel } from '@Entities/poule.entity';
-import { getPoules, getTeamsWithResult } from '@Utils/FFTTApiRequest';
+import { Team, TeamModel } from '../../entities/team.entity';
+import { Poule, PouleModel } from '../../entities/poule.entity';
+import { getPoules, getTeamsWithResult } from '../../utils/FFTTApiRequest';
 
 @Resolver(Poule)
 export default class PouleResolver {

@@ -1,8 +1,8 @@
 import {
   Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
-import { Player, PlayerModel } from '@Entities/player.entity';
-import { getClubPlayers } from '@Utils/FFTTApiRequest';
+import { Player, PlayerModel } from '../../entities/player.entity';
+import { getClubPlayers } from '../../utils/FFTTApiRequest';
 
 @Resolver(Player)
 export default class PlayerResolver {

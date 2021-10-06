@@ -4,9 +4,9 @@ import dateFormat from 'dateformat';
 import axios from 'axios';
 import iconv from 'iconv-lite';
 import { parseString } from 'xml2js';
-import { Player } from '@Entities/player.entity';
-import { Team } from '@Entities/team.entity';
-import { Poule } from '@Entities/poule.entity';
+import { Player } from '../entities/player.entity';
+import { Team } from '../entities/team.entity';
+import { Poule } from '../entities/poule.entity';
 
 const API_URL = 'http://www.fftt.com/mobile/pxml';
 const NUMCLUB = '04450410';

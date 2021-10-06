@@ -1,5 +1,5 @@
 import { InputType, Field } from 'type-graphql';
-import { Partner } from '@Entities/partner.entity';
+import { Partner } from '../../entities/partner.entity';
 
 @InputType()
 export default class PartnerInput implements Partial<Partner> {

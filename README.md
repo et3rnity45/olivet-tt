@@ -17,7 +17,7 @@ Olivet Tennis de Table web application.
 To run this project, you will need to add the following environment variables to your backend .env file
 
 `NODE_ENV`
-`PORT`
+`SERVER_PORT`
 `DB_URL`
 
 `AWS_ACCESS_KEY_ID`
@@ -62,10 +62,11 @@ Start the server
 
 To run this project with Docker :
 
-Add a `.env.docker` file in /backend before running docker-compose.
+Add a `.env` file in /backend before running docker-compose.
 
 ```bash
   docker-compose -f docker-compose.dev.yml up --build
+  docker-compose -f docker-compose.prod.yml up --build
 ```
 
   

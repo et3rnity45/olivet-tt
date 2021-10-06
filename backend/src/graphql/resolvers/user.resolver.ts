@@ -2,8 +2,8 @@ import {
   Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
 import { ApolloError } from 'apollo-server-express';
-import UserInput from '@Inputs/user.input';
-import { User, UserModel } from '@Entities/user.entity';
+import UserInput from '../inputs/user.input';
+import { User, UserModel } from '../../entities/user.entity';
 
 @Resolver(User)
 export default class UserResolver {

@@ -1,7 +1,7 @@
 import { PutObjectRequest } from 'aws-sdk/clients/s3';
 import { FileUpload } from 'graphql-upload';
 import { v4 as uuid } from 'uuid';
-import s3 from '@Config/aws-s3';
+import s3 from '../config/aws-s3';
 
 export const uploadFile = async (file: FileUpload): Promise<string> => {
   const params: PutObjectRequest = {

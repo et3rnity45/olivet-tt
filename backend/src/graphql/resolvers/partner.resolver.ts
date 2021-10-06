@@ -3,9 +3,9 @@ import {
 } from 'type-graphql';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
 import { ApolloError } from 'apollo-server-express';
-import PartnerInput from '@Inputs/partner.input';
-import { Partner, PartnerModel } from '@Entities/partner.entity';
-import { uploadFile, deleteFile } from '@Utils/UploadFile';
+import PartnerInput from '../inputs/partner.input';
+import { Partner, PartnerModel } from '../../entities/partner.entity';
+import { uploadFile, deleteFile } from '../../utils/UploadFile';
 
 @Resolver(Partner)
 export default class PartnerResolver {

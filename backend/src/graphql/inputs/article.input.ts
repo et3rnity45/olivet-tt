@@ -1,5 +1,5 @@
 import { InputType, Field } from 'type-graphql';
-import { Article } from '@Entities/article.entity';
+import { Article } from '../../entities/article.entity';
 
 @InputType()
 export default class ArticleInput implements Partial<Article> {

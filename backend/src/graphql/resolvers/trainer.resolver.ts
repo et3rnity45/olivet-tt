@@ -3,9 +3,9 @@ import {
 } from 'type-graphql';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
 import { ApolloError } from 'apollo-server-express';
-import TrainerInput from '@Inputs/trainer.input';
-import { Trainer, TrainerModel } from '@Entities/trainer.entity';
-import { uploadFile, deleteFile } from '@Utils/UploadFile';
+import TrainerInput from '../inputs/trainer.input';
+import { Trainer, TrainerModel } from '../../entities/trainer.entity';
+import { uploadFile, deleteFile } from '../../utils/UploadFile';
 
 @Resolver(Trainer)
 export default class TrainerResolver {
