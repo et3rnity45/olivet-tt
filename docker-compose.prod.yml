@@ -2,7 +2,6 @@ version: '3'
 
 services:
     server:
-        container_name: olivet-back
         build: ./backend
         command: sh -c "yarn run build && yarn run prod"
         expose:
@@ -14,7 +13,6 @@ services:
             - SERVER_PORT=5000
             - DB_URL=mongodb://mongodb:27017/usmolivet
     client:
-        container_name: olivet-front
         build: ./frontend
         command: sh -c "yarn run build"
         volumes:
