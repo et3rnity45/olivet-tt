@@ -21,7 +21,7 @@
     "apollo-server-express": "^3.3.0",
     "argon2": "^0.28.2",
     "aws-sdk": "^2.922.0",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "class-validator": "^0.13.1",
     "cors": "^2.8.5",
     "crypto-js": "^4.0.0",
