@@ -36,7 +36,7 @@ export default class TrainerResolver {
 
     try {
       await trainer.save();
-    } catch (err) {
+    } catch (err: any) {
       if (err.name === 'MongoError' && err.code === 11000) {
         deleteFile(trainer.media);
         throw new ApolloError('duplicate value');

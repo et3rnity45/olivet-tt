@@ -36,7 +36,7 @@ export default class PartnerResolver {
 
     try {
       await partner.save();
-    } catch (err) {
+    } catch (err: any) {
       if (err.name === 'MongoError' && err.code === 11000) {
         deleteFile(partner.media);
         throw new ApolloError('duplicate value');

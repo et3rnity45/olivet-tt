@@ -3,7 +3,7 @@ version: '3'
 services:
     server:
         build: ./backend
-        command: sh -c "npm run build && npm run prod"
+        command: sh -c "yarn run build && yarn run prod"
         expose:
             - 5000
         env_file:
@@ -14,7 +14,7 @@ services:
             - DB_URL=mongodb://mongodb:27017/usmolivet
     client:
         build: ./frontend
-        command: sh -c "npm run build"
+        command: sh -c "yarn run build"
         volumes:
             - web-client-build:/app/build
         environment:

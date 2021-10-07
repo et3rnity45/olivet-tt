@@ -43,7 +43,7 @@ export default class ArticleResolver {
 
     try {
       await article.save();
-    } catch (err) {
+    } catch (err: any) {
       if (err.name === 'MongoError' && err.code === 11000) {
         deleteFile(article.media);
         throw new ApolloError('duplicate value');
