@@ -7,13 +7,11 @@ import { buildSchema } from 'type-graphql';
 import { Payload, verifyToken } from './utils/auth';
 import authChecker from './config/auth-checker';
 
+const PORT = process.env.SERVER_PORT || 4000;
+
 export default async function initServer(): Promise<void> {
   try {
-    const app = express();
-    const PORT = process.env.SERVER_PORT || 4000;
     const server = new ApolloServer({
-      uploads: false,
-      playground: process.env.NODE_ENV === 'development',
       schema: await buildSchema({
         resolvers: [`${__dirname}/graphql/resolvers/**/*.{ts,js}`],
         emitSchemaFile: true,
@@ -31,18 +29,19 @@ export default async function initServer(): Promise<void> {
         return {};
       },
     });
-    const path = server.graphqlPath;
     await server.start();
+
+    const app = express();
 
     app.use(cors());
     app.use(graphqlUploadExpress({
       maxFileSize: 30000000,
-      maxFiles: 10,
+      maxFiles: 5,
     }));
-    server.applyMiddleware({ app, path });
+    server.applyMiddleware({ app });
 
     app.listen(PORT, () => {
-      console.log(`🚀 Server ready at http://localhost:${PORT}${path}`);
+      console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
     });
   } catch (err) {
     console.log(`❌ Error during server starting : ${err}`);

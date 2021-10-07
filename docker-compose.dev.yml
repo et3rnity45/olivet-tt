@@ -20,7 +20,7 @@ services:
         build: ./frontend
         environment:
             - NODE_ENV=development
-            - REACT_APP_API_URL=localhost:4000/graphql
+            - REACT_APP_API_URL=http://localhost:4000/graphql
         volumes:
             - ./frontend/src/:/app/src
             - /app/node_modules

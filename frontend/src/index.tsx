@@ -14,7 +14,7 @@ import App from "./App";
 import "./index.css";
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_API_URL || "localhost:4000/graphql",
+  uri: process.env.REACT_APP_API_URL || "http://localhost:4000/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -28,8 +28,8 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
   link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
 });
 
 ReactDOM.render(
