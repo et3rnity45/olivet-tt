@@ -1,7 +1,7 @@
 module.exports = {
+  mode: 'jit',
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
-  // mode: 'jit',
   theme: {
     fontFamily: {
       'sans': 'Poppins',
@@ -9,10 +9,10 @@ module.exports = {
     borderRadius: {
       DEFAULT: '.175rem',
     },
-    boxShadow: {
-      card: '0 6px 12px 0 rgba(48,54,77,.12)'
-    },
     extend: {
+      boxShadow: {
+        card: '0 6px 12px 0 rgba(48,54,77,.12)'
+      },
       colors: {
         lightBlack: '#30364d',
         lightGray: '#f4f4f4',

@@ -9,24 +9,25 @@ import ListArticle from "@Components/base/ListArticle";
 const options = ["competition", "stage", "autre"];
 
 const Articles = (): JSX.Element => {
+  const { loading, error, data } = useQuery(ArticlesQuery);
   const { category } = useParams<{ category: string | undefined }>();
   const [filter, setFilter] = useState(category?.toLowerCase());
   const [filteredArticles, setFilteredArticles] = useState([]);
-  const { loading, error, data } = useQuery(ArticlesQuery);
 
   useEffect(() => {
     setFilter(category?.toLowerCase());
   }, [category]);
 
   useEffect(() => {
+    const articles = data?.articles;
     if (filter) {
       setFilteredArticles(
-        data?.articles.filter((article: Article) => article.category === filter)
+        articles.filter((article: Article) => article.category === filter)
       );
     } else {
-      setFilteredArticles(data?.articles);
+      setFilteredArticles(articles);
     }
-  }, [data?.articles, filter]);
+  }, [data, filter]);
 
   const articleList = filteredArticles?.map((article: Article) => {
     return (

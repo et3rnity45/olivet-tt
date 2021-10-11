@@ -4,10 +4,9 @@ module.exports = {
     'airbnb/hooks',
     'plugin:@typescript-eslint/recommended',
     'plugin:jest/recommended',
-    'prettier',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
   ],
-  plugins: ['react', '@typescript-eslint', 'jest'],
+  plugins: ['react', '@typescript-eslint', 'jest', 'import'],
   env: {
     browser: true,
     es6: true,
@@ -27,7 +26,6 @@ module.exports = {
     project: './tsconfig.json',
   },
   rules: {
-    '@typescript-eslint/camelcase': "off",
     'linebreak-style': 'off',
     'react/require-default-props': 0,
     'prettier/prettier': [
@@ -36,10 +34,5 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
-  },
-  settings: {
-    "import/resolver": {
-      typescript: {} // this loads <rootdir>/tsconfig.json to eslint
-    },
   },
 };
