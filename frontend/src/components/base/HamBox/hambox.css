@@ -66,7 +66,7 @@
 }
 
 aside {
-  width: min(75vw, 400px);
+  width: 100%;
   transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
   box-shadow: -10px 0px 30px -15px rgba(38, 48, 63, 0.7);
   transform: translateX(100vw);

@@ -1,26 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import useOnClickOutside from "@Hooks/useOnClickOutside";
-import navLinks from "../../../config";
+import navigation from "../../../utils/navigation";
 import "./hambox.css";
 
 const HamBox = (): JSX.Element => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const wrapperRef = useRef(null);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
-  useOnClickOutside(wrapperRef, () => setMenuOpen(false));
-
-  useEffect(() => {
-    document.body.className = menuOpen ? "blur" : "";
-    return () => {
-      document.body.className = "";
-    };
-  }, [menuOpen]);
 
   return (
-    <div ref={wrapperRef} className="block lg:hidden">
+    <div className="block lg:hidden">
       <button
         type="button"
         onClick={toggleMenu}
@@ -35,47 +26,74 @@ const HamBox = (): JSX.Element => {
       </button>
       <aside
         aria-hidden={!menuOpen}
-        className={`flex items-center fixed top-0 bottom-0 right-0 py-12 px-2 h-screen bg-lightBlue lg:hidden ${
+        className={`fixed top-0 bottom-0 right-0 py-4 mt-20 h-screen bg-lightBlue lg:hidden ${
           menuOpen ? "active" : ""
         }`}
       >
-        <nav className="flex-1 px-8">
-          <ul className="text-lg uppercase">
-            {navLinks.map((navLink) =>
-              navLink.subLinks ? (
-                <li className="text-center py-3" key={navLink.name}>
-                  <button type="button" className="text-lg uppercase">
-                    {navLink.name}
-                  </button>
-                  <ChevronDownIcon className="inline-block ml-2 h-6" />
-                  <ul className="text-base capitalize py-1 opacity-80">
-                    {navLink.subLinks.map((subLink) => (
-                      <li key={subLink.name}>
-                        <NavLink
-                          to={subLink.href}
-                          activeClassName="text-lightRed"
-                          exact
-                          onClick={() => setMenuOpen(false)}
+        <nav>
+          <ul>
+            {navigation.map((item) => (
+              <li className="flex flex-col" key={item.name}>
+                {item.subNav ? (
+                  <Disclosure defaultOpen={true}>
+                    {({ open }) => (
+                      <>
+                        <Disclosure.Button
+                          className={`relative flex w-full py-3 px-6 ${
+                            open
+                              ? "border-lightWhite border-t border-opacity-10"
+                              : ""
+                          }`}
                         >
-                          {subLink.name}
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ) : (
-                <li className="text-center py-2" key={navLink.name}>
+                          <span>{item.name}</span>
+                          <ChevronDownIcon
+                            className={`absolute top-0 bottom-0 right-0 my-auto mx-6 h-5 w-5 transition duration-300 ${
+                              open ? "transform rotate-180" : ""
+                            }`}
+                          />
+                        </Disclosure.Button>
+                        <Transition
+                          enter="transition duration-200 ease-out"
+                          enterFrom="transform scale-95 opacity-0"
+                          enterTo="transform scale-100 opacity-100"
+                          leave="transition duration-200 ease-out"
+                          leaveFrom="transform scale-100 opacity-100"
+                          leaveTo="transform scale-95 opacity-0"
+                        >
+                          <Disclosure.Panel as="nav" className="pb-6">
+                            <ul>
+                              {item.subNav.map((subItem) => (
+                                <li className="flex" key={subItem.name}>
+                                  <NavLink
+                                    to={subItem.href}
+                                    className="w-full py-3 px-10 text-sm"
+                                    activeClassName="font-semibold"
+                                    exact
+                                    onClick={() => setMenuOpen(false)}
+                                  >
+                                    {subItem.name}
+                                  </NavLink>
+                                </li>
+                              ))}
+                            </ul>
+                          </Disclosure.Panel>
+                        </Transition>
+                      </>
+                    )}
+                  </Disclosure>
+                ) : (
                   <NavLink
-                    to={navLink.href}
-                    activeClassName="text-lightRed"
+                    to={item.href}
+                    className="w-full py-3 px-6"
+                    activeClassName="font-semibold"
                     exact
                     onClick={() => setMenuOpen(false)}
                   >
-                    {navLink.name}
+                    {item.name}
                   </NavLink>
-                </li>
-              )
-            )}
+                )}
+              </li>
+            ))}
           </ul>
         </nav>
       </aside>

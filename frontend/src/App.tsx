@@ -6,7 +6,6 @@ import Page from "@Pages/Page";
 import Sidebar from "@Components/layout/Sidebar";
 
 function App(): JSX.Element {
-  const isHome = useLocation().pathname === "/";
   const isAdmin = useLocation().pathname.startsWith("/admin");
 
   if (isAdmin)
@@ -21,8 +20,8 @@ function App(): JSX.Element {
 
   return (
     <div className="App">
-      <Navbar transparent={isHome} />
-      <main id="content">
+      <Navbar />
+      <main id="content" className="mt-20 overflow-hidden">
         <Page />
       </main>
       <Footer />

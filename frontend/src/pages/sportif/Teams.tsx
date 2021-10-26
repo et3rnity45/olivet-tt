@@ -4,7 +4,8 @@ import { useQuery } from "@apollo/client";
 import { RefreshIcon } from "@heroicons/react/outline";
 import { PoulesQuery } from "@Queries/poule";
 import PouleType from "@Types/Poule";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Tab } from "@headlessui/react";
+import classNames from "@Utils/classNames";
 
 const Teams = (): JSX.Element => {
   const { loading, error, data } = useQuery(PoulesQuery);
@@ -41,33 +42,39 @@ const Teams = (): JSX.Element => {
           </div>
         ) : null}
         {data?.poules ? (
-          <Tabs>
-            <TabList className="flex flex-wrap justify-center uppercase pt-8">
+          <Tab.Group>
+            <Tab.List className="flex flex-wrap justify-center uppercase pt-8">
               {data.poules.map((poule: PouleType, index: number) => (
                 <Tab
                   key={poule.id}
-                  className="text-xs md:text-sm cursor-pointer p-2 mx-2 mb-2 hover:bg-lightGray"
-                  selectedClassName="bg-lightRed text-white"
+                  className={({ selected }) =>
+                    classNames(
+                      "uppercase text-sx md:text-sm cursor-pointer p-2 mx-2 mb-2",
+                      selected ? "bg-lightRed text-white" : "hover:bg-lightGray"
+                    )
+                  }
                 >
                   équipe {index + 1}
                 </Tab>
               ))}
-            </TabList>
-            {data.poules.map((poule: PouleType) => (
-              <TabPanel key={poule.id}>
-                <h3 className="text-2xl uppercase tracking-wide text-center mt-8">
-                  {poule.libdivision}
-                </h3>
-                <DataTable
-                  className="uppercase"
-                  data={poule.teams}
-                  columns={columns}
-                  striped
-                  highlightOnHover
-                />
-              </TabPanel>
-            ))}
-          </Tabs>
+            </Tab.List>
+            <Tab.Panels>
+              {data.poules.map((poule: PouleType) => (
+                <Tab.Panel key={poule.id}>
+                  <h3 className="text-2xl uppercase tracking-wide text-center mt-8">
+                    {poule.libdivision}
+                  </h3>
+                  <DataTable
+                    className="uppercase"
+                    data={poule.teams}
+                    columns={columns}
+                    striped
+                    highlightOnHover
+                  />
+                </Tab.Panel>
+              ))}
+            </Tab.Panels>
+          </Tab.Group>
         ) : null}
       </div>
     </section>

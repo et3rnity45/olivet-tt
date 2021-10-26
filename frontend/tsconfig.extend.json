@@ -8,7 +8,8 @@
       "@Assets/*": ["./assets/*"],
       "@Components/*": ["./components/*"],
       "@Queries/*": ["./graphql/queries/*"],
-      "@Mutations/*": ["./graphql/mutations/*"]
+      "@Mutations/*": ["./graphql/mutations/*"],
+      "@Utils/*": ["./utils/*"]
     }
   }
 }

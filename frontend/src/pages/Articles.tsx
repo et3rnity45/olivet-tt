@@ -20,12 +20,15 @@ const Articles = (): JSX.Element => {
 
   useEffect(() => {
     const articles = data?.articles;
-    if (filter) {
+    if (articles) {
       setFilteredArticles(
-        articles.filter((article: Article) => article.category === filter)
+        filter
+          ? articles.filter(
+              (article: Article) =>
+                article.category.toLowerCase() === filter.toLowerCase()
+            )
+          : articles
       );
-    } else {
-      setFilteredArticles(articles);
     }
   }, [data, filter]);
 
