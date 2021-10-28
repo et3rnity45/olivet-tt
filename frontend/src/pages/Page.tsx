@@ -10,6 +10,8 @@ import Ranking from "@Pages/sportif/Ranking";
 import Teams from "@Pages/sportif/Teams";
 import Training from "@Pages/sportif/Training";
 import Login from "@Pages/Login";
+import ArticleTable from "@Pages/admin/ArticleTable";
+import ArticleForm from "@Pages/admin/ArticleForm";
 import NotFound from "@Pages/NotFound";
 import ProtectedRoute from "@Components/ProtectedRoute";
 
@@ -26,7 +28,12 @@ const Page = (): JSX.Element => {
       <Route path="/article/:id" exact component={Article} />
       <Route path="/login" exact component={Login} />
       <ProtectedRoute path="/admin" exact />
-      <ProtectedRoute path="/admin/test" exact component={Contact} />
+      <ProtectedRoute path="/admin/articles" exact component={ArticleTable} />
+      <ProtectedRoute
+        path="/admin/articles/create"
+        exact
+        component={ArticleForm}
+      />
       <Route component={NotFound} />
     </Switch>
   );

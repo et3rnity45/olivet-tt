@@ -4,6 +4,7 @@ import Truncate from "react-truncate-html";
 import { ArrowRightIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import Article from "@Types/Article";
+import getMediaUrl from "@Utils/mediaUrl";
 
 type ListArticleProps = {
   article: Article;
@@ -18,7 +19,7 @@ const ListArticle = ({ article }: ListArticleProps): JSX.Element => {
       >
         <img
           className="rounded-t transition-transform transform scale-101 hover:scale-110 duration-400 ease-in-out"
-          src={`https://s3.eu-west-3.amazonaws.com/images.olivet-tt.fr/${article.media}`}
+          src={getMediaUrl(article.media)}
           alt={article.title}
         />
       </Link>

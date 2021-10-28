@@ -25,7 +25,7 @@ const navigation = [
 
 const Sidebar = (): JSX.Element => {
   return (
-    <div className="fixed top-0 bottom-0 left-0 w-64 bg-lightBlue bg-opacity-95 shadow-card text-white">
+    <div className="fixed top-0 bottom-0 left-0 z-50 w-64 bg-lightBlue bg-opacity-95 shadow-card text-white">
       <div className="flex flex-col items-center px-6 mt-4 mb-6">
         <img className="w-16 h-auto" src={logo} alt="Logo USM Olivet TT" />
         <h3 className="text-xl font-semibold mt-4">USM Olivet TT</h3>
@@ -38,7 +38,7 @@ const Sidebar = (): JSX.Element => {
                 to={item.href}
                 className="inline-flex items-end w-full p-2 mt-1 rounded hover:bg-lightBlue transition duration-50 ease-in-out"
                 activeClassName="text-lightRed"
-                exact
+                exact={item.href === "/admin"}
               >
                 <item.icon className="h-6 w-6 mr-2" aria-hidden="true" />
                 <span className="text-sm text-white capitalize">

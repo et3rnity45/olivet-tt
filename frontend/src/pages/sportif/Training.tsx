@@ -4,6 +4,7 @@ import { RefreshIcon } from "@heroicons/react/outline";
 import { TrainersQuery } from "@Queries/trainer";
 import TrainerType from "@Types/Trainer";
 import planning from "@Assets/background/planning.png";
+import getMediaUrl from "@Utils/mediaUrl";
 
 const Training = (): JSX.Element => {
   const { loading, error, data } = useQuery(TrainersQuery);
@@ -15,7 +16,7 @@ const Training = (): JSX.Element => {
     >
       <img
         className="rounded-t h-auto"
-        src={`https://s3.eu-west-3.amazonaws.com/images.olivet-tt.fr/${trainer.media}`}
+        src={getMediaUrl(trainer.media)}
         alt={`${trainer.firstname} ${trainer.lastname}`}
       />
       <div className="p-10">

@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { RefreshIcon } from "@heroicons/react/outline";
 import PartnerType from "@Types/Partner";
 import { PartnersQuery } from "@Queries/partner";
+import getMediaUrl from "@Utils/mediaUrl";
 
 const Partners = (): JSX.Element => {
   const { loading, error, data } = useQuery(PartnersQuery);
@@ -17,7 +18,7 @@ const Partners = (): JSX.Element => {
     >
       <img
         className="partner-logo"
-        src={`https://s3.eu-west-3.amazonaws.com/images.olivet-tt.fr/${partner.media}`}
+        src={getMediaUrl(partner.media)}
         alt={`Logo ${partner.name}`}
       />
     </a>

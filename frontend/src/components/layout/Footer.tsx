@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { RefreshIcon } from "@heroicons/react/outline";
 import { PartnersQuery } from "@Queries/partner";
 import PartnerType from "@Types/Partner";
+import getMediaUrl from "@Utils/mediaUrl";
 
 const Footer = (): JSX.Element => {
   const { loading, error, data } = useQuery(PartnersQuery);
@@ -29,7 +30,7 @@ const Footer = (): JSX.Element => {
               <Link className="p-8" to="/partenaires" key={partner.id}>
                 <img
                   className="white-filter logo-max align-middle"
-                  src={`https://s3.eu-west-3.amazonaws.com/images.olivet-tt.fr/${partner.media}`}
+                  src={getMediaUrl(partner.media)}
                   alt={partner.name}
                 />
               </Link>
