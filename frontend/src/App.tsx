@@ -12,7 +12,7 @@ function App(): JSX.Element {
     return (
       <div className="App">
         <Sidebar />
-        <main id="content" className="ml-64">
+        <main id="content" className="ml-64 min-h-screen bg-gray-100">
           <Page />
         </main>
       </div>

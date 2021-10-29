@@ -8,4 +8,4 @@ RUN yarn install
 
 COPY . .
 
-CMD npm start
+CMD yarn start

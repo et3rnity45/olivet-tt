@@ -2,18 +2,20 @@
 import React, { FC, InputHTMLAttributes } from "react";
 import { UseFormRegister } from "react-hook-form";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface SelectProps extends InputHTMLAttributes<HTMLSelectElement> {
   name: string;
   label: string;
   register: UseFormRegister<any>;
+  children: JSX.Element[];
   className?: string;
 }
 
-const Input: FC<InputProps> = ({
+const Select: FC<SelectProps> = ({
   name,
   label,
   register,
-  className,
+  children,
+  className = "",
   ...rest
 }) => {
   return (
@@ -21,14 +23,16 @@ const Input: FC<InputProps> = ({
       <label htmlFor={name} className="block text-sm font-medium text-gray-700">
         {label}
       </label>
-      <input
+      <select
         id={name}
-        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
         {...register(name)}
         {...rest}
-      />
+        className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      >
+        {children}
+      </select>
     </div>
   );
 };
 
-export default Input;
+export default Select;

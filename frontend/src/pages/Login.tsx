@@ -1,14 +1,13 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
-import logo from "@Assets/logo/olivet-tt-black.png";
-import Input from "@Components/base/Forms/Input";
-import Submit from "@Components/base/Forms/Submit";
+import Joi from "joi";
+import { useHistory } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
-import Joi from "joi";
 import { useLazyQuery } from "@apollo/client";
+import logo from "@Assets/logo/olivet-tt-black.png";
+import Input from "@Components/base/Forms/LoginInput";
+import Submit from "@Components/base/Forms/LoginSubmit";
 import LoginQuery from "@Queries/login";
-import { useHistory } from "react-router-dom";
 
 type LoginForm = {
   email: string;

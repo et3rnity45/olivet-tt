@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowRightIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 import Truncate from "react-truncate-html";
-import moment from "moment";
+import dayjs from "dayjs";
 import Article from "@Types/Article";
 import getMediaUrl from "@Utils/mediaUrl";
 
@@ -42,7 +42,7 @@ const HomeArticle = ({
         </div>
         <div className="py-6 px-6 sm:px-10 border-t border-1 border-lightGray">
           <span className="text-gray font-light">
-            {moment(article.createdAt).fromNow()}
+            {dayjs(article.createdAt).fromNow()}
           </span>
           <Link
             className="relative article-link float-right font-light"

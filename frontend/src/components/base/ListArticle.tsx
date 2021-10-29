@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import dayjs from "dayjs";
 import Truncate from "react-truncate-html";
 import { ArrowRightIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
@@ -35,7 +35,7 @@ const ListArticle = ({ article }: ListArticleProps): JSX.Element => {
         </div>
         <div className="py-6 px-6 sm:px-10 border-t border-1 border-lightGray">
           <span className="text-gray font-light">
-            {moment(article.createdAt).fromNow()}
+            {dayjs(article.createdAt).fromNow()}
           </span>
           <Link
             className="relative article-link float-right font-light"

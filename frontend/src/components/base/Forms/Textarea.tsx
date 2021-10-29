@@ -2,14 +2,14 @@
 import React, { FC, InputHTMLAttributes } from "react";
 import { UseFormRegister } from "react-hook-form";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface TextareaProps extends InputHTMLAttributes<HTMLTextAreaElement> {
   name: string;
   label: string;
   register: UseFormRegister<any>;
   className?: string;
 }
 
-const Input: FC<InputProps> = ({
+const Textarea: FC<TextareaProps> = ({
   name,
   label,
   register,
@@ -21,14 +21,17 @@ const Input: FC<InputProps> = ({
       <label htmlFor={name} className="block text-sm font-medium text-gray-700">
         {label}
       </label>
-      <input
-        id={name}
-        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-        {...register(name)}
-        {...rest}
-      />
+      <div className="mt-1">
+        <textarea
+          id={name}
+          rows={12}
+          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+          {...register(name)}
+          {...rest}
+        />
+      </div>
     </div>
   );
 };
 
-export default Input;
+export default Textarea;

@@ -1,19 +1,23 @@
-import React from "react";
+import React, { FC } from "react";
 
 type SubmitProps = {
-  value: string;
+  text: string;
   className?: string;
 };
 
-function App({ value, className }: SubmitProps): JSX.Element {
+const Submit: FC<SubmitProps> = ({ text, className }) => {
   return (
-    <input
-      value={value.toLowerCase()}
-      type="submit"
-      placeholder="placeholder"
-      className={`uppercase px-4 py-2 rounded bg-lightRed hover:bg-lighterRed text-white font-semibold text-center block w-full focus:outline-none focus:ring focus:ring-offset-2 focus:ring-lightRed focus:ring-opacity-80 cursor-pointer ${className}`}
-    />
+    <>
+      <button
+        type="submit"
+        className={`${className} inline-flex justify-center py-2 px-4 border border-transparent shadow-sm 
+        text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none 
+        focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+      >
+        {text}
+      </button>
+    </>
   );
-}
+};
 
-export default App;
+export default Submit;

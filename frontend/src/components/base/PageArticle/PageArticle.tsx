@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import dayjs from "dayjs";
 import { CalendarIcon } from "@heroicons/react/outline";
 import Article from "@Types/Article";
 import getMediaUrl from "@Utils/mediaUrl";
@@ -24,7 +24,7 @@ const PageArticle = ({ article }: PageArticleProps): JSX.Element => {
         <div className="flex items-center">
           <CalendarIcon className="h-5 mr-2" />
           <span className="uppercase">
-            {moment(article.createdAt).format("D MMM, YYYY")}
+            {dayjs(article.createdAt).format("D MMMM, YYYY")}
           </span>
         </div>
       </div>
