@@ -4,6 +4,8 @@ import Footer from "@Components/layout/Footer";
 import Navbar from "@Components/layout/Navbar";
 import Page from "@Pages/Page";
 import Sidebar from "@Components/layout/Sidebar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 function App(): JSX.Element {
   const isAdmin = useLocation().pathname.startsWith("/admin");
@@ -14,6 +16,7 @@ function App(): JSX.Element {
         <Sidebar />
         <main id="content" className="ml-64 min-h-screen bg-gray-100">
           <Page />
+          <ToastContainer />
         </main>
       </div>
     );

@@ -1,40 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC, InputHTMLAttributes, useCallback, useEffect } from "react";
-import {
-  UseFormRegister,
-  UseFormSetValue,
-  UseFormUnregister,
-  UseFormWatch,
-} from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
 
-interface UploadProps extends InputHTMLAttributes<HTMLInputElement> {
+interface UploadFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label: string;
-  register: UseFormRegister<any>;
-  unregister: UseFormUnregister<any>;
-  setValue: UseFormSetValue<any>;
-  watch: UseFormWatch<any>;
+  forms: UseFormReturn<any>;
   className?: string;
 }
 
-const Upload: FC<UploadProps> = ({
+const UploadField: FC<UploadFieldProps> = ({
   name,
   label,
-  register,
-  unregister,
-  setValue,
-  watch,
+  forms,
   className,
   ...rest
 }) => {
-  const files: File[] = watch(name);
+  const files: File[] = forms.watch(name);
   const onDrop = useCallback(
     (droppedFiles) => {
-      const newFiles = droppedFiles;
-      setValue(name, newFiles, { shouldValidate: true });
+      forms.setValue(name, droppedFiles, { shouldValidate: true });
     },
-    [name, setValue]
+    [name, forms]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -44,11 +32,8 @@ const Upload: FC<UploadProps> = ({
   });
 
   useEffect(() => {
-    register(name);
-    return () => {
-      unregister(name);
-    };
-  }, [register, name, unregister]);
+    forms.register(name);
+  }, [forms, name]);
 
   return (
     <div className={className}>
@@ -60,7 +45,7 @@ const Upload: FC<UploadProps> = ({
         }`}
       >
         <div className="flex flex-col justify-center space-y-1 text-center">
-          {files ? (
+          {!!files?.length ? (
             <img
               src={URL.createObjectURL(files[0])}
               alt={files[0].name}
@@ -107,4 +92,4 @@ const Upload: FC<UploadProps> = ({
   );
 };
 
-export default Upload;
+export default UploadField;

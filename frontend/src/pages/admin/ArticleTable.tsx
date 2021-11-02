@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import dayjs from "dayjs";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import {
   PencilIcon,
   PlusIcon,
@@ -9,13 +9,38 @@ import {
 } from "@heroicons/react/outline";
 import ArticleType from "@Types/Article";
 import { ArticlesQuery } from "@Queries/article";
+import { DeleteArticle } from "@Mutations/article";
 import { NavLink, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const columns = ["#", "Titre", "Catégorie", "Mise à jour", "Date de création"];
 
 const ArticleTable = (): JSX.Element => {
-  const { loading, error, data } = useQuery(ArticlesQuery);
   const location = useLocation();
+  const { loading, error, data } = useQuery(ArticlesQuery, {
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-first",
+  });
+  const [deleteArticle] = useMutation(DeleteArticle, {
+    refetchQueries: [ArticlesQuery],
+  });
+
+  const handleDelete = async (id: string) => {
+    if (window.confirm("Voulez-vous vraiment supprimer cet article ?")) {
+      await deleteArticle({ variables: { id } });
+      toast.success("Article supprimé avec succès", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (location.state) {
+      toast.success(`${location.state}`, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+    }
+  }, [location.state]);
 
   return (
     <section className="py-16 mx-4">
@@ -95,6 +120,7 @@ const ArticleTable = (): JSX.Element => {
                                 <button
                                   type="button"
                                   className="text-red-600 hover:text-red-900"
+                                  onClick={() => handleDelete(article.id)}
                                 >
                                   <TrashIcon className="h-5 w-5" />
                                 </button>

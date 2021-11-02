@@ -10,7 +10,6 @@ import Ranking from "@Pages/sportif/Ranking";
 import Teams from "@Pages/sportif/Teams";
 import Training from "@Pages/sportif/Training";
 import Login from "@Pages/Login";
-import ArticleCreate from "@Pages/admin/ArticleCreate";
 import ArticleUpdate from "@Pages/admin/ArticleUpdate";
 import ArticleTable from "@Pages/admin/ArticleTable";
 import NotFound from "@Pages/NotFound";
@@ -33,7 +32,7 @@ const Page = (): JSX.Element => {
       <ProtectedRoute
         path="/admin/articles/create"
         exact
-        component={ArticleCreate}
+        component={ArticleUpdate}
       />
       <ProtectedRoute
         path="/admin/articles/edit/:id"

@@ -2,7 +2,7 @@
 import React, { FC, InputHTMLAttributes } from "react";
 import { UseFormRegister } from "react-hook-form";
 
-interface SelectProps extends InputHTMLAttributes<HTMLSelectElement> {
+interface SelectFieldProps extends InputHTMLAttributes<HTMLSelectElement> {
   name: string;
   label: string;
   register: UseFormRegister<any>;
@@ -10,7 +10,7 @@ interface SelectProps extends InputHTMLAttributes<HTMLSelectElement> {
   className?: string;
 }
 
-const Select: FC<SelectProps> = ({
+const SelectField: FC<SelectFieldProps> = ({
   name,
   label,
   register,
@@ -35,4 +35,4 @@ const Select: FC<SelectProps> = ({
   );
 };
 
-export default Select;
+export default SelectField;
