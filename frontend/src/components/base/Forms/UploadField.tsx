@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FC, InputHTMLAttributes, useCallback, useEffect } from "react";
+import React, { InputHTMLAttributes, useCallback, useEffect } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
 
@@ -10,13 +10,13 @@ interface UploadFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
 }
 
-const UploadField: FC<UploadFieldProps> = ({
+const UploadField = ({
   name,
   label,
   forms,
   className,
   ...rest
-}) => {
+}: UploadFieldProps): JSX.Element => {
   const files: File[] = forms.watch(name);
   const onDrop = useCallback(
     (droppedFiles) => {

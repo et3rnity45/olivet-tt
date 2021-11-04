@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import React from "react";
 
 type SubmitProps = {
   value: string;
   className?: string;
 };
 
-const LoginSubmit: FC<SubmitProps> = ({ value, className }) => {
+const LoginSubmit = ({ value, className }: SubmitProps): JSX.Element => {
   return (
     <input
       value={value.toLowerCase()}

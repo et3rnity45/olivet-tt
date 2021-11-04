@@ -1,12 +1,12 @@
-import React, { FC, FormEventHandler } from "react";
+import React, { FormEventHandler, ReactNode } from "react";
 import Submit from "./Submit";
 
 type UpdateFormProps = {
-  children: JSX.Element[];
+  children: ReactNode;
   onSubmit: FormEventHandler<HTMLFormElement> | undefined;
 };
 
-const UpdateForm: FC<UpdateFormProps> = ({ children, onSubmit }) => {
+const UpdateForm = ({ children, onSubmit }: UpdateFormProps): JSX.Element => {
   return (
     <form onSubmit={onSubmit}>
       <div className="shadow overflow-hidden sm:rounded-md">

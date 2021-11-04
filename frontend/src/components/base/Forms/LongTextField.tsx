@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FC, useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { UseFormReturn } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -11,12 +11,12 @@ interface LongTextFiledProps {
   className?: string;
 }
 
-export const LongTextField: FC<LongTextFiledProps> = ({
+export const LongTextField = ({
   name,
   label,
   forms,
   className,
-}) => {
+}: LongTextFiledProps): JSX.Element => {
   const modules = useMemo(
     () => ({
       toolbar: [

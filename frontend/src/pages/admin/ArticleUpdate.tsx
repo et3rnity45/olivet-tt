@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation, useQuery } from "@apollo/client";
@@ -25,7 +25,7 @@ const defaultValues = {
   content: "",
 };
 
-const ArticleUpdate: FC = () => {
+const ArticleUpdate = (): JSX.Element => {
   const history = useHistory();
   const { id } = useParams<{ id: string | undefined }>();
   const { data } = useQuery(ArticleQuery, {

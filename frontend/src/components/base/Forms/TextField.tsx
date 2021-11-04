@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FC, InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -9,13 +9,13 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
 }
 
-const TextField: FC<TextFieldProps> = ({
+const TextField = ({
   name,
   label,
   register,
   className,
   ...rest
-}) => {
+}: TextFieldProps): JSX.Element => {
   return (
     <div className={className}>
       <label htmlFor={name} className="block text-sm font-medium text-gray-700">

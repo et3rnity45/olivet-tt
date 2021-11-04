@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FC, InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 interface SelectFieldProps extends InputHTMLAttributes<HTMLSelectElement> {
@@ -10,14 +10,14 @@ interface SelectFieldProps extends InputHTMLAttributes<HTMLSelectElement> {
   className?: string;
 }
 
-const SelectField: FC<SelectFieldProps> = ({
+const SelectField = ({
   name,
   label,
   register,
   children,
   className = "",
   ...rest
-}) => {
+}: SelectFieldProps): JSX.Element => {
   return (
     <div className={className}>
       <label htmlFor={name} className="block text-sm font-medium text-gray-700">

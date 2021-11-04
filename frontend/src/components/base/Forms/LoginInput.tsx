@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FC } from "react";
+import React from "react";
 import { UseFormRegister } from "react-hook-form";
 
 type InputProps = {
@@ -10,13 +10,13 @@ type InputProps = {
   className?: string;
 };
 
-const LoginInput: FC<InputProps> = ({
+const LoginInput = ({
   type,
   name,
   label,
   register,
   className,
-}) => {
+}: InputProps): JSX.Element => {
   return (
     <div className={`relative ${className}`}>
       <input

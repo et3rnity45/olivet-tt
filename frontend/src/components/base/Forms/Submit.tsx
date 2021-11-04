@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import React from "react";
 
 type SubmitProps = {
   text: string;
   className?: string;
 };
 
-const Submit: FC<SubmitProps> = ({ text, className }) => {
+const Submit = ({ text, className }: SubmitProps): JSX.Element => {
   return (
     <>
       <button
