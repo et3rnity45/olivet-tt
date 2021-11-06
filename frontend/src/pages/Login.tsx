@@ -5,8 +5,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useLazyQuery } from "@apollo/client";
 import logo from "@Assets/logo/olivet-tt-black.png";
-import Input from "@Components/base/Forms/LoginInput";
-import Submit from "@Components/base/Forms/LoginSubmit";
+import Input from "@Components/atoms/LoginInput";
+import Submit from "@Components/atoms/LoginSubmit";
 import LoginQuery from "@Queries/login";
 
 type LoginForm = {

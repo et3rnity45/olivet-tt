@@ -1,9 +1,9 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import Footer from "@Components/layout/Footer";
-import Navbar from "@Components/layout/Navbar";
+import Footer from "@Components/organisms/Footer";
+import Navbar from "@Components/organisms/Navbar";
 import Page from "@Pages/Page";
-import Sidebar from "@Components/layout/Sidebar";
+import Sidebar from "@Components/organisms/Sidebar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 
@@ -22,9 +22,9 @@ function App(): JSX.Element {
     );
 
   return (
-    <div className="App">
+    <div className="App min-h-screen flex flex-col">
       <Navbar />
-      <main id="content" className="mt-20 overflow-hidden">
+      <main id="content" className="pt-20 flex-1 overflow-hidden">
         <Page />
       </main>
       <Footer />

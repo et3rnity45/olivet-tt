@@ -4,7 +4,7 @@ import { ReactComponent as Facebook } from "@Assets/icons/facebook.svg";
 import { ReactComponent as Youtube } from "@Assets/icons/youtube.svg";
 
 const coordinates = {
-  mail: "usmo.tennisdetable@wanadoo.fr",
+  mail: "olivet-tt@orange.fr",
   phone: "02 38 66 86 88",
   room: "Gymnase de l'Orbellière",
   address: "199 Rue des Cireries",

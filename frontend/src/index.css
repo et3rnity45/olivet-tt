@@ -83,10 +83,6 @@ code {
     @apply top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
   }
 
-  .label {
-    @apply inline-block py-1 px-2 rounded bg-lightRed text-white text-xs font-medium uppercase;
-  }
-
   .logo-max {
     max-height: 30px;
     max-width: 50px;
@@ -185,10 +181,6 @@ code {
 @layer utilities {
   .trainer-card {
     max-width: 400px;
-  }
-
-  .filter-button {
-    @apply uppercase text-darkGray py-1 px-2 hover:bg-lightGray focus:bg-lightRed focus:text-white;
   }
 
   .article-container {

@@ -13,7 +13,7 @@ import Login from "@Pages/Login";
 import ArticleUpdate from "@Pages/admin/ArticleUpdate";
 import ArticleTable from "@Pages/admin/ArticleTable";
 import NotFound from "@Pages/NotFound";
-import ProtectedRoute from "@Components/ProtectedRoute";
+import ProtectedRoute from "@Components/utils/ProtectedRoute";
 
 const Page = (): JSX.Element => {
   return (

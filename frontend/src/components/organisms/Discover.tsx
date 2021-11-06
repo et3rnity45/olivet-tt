@@ -32,11 +32,11 @@ const Discover = (): JSX.Element => {
   return (
     <section className="py-16" id="discover">
       <div className="container mx-auto">
-        <div className="flex flex-col xl:flex-row">
+        <div className="flex flex-col lg:flex-row">
           {activities.map((activity) => {
             return (
               <Link
-                className="flex-1 flex flex-col items-center p-10 mx-4 hover:shadow-card hover:text-lightRed focus:shadow-card focus:text-lightRed rounded-lg transition-all duration-400"
+                className="flex-1 flex flex-col items-center p-10 mx-4 hover:shadow-2xl hover:text-lightRed focus:shadow-md focus:text-lightRed rounded-lg transition-all duration-400"
                 to={activity.link}
                 key={activity.name}
               >

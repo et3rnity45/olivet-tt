@@ -1,5 +1,5 @@
 import React, { FormEventHandler, ReactNode } from "react";
-import Submit from "./Submit";
+import Submit from "../atoms/Submit";
 
 type UpdateFormProps = {
   children: ReactNode;

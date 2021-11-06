@@ -1,7 +1,7 @@
 import React from "react";
-import HamMenu from "@Components/base/HamBox/HamMenu";
-import LeftNav from "./LeftNav";
-import RightNav from "./RightNav";
+import HamMenu from "@Components/molecules/HamMenu";
+import LeftNav from "@Components/molecules/LeftNav";
+import RightNav from "@Components/molecules/RightNav";
 
 const NavBar = (): JSX.Element => {
   return (

@@ -36,9 +36,9 @@ const RightNav = (): JSX.Element => {
                     >
                       <ul className="flex flex-col py-2">
                         {item.subNav.map((subItem) => (
-                          <>
+                          <Fragment key={subItem.name}>
                             <div className="absolute w-2 h-2 transform rotate-45 bg-white -top-1 left-10"></div>
-                            <li key={subItem.name}>
+                            <li>
                               <NavLink
                                 to={subItem.href}
                                 className="flex items-center uppercase text-lightBlack text-opacity-70 py-2 px-4 hover:text-lightRed"
@@ -46,7 +46,7 @@ const RightNav = (): JSX.Element => {
                                 {subItem.name}
                               </NavLink>
                             </li>
-                          </>
+                          </Fragment>
                         ))}
                       </ul>
 

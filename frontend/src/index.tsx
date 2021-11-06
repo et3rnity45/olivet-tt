@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { createUploadLink } from "apollo-upload-client";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import ScrollToTop from "@Components/ScrollToTop";
+import ScrollToTop from "@Components/utils/ScrollToTop";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import "./index.css";

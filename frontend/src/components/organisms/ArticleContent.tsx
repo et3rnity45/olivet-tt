@@ -1,14 +1,15 @@
 import React from "react";
 import dayjs from "dayjs";
 import { CalendarIcon } from "@heroicons/react/outline";
-import Article from "@Types/Article";
+import Badge from "@Components/atoms/Badge";
 import getMediaUrl from "@Utils/mediaUrl";
+import Article from "@Types/Article";
 
-type PageArticleProps = {
+type ArticleContentProps = {
   article: Article;
 };
 
-const PageArticle = ({ article }: PageArticleProps): JSX.Element => {
+const ArticleContent = ({ article }: ArticleContentProps): JSX.Element => {
   return (
     <article>
       <img
@@ -17,7 +18,7 @@ const PageArticle = ({ article }: PageArticleProps): JSX.Element => {
         alt={article.id}
       />
       <div className="mx-0 md:mx-5 lg:mx-20 mb-6">
-        <p className="label mb-4">{article.category}</p>
+        <Badge text={article.category} />
         <h1 className="font-bold text-black text-3xl lg:text-5xl tracking-widest mb-6">
           {article.title}
         </h1>
@@ -37,4 +38,4 @@ const PageArticle = ({ article }: PageArticleProps): JSX.Element => {
   );
 };
 
-export default PageArticle;
+export default ArticleContent;

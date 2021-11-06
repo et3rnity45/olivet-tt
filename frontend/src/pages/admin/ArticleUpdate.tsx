@@ -5,11 +5,11 @@ import { useMutation, useQuery } from "@apollo/client";
 import { CreateArticle, UpdateArticle } from "@Mutations/article";
 import { ArticleQuery } from "@Queries/article";
 import CategoryEnum from "@Types/CategoryEnum";
-import LongTextField from "@Components/base/Forms/LongTextField";
-import SelectField from "@Components/base/Forms/SelectField";
-import UploadField from "@Components/base/Forms/UploadField";
-import TextField from "@Components/base/Forms/TextField";
-import UpdateForm from "@Components/base/Forms/UpdateForm";
+import LongTextField from "@Components/atoms/LongTextField";
+import SelectField from "@Components/atoms/SelectField";
+import UploadField from "@Components/atoms/UploadField";
+import TextField from "@Components/atoms/TextField";
+import UpdateForm from "@Components/molecules/UpdateForm";
 
 type ArticleForm = {
   title: string;

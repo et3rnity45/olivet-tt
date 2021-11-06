@@ -1,7 +1,7 @@
 import React from "react";
-import Discover from "@Components/sections/Discover";
-import News from "@Components/sections/News";
-import Hero from "@Components/sections/Hero";
+import Discover from "@Components/organisms/Discover";
+import News from "@Components/organisms/News";
+import Hero from "@Components/organisms/Hero";
 
 const HomePage = (): JSX.Element => {
   return (

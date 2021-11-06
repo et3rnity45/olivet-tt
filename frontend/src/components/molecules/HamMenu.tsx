@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import navigation from "../../../utils/navigation";
+import navigation from "../../utils/navigation";
 import "./hambox.css";
 
 const HamBox = (): JSX.Element => {
