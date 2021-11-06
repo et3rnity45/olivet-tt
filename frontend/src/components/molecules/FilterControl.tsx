@@ -6,7 +6,7 @@ type FilterControlProps = {
   filter: string | undefined;
   setFilter: React.Dispatch<React.SetStateAction<string | undefined>>;
   options: string[];
-  className: string;
+  className?: string;
 };
 
 const FilterControl = ({

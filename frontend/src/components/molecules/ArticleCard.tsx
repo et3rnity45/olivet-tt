@@ -24,7 +24,7 @@ const ArticleCard = ({
           <img
             src={getMediaUrl(article.media)}
             alt={article.title}
-            className="object-cover rounded-t-lg transition duration-400 ease-in-out group-hover:scale-110"
+            className="object-cover transition duration-400 ease-in-out group-hover:scale-110"
           />
         </div>
         <div className="flex flex-col items-center py-6">
