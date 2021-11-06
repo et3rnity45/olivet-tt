@@ -18,7 +18,7 @@ const FilterButton = ({
       onClick={onClick}
       className={classNames(
         "uppercase text-xs md:text-sm cursor-pointer p-2 m-2",
-        active ? "bg-lightRed text-white" : "hover:bg-lightGray"
+        active ? "bg-lightRed text-white" : "hover:bg-gray-200"
       )}
     >
       {text}

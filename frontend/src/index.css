@@ -117,7 +117,7 @@ code {
     }
     .partner-item:nth-child(4n-3),
     .partner-item:nth-child(4n) {
-      @apply bg-lightGray;
+      @apply bg-gray-200;
     }
   }
   @media screen and (min-width: 530px) and (max-width: 1019px) {
@@ -129,7 +129,7 @@ code {
     .partner-item:nth-child(6n-4),
     .partner-item:nth-child(6n-2),
     .partner-item:nth-child(6n) {
-      @apply bg-lightGray;
+      @apply bg-gray-200;
     }
   }
   @media screen and (min-width: 1020px) {
@@ -142,7 +142,7 @@ code {
     .partner-item:nth-child(8n-4),
     .partner-item:nth-child(8n-3),
     .partner-item:nth-child(8n-1) {
-      @apply bg-lightGray;
+      @apply bg-gray-200;
     }
   }
 

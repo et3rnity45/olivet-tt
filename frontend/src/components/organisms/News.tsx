@@ -10,7 +10,7 @@ const News = (): JSX.Element => {
   const { loading, error, data } = useQuery(NewestArticles);
 
   return (
-    <section className="py-16 bg-lightGray" id="discover">
+    <section className="py-16" id="discover">
       <div className="container px-4 mx-auto">
         <h2>Actualité du Club</h2>
         <hr className="my-10 text-lightWhite" />

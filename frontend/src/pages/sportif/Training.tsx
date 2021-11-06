@@ -43,7 +43,7 @@ const Training = (): JSX.Element => {
           />
         </div>
       </section>
-      <section className="py-16 bg-lightGray" id="entraineur">
+      <section className="py-16" id="entraineur">
         <div className="container mx-auto px-3">
           <h2 className="mb-8 lg:mb-16">Nos Entraîneurs</h2>
           {loading ? (

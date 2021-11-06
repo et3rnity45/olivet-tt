@@ -50,7 +50,7 @@ const Teams = (): JSX.Element => {
                   className={({ selected }) =>
                     classNames(
                       "uppercase text-sx md:text-sm cursor-pointer p-2 mx-2 mb-2",
-                      selected ? "bg-lightRed text-white" : "hover:bg-lightGray"
+                      selected ? "bg-lightRed text-white" : "hover:bg-gray-200"
                     )
                   }
                 >
