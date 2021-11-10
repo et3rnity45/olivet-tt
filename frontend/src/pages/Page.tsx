@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
+import ProtectedRoute from "@Components/utils/ProtectedRoute";
+import NotFound from "@Pages/NotFound";
 import HomePage from "@Pages/HomePage";
 import Article from "@Pages/Article";
 import Articles from "@Pages/Articles";
@@ -12,8 +14,8 @@ import Training from "@Pages/sportif/Training";
 import Login from "@Pages/Login";
 import ArticleUpdate from "@Pages/admin/ArticleUpdate";
 import ArticleTable from "@Pages/admin/ArticleTable";
-import NotFound from "@Pages/NotFound";
-import ProtectedRoute from "@Components/utils/ProtectedRoute";
+import PartnerUpdate from "@Pages/admin/PartnerUpdate";
+import PartnerTable from "@Pages/admin/PartnerTable";
 
 const Page = (): JSX.Element => {
   return (
@@ -38,6 +40,17 @@ const Page = (): JSX.Element => {
         path="/admin/articles/edit/:id"
         exact
         component={ArticleUpdate}
+      />
+      <ProtectedRoute path="/admin/partners" exact component={PartnerTable} />
+      <ProtectedRoute
+        path="/admin/partners/create"
+        exact
+        component={PartnerUpdate}
+      />
+      <ProtectedRoute
+        path="/admin/partners/edit/:id"
+        exact
+        component={PartnerUpdate}
       />
       <Route component={NotFound} />
     </Switch>

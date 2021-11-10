@@ -8,7 +8,9 @@ type FormProps = {
 const Form = ({ children, onSubmit }: FormProps): JSX.Element => {
   return (
     <form onSubmit={onSubmit}>
-      <div className="shadow overflow-hidden sm:rounded-md">{children}</div>
+      <fieldset className="shadow overflow-hidden sm:rounded-md">
+        {children}
+      </fieldset>
     </form>
   );
 };

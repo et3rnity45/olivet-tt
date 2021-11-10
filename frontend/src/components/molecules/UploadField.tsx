@@ -1,29 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { InputHTMLAttributes, useCallback, useEffect } from "react";
-import { UseFormReturn } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
+import Label from "@Components/atoms/Label";
 
 interface UploadFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label: string;
-  forms: UseFormReturn<any>;
   className?: string;
 }
 
 const UploadField = ({
   name,
   label,
-  forms,
   className,
   ...rest
 }: UploadFieldProps): JSX.Element => {
-  const files: File[] = forms.watch(name);
+  const methods = useFormContext();
+  const files: File[] = methods.watch(name);
   const onDrop = useCallback(
     (droppedFiles) => {
-      forms.setValue(name, droppedFiles, { shouldValidate: true });
+      methods.setValue(name, droppedFiles, { shouldValidate: true });
     },
-    [name, forms]
+    [name, methods]
   );
+
+  useEffect(() => {
+    methods.register(name);
+  }, [name, methods]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -31,13 +35,9 @@ const UploadField = ({
     accept: "image/png, image/jpg, image/jpeg, image/pdf",
   });
 
-  useEffect(() => {
-    forms.register(name);
-  }, [forms, name]);
-
   return (
     <div className={className}>
-      <label className="block text-sm font-medium text-gray-700">{label}</label>
+      <Label htmlFor={name} text={label} />
       <div
         {...getRootProps()}
         className={`mt-1 flex justify-center px-6 pt-16 pb-20 border-2 border-gray-300 border-dashed rounded-md ${

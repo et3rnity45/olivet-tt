@@ -22,11 +22,26 @@ module.exports = {
         lightRed: "#ff4652",
         lighterRed: "#ff3c48",
       },
+      inset: {
+        "-10": "-10px",
+      },
+      rotate: {
+        225: "225deg",
+      },
       scale: {
         101: "1.01",
       },
+      spacing: {
+        "2px": "2px",
+        "30px": "30px",
+        "6/5": "120%",
+      },
       transitionDuration: {
         400: "400ms",
+      },
+      translate: {
+        "no-screen": "0vw",
+        screen: "100vw",
       },
     },
   },
