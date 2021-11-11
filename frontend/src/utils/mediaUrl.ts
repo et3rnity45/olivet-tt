@@ -1,4 +1,4 @@
-const MEDIA_PROVIDER = "https://s3.eu-west-3.amazonaws.com/images.olivet-tt.fr";
+const MEDIA_PROVIDER = process.env.REACT_APP_MEDIA_PROVIDER;
 const getMediaUrl = (link: string): string => {
   return `${MEDIA_PROVIDER}/${link}`;
 };

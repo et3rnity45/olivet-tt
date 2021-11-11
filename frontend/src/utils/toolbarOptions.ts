@@ -1,9 +1,17 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const uploadCallback = (): Promise<unknown> => {
+import { AddMedia } from "@Mutations/media";
+import getMediaUrl from "@Utils/mediaUrl";
+import { client } from "../index";
+
+const uploadCallback = async (file: File): Promise<unknown> => {
+  const response = await client.mutate({
+    mutation: AddMedia,
+    variables: { file },
+  });
+  console.log(response);
   return new Promise((resolve) => {
     resolve({
       data: {
-        link: "https://s3.eu-west-3.amazonaws.com/images.olivet-tt.fr/7cbb3cd2-bbb9-4367-8728-9f6bdfba7a33-1280x720.png",
+        link: getMediaUrl(response.data.addMedia),
       },
     });
   });
@@ -35,7 +43,7 @@ const toolbarOptions = {
     urlEnabled: true,
     uploadEnabled: true,
     alignmentEnabled: true,
-    uploadCallback: undefined,
+    uploadCallback,
     previewImage: true,
     inputAccept: "image/jpeg,image/jpg,image/png",
     alt: { present: false, mandatory: false },

@@ -3,6 +3,7 @@ type PlayerType = {
   nom: string;
   prenom: string;
   point: number;
+  apoint: number;
   valcla: number;
   clast: string;
   evolution?: number;

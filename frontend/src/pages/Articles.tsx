@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { RefreshIcon } from "@heroicons/react/outline";
 import { useQuery } from "@apollo/client";
@@ -15,31 +16,32 @@ const spring = {
 };
 
 const Articles = (): JSX.Element => {
+  const { category } = useParams<{ category: string }>();
   const { loading, error, data } = useQuery(ArticlesQuery);
-  const [category, setCategory] = useState<string | undefined>();
+  const [filter, setFilter] = useState<string | undefined>(category);
   const [filteredArticles, setFilteredArticles] = useState([]);
 
   useEffect(() => {
     const articles = data?.articles;
     if (articles) {
       setFilteredArticles(
-        category
+        filter
           ? articles.filter(
               (article: Article) =>
-                article.category.toLowerCase() === category.toLowerCase()
+                article.category.toLowerCase() === filter.toLowerCase()
             )
           : articles
       );
     }
-  }, [data, category]);
+  }, [data, filter]);
 
   return (
     <section className="py-8 lg:py-16 mx-4" id="contact">
       <div className="container mx-auto">
         <h2 className="mb-8 lg:mb-16">Toute l&apos;acutalité</h2>
         <FilterControl
-          filter={category}
-          setFilter={setCategory}
+          filter={filter}
+          setFilter={setFilter}
           options={Object.values(CategoryEnum)}
           className="pl-5"
         />

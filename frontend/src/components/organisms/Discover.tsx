@@ -14,17 +14,17 @@ export const activities = [
   },
   {
     name: "Stages",
-    link: "/articles",
+    link: "/articles/stage",
     svg: <PingPong height="60" width="60" className="fill-current" />,
     description:
       "Découvrez les stages proposés par le club pour occuper les enfants durant les vacances",
   },
   {
     name: "Compétitions",
-    link: "/articles",
+    link: "/articles/competition",
     svg: <Trophy height="60" width="60" className="fill-current" />,
     description:
-      "Consultez les annonces et les résultats des différentes compétitions auquelles le club participe",
+      "Consultez les annonces et les résultats des différentes compétitions auxquelles le club participe",
   },
 ];
 

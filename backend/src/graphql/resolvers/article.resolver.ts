@@ -11,7 +11,7 @@ import { uploadFile, deleteFile } from '../../utils/UploadFile';
 export default class ArticleResolver {
   @Query(() => [Article])
   async articles(): Promise<Article[]> {
-    const articles = await ArticleModel.find().exec();
+    const articles = await ArticleModel.find().sort('-createdAt').exec();
 
     return articles;
   }

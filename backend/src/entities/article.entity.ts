@@ -1,4 +1,3 @@
-/* eslint-disable func-names */
 import { ObjectType, Field, ID } from 'type-graphql';
 import { Prop, getModelForClass } from '@typegoose/typegoose';
 

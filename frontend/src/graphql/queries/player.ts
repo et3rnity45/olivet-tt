@@ -7,6 +7,7 @@ export const PlayerQuery = gql`
       nom
       prenom
       point
+      apoint
       valcla
       clast
     }
@@ -20,6 +21,7 @@ export const PlayersQuery = gql`
       nom
       prenom
       point
+      apoint
       valcla
       clast
     }
