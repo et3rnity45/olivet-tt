@@ -22,6 +22,11 @@ module.exports = {
         lightRed: "#ff4652",
         lighterRed: "#ff3c48",
       },
+      fontSize: {
+        "large": "4rem",
+        "xlarge": "8rem",
+        "xxlarge": "15rem",
+      },
       inset: {
         "-10": "-10px",
       },

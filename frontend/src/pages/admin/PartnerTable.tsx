@@ -88,10 +88,8 @@ const PartnerTable = (): JSX.Element => {
                         </tr>
                       </thead>
                       <tbody className="relative bg-white divide-y divide-gray-200">
-                        {data?.partners
-                          .slice(0)
-                          .reverse()
-                          .map((partner: PartnerType, idx: number) => (
+                        {data?.partners.map(
+                          (partner: PartnerType, idx: number) => (
                             <tr key={partner.id}>
                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 {idx + 1}
@@ -130,7 +128,8 @@ const PartnerTable = (): JSX.Element => {
                                 </button>
                               </td>
                             </tr>
-                          ))}
+                          )
+                        )}
                       </tbody>
                     </table>
                   </div>

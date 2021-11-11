@@ -8,16 +8,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-.white-filter {
-  -webkit-filter: brightness(0) invert(1);
-  filter: brightness(0) invert(1);
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -78,7 +68,6 @@ code {
   .article-link:hover::before {
     @apply right-0;
   }
-
   .position-center {
     @apply top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
   }
@@ -159,22 +148,6 @@ code {
   :hover > .partner-logo,
   :focus > .partner-logo {
     transform: translate(-50%, -50%) scale(1.1);
-  }
-
-  .text-404 {
-    font-size: 4rem;
-  }
-
-  @screen md {
-    .text-404 {
-      font-size: 8rem;
-    }
-  }
-
-  @screen lg {
-    .text-404 {
-      font-size: 15rem;
-    }
   }
 }
 

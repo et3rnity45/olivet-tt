@@ -29,7 +29,7 @@ const Footer = (): JSX.Element => {
             {data?.partners?.map((partner: PartnerType) => (
               <Link className="p-8" to="/partenaires" key={partner.id}>
                 <img
-                  className="white-filter logo-max align-middle"
+                  className="filter invert brightness-100 align-middle logo-max opacity-60 hover:opacity-100 transition"
                   src={getMediaUrl(partner.media)}
                   alt={partner.name}
                 />
@@ -39,11 +39,14 @@ const Footer = (): JSX.Element => {
         </div>
       </section>
       <hr className="text-lightWhite" />
-      <section id="copyright" className="">
-        <p className="text-center text-gray p-10">
+      <section id="copyright">
+        <p className="text-center text-gray-200 opacity-60 p-10">
           &copy; {new Date().getFullYear()}, USM Olivet TT. Tous droits
           réservés.
-          <Link className="ml-3 hover:text-lightWhite" to="/cgu">
+          <Link
+            className="ml-3 opacity-60 hover:opacity-100 transition"
+            to="/cgu"
+          >
             Conditions d&apos;utilisation
           </Link>
         </p>

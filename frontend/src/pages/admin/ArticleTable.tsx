@@ -88,10 +88,8 @@ const ArticleTable = (): JSX.Element => {
                         </tr>
                       </thead>
                       <tbody className="relative bg-white divide-y divide-gray-200">
-                        {data?.articles
-                          .slice(0)
-                          .reverse()
-                          .map((article: ArticleType, idx: number) => (
+                        {data?.articles.map(
+                          (article: ArticleType, idx: number) => (
                             <tr key={article.id}>
                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 {idx + 1}
@@ -126,7 +124,8 @@ const ArticleTable = (): JSX.Element => {
                                 </button>
                               </td>
                             </tr>
-                          ))}
+                          )
+                        )}
                       </tbody>
                     </table>
                   </div>

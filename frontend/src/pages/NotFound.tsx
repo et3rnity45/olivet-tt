@@ -8,7 +8,7 @@ const NotFound = (): JSX.Element => {
         <h1 className="font-extrabold text-2xl md:text-4xl lg:text-6xl mb-5 lgmb-10">
           Oups... Cette page n&apos;existe pas !
         </h1>
-        <p className="text-404 font-bold tracking-widest mb-5">
+        <p className="text-large md:text-xlarge lg:text-xxlarge font-bold tracking-widest mb-5">
           <span>4</span>
           <span className="text-stroke text-lightRed">0</span>
           <span>4</span>
