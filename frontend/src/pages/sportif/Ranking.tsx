@@ -12,7 +12,7 @@ const Ranking = (): JSX.Element => {
     index: index + 1,
     fullname: `${player.nom} ${player.prenom}`,
     point: Number(player.point.toFixed(1)),
-    monthEvolution: Number((player.apoint - player.valcla).toFixed(1)),
+    monthEvolution: Number((player.point - player.apoint).toFixed(1)),
     yearEvolution: Number((player.point - player.valcla).toFixed(1)),
   }));
 
