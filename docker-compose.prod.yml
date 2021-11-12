@@ -21,7 +21,6 @@ services:
       - NODE_ENV=production
       - REACT_APP_API_URL=/graphql
   mongodb:
-    container_name: mongo-container
     image: mongo:4.4.9
     volumes:
       - ./data/db:/data/db
