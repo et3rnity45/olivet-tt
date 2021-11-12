@@ -26,8 +26,6 @@ services:
     ports:
       - 3000:3000
   mongodb:
-    container_name: mongo-container
     image: mongo:4.4.9
     volumes:
-      - ./data/db:/data/db
-      - ./data/backup:/data/backup
+      - ./data:/data/db
