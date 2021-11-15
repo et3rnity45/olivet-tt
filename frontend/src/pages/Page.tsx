@@ -12,10 +12,10 @@ import Ranking from "@Pages/sportif/Ranking";
 import Teams from "@Pages/sportif/Teams";
 import Training from "@Pages/sportif/Training";
 import Login from "@Pages/Login";
-import ArticleUpdate from "@Pages/admin/ArticleUpdate";
-import ArticleTable from "@Pages/admin/ArticleTable";
-import PartnerUpdate from "@Pages/admin/PartnerUpdate";
-import PartnerTable from "@Pages/admin/PartnerTable";
+import ArticleUpdate from "@Pages/admin/article/ArticleUpdate";
+import ArticleTable from "@Pages/admin/article/ArticleTable";
+import PartnerUpdate from "@Pages/admin/partner/PartnerUpdate";
+import PartnerTable from "@Pages/admin/partner/PartnerTable";
 
 const Page = (): JSX.Element => {
   return (

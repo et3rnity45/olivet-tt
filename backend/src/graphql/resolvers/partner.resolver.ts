@@ -53,12 +53,15 @@ export default class PartnerResolver {
       @Arg('input') input: PartnerInput,
       @Arg('file', () => GraphQLUpload, { nullable: true }) file?: FileUpload,
   ): Promise<Partner> {
-    let media;
-    if (file) media = await uploadFile(file);
+    const currentPartner = await PartnerModel.findById(id);
+    if (!currentPartner) throw new ApolloError('partner not found');
 
-    const partner = await PartnerModel.findByIdAndUpdate(id, { ...input, media });
-    if (!partner) throw new ApolloError('partner not found');
-    deleteFile(partner.media);
+    let { media } = currentPartner;
+    if (file) {
+      deleteFile(currentPartner.media);
+      media = await uploadFile(file);
+    }
+    const partner = await PartnerModel.findByIdAndUpdate(id, { ...input, media }, { new: true });
 
     return partner;
   }
@@ -67,11 +70,8 @@ export default class PartnerResolver {
   @Mutation(() => Partner)
   async deletePartner(@Arg('id', () => ID) id: string): Promise<Partner> {
     const partner = await PartnerModel.findByIdAndDelete(id);
-    if (partner) {
-      deleteFile(partner.media);
-    } else {
-      throw new ApolloError('partner not found');
-    }
+    if (!partner) throw new ApolloError('partner not found');
+    await deleteFile(partner.media);
 
     return partner;
   }

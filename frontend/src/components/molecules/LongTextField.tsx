@@ -9,7 +9,7 @@ type LongTextFiledProps = {
   className?: string;
 };
 
-export const LongTextField = ({
+const LongTextField = ({
   name,
   label,
   className,

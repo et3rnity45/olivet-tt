@@ -60,16 +60,15 @@ export default class ArticleResolver {
       @Arg('input') input: ArticleInput,
       @Arg('file', () => GraphQLUpload, { nullable: true }) file?: FileUpload,
   ): Promise<Article> {
-    const oldArticle = await ArticleModel.findById(id).exec();
-    if (!oldArticle) throw new ApolloError('article not found');
-    let { media } = oldArticle;
-    if (file) {
-      media = await uploadFile(file);
-      deleteFile(oldArticle.media);
-    }
+    const currentArticle = await ArticleModel.findById(id).exec();
+    if (!currentArticle) throw new ApolloError('article not found');
 
-    const article = await ArticleModel.findByIdAndUpdate(id, { ...input, media });
-    if (!article) throw new ApolloError('article not found');
+    let { media } = currentArticle;
+    if (file) {
+      deleteFile(currentArticle.media);
+      media = await uploadFile(file);
+    }
+    const article = await ArticleModel.findByIdAndUpdate(id, { ...input, media }, { new: true });
 
     return article;
   }
@@ -78,11 +77,8 @@ export default class ArticleResolver {
   @Mutation(() => Article)
   async deleteArticle(@Arg('id', () => ID) id: string): Promise<Article> {
     const article = await ArticleModel.findByIdAndDelete(id);
-    if (article) {
-      deleteFile(article.media);
-    } else {
-      throw new ApolloError('article not found');
-    }
+    if (!article) throw new ApolloError('article not found');
+    await deleteFile(article.media);
 
     return article;
   }

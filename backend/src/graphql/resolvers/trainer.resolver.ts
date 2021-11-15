@@ -53,12 +53,15 @@ export default class TrainerResolver {
       @Arg('input') input: TrainerInput,
       @Arg('file', () => GraphQLUpload, { nullable: true }) file?: FileUpload,
   ): Promise<Trainer> {
-    let media;
-    if (file) media = await uploadFile(file);
+    const currentTrainer = await TrainerModel.findById(id);
+    if (!currentTrainer) throw new ApolloError('trainer not found');
 
-    const trainer = await TrainerModel.findByIdAndUpdate(id, { ...input, media });
-    if (!trainer) throw new ApolloError('trainer not found');
-    deleteFile(trainer.media);
+    let { media } = currentTrainer;
+    if (file) {
+      deleteFile(currentTrainer.media);
+      media = await uploadFile(file);
+    }
+    const trainer = await TrainerModel.findByIdAndUpdate(id, { ...input, media }, { new: true });
 
     return trainer;
   }
@@ -67,11 +70,8 @@ export default class TrainerResolver {
   @Mutation(() => Trainer)
   async deleteTrainer(@Arg('id', () => ID) id: string): Promise<Trainer> {
     const trainer = await TrainerModel.findByIdAndDelete(id);
-    if (trainer) {
-      deleteFile(trainer.media);
-    } else {
-      throw new ApolloError('trainer not found');
-    }
+    if (!trainer) throw new ApolloError('trainer not found');
+    await deleteFile(trainer.media);
 
     return trainer;
   }
