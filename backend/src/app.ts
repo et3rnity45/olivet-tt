@@ -6,6 +6,7 @@ import { graphqlUploadExpress } from 'graphql-upload';
 import { buildSchema } from 'type-graphql';
 import { Payload, verifyToken } from './utils/auth';
 import authChecker from './config/auth-checker';
+import restRoutes from './routes';
 
 const PORT = process.env.SERVER_PORT || 4000;
 
@@ -38,6 +39,7 @@ export default async function initServer(): Promise<void> {
       maxFileSize: 30000000,
       maxFiles: 5,
     }));
+    app.use('/', restRoutes);
     server.applyMiddleware({ app });
 
     app.listen(PORT, () => {
