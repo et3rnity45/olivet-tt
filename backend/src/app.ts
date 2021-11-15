@@ -39,7 +39,9 @@ export default async function initServer(): Promise<void> {
       maxFileSize: 30000000,
       maxFiles: 5,
     }));
-    app.use('/', restRoutes);
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json());
+    app.use('/webhooks', restRoutes);
     server.applyMiddleware({ app });
 
     app.listen(PORT, () => {
