@@ -18,6 +18,8 @@ import PartnerUpdate from "@Pages/admin/PartnerUpdate";
 import PartnerTable from "@Pages/admin/PartnerTable";
 
 const Page = (): JSX.Element => {
+  const activeTournament = false;
+
   return (
     <Switch>
       <Route path="/" exact component={HomePage} />
@@ -28,6 +30,14 @@ const Page = (): JSX.Element => {
       <Route path="/contact" exact component={Contact} />
       <Route path="/articles/:category?" exact component={Articles} />
       <Route path="/article/:id" exact component={Article} />
+      {activeTournament && (
+        <>
+          <Route path="/tournoi/tableaux" exact component={Contact} />
+          <Route path="/tournoi/inscriptions" exact component={Contact} />
+          <Route path="/tournoi/reglement" exact component={Contact} />
+          <Route path="/tournoi/infos" exact component={Contact} />
+        </>
+      )}
       <Route path="/login" exact component={Login} />
       <ProtectedRoute path="/admin" exact />
       <ProtectedRoute path="/admin/articles" exact component={ArticleTable} />

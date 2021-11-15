@@ -1,24 +1,32 @@
-const firstSubNav = [
-  { name: "Bureau", href: "/club/bureau", subNav: null },
-  { name: "Historique", href: "/club/historique", subNav: null },
-  { name: "Projet du club", href: "/club/projet", subNav: null },
+const club = [
+  { name: "Bureau", href: "/club/bureau" },
+  { name: "Historique", href: "/club/historique" },
+  { name: "Projet du club", href: "/club/projet" },
 ];
 
-const secondSubNav = [
-  { name: "Entraînements", href: "/sportif/entrainements", subNav: null },
-  { name: "Stages", href: "/articles/stage", subNav: null },
-  { name: "Compétitions", href: "/articles/competition", subNav: null },
-  { name: "Classement", href: "/sportif/classement", subNav: null },
-  { name: "Equipes", href: "/sportif/equipes", subNav: null },
+const sportif = [
+  { name: "Entraînements", href: "/sportif/entrainements" },
+  { name: "Stages", href: "/articles/stage" },
+  { name: "Compétitions", href: "/articles/competition" },
+  { name: "Classement", href: "/sportif/classement" },
+  { name: "Equipes", href: "/sportif/equipes" },
+];
+
+const tournoi = [
+  { name: "Tableaux", href: "/tournoi/tableaux" },
+  { name: "Inscriptions", href: "/tournoi/inscriptions" },
+  { name: "Réglement", href: "/tournoi/reglement" },
+  { name: "Infos Pratiques", href: "/tournoi/infos" },
 ];
 
 const navigation = [
-  { name: "Accueil", href: "/", subNav: null },
-  { name: "Actualités", href: "/articles", subNav: null },
-  { name: "Le club", href: "#", subNav: firstSubNav },
-  { name: "Sportif", href: "#", subNav: secondSubNav },
-  { name: "Partenaires", href: "/partenaires", subNav: null },
-  { name: "Contact", href: "/contact", subNav: null },
+  { name: "Accueil", href: "/" },
+  { name: "Tournoi", href: "#", subNav: tournoi },
+  { name: "Actualités", href: "/articles" },
+  { name: "Le club", href: "#", subNav: club },
+  { name: "Sportif", href: "#", subNav: sportif },
+  { name: "Partenaires", href: "/partenaires" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default navigation;
