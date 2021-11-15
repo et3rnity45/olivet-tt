@@ -10,9 +10,6 @@ module.exports = {
       borderRadius: {
         DEFAULT: ".175rem",
       },
-      boxShadow: {
-        card: "0 12px 24px -6px rgba(48,54,77,.16)",
-      },
       colors: {
         lightBlack: "#30364d",
         darkGray: "#798099",

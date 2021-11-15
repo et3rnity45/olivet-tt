@@ -25,7 +25,7 @@ const navigation = [
 
 const Sidebar = (): JSX.Element => {
   return (
-    <div className="fixed top-0 bottom-0 left-0 z-50 w-64 bg-lightBlue bg-opacity-95 shadow-card text-white">
+    <div className="fixed top-0 bottom-0 left-0 z-50 w-64 bg-lightBlue bg-opacity-95 shadow-2xl text-white">
       <div className="flex flex-col items-center px-6 mt-4 mb-6">
         <img className="w-16 h-auto" src={logo} alt="Logo USM Olivet TT" />
         <h3 className="text-xl font-semibold mt-4">USM Olivet TT</h3>

@@ -51,7 +51,7 @@ const Login = (): JSX.Element => {
 
   return (
     <section className="py-16 mx-4" id="login">
-      <div className="rounded shadow-card bg-white px-10 py-8 max-w-sm mx-auto flex flex-col">
+      <div className="rounded shadow-2xl bg-white px-10 py-8 max-w-sm mx-auto flex flex-col">
         <div className="flex justify-center items-center mb-8">
           <img className="h-32" src={logo} alt="Olivet TT Logo" />
         </div>

@@ -12,7 +12,7 @@ const Training = (): JSX.Element => {
   const trainerList = data?.trainers?.map((trainer: TrainerType) => (
     <div
       key={trainer.id}
-      className="flex-1 flex flex-col shadow-card trainer-card rounded bg-white mx-4 mb-8"
+      className="flex-1 flex flex-col shadow-2xl trainer-card rounded bg-white mx-4 mb-8"
     >
       <img
         className="rounded-t h-auto"
