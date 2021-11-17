@@ -1,12 +1,14 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   mode: "jit",
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    fontFamily: {
-      sans: "Poppins",
-    },
     extend: {
+      fontFamily: {
+        sans: ["Poppins", ...defaultTheme.fontFamily.sans],
+      },
       borderRadius: {
         DEFAULT: ".175rem",
       },
@@ -20,9 +22,9 @@ module.exports = {
         lighterRed: "#ff3c48",
       },
       fontSize: {
-        "large": "4rem",
-        "xlarge": "8rem",
-        "xxlarge": "15rem",
+        large: "4rem",
+        xlarge: "8rem",
+        xxlarge: "15rem",
       },
       inset: {
         "-10": "-10px",
