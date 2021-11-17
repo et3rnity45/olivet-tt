@@ -18,17 +18,21 @@ export class Ticket {
   @Prop({ trim: true, required: true })
   email!: string;
 
+  @Field()
   @Prop({ trim: true, required: true })
   phone!: string;
 
+  @Field()
   @Prop({ trim: true, required: true })
   licence!: string;
 
+  @Field()
   @Prop({ required: true })
   hasPaid!: boolean;
 
+  @Field()
   @Prop({ required: true })
-  brackets!: string[];
+  bracket!: string;
 
   @Field()
   createdAt!: Date;

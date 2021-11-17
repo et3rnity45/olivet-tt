@@ -22,5 +22,5 @@ export default class TicketInput implements Partial<Ticket> {
   hasPaid!: boolean;
 
   @Field()
-  brackets!: string[];
+  bracket!: string;
 }

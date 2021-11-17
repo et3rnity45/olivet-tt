@@ -7,7 +7,6 @@ import { Ticket, TicketModel } from '../../entities/ticket.entity';
 
 @Resolver(Ticket)
 export default class TicketResolver {
-  @Authorized()
   @Query(() => [Ticket])
   async tickets(): Promise<Ticket[]> {
     const tickets = await TicketModel.find().exec();
@@ -15,12 +14,29 @@ export default class TicketResolver {
     return tickets;
   }
 
-  @Authorized()
   @Query(() => Ticket)
   async ticket(@Arg('id', () => ID) id: string): Promise<Ticket> {
     const ticket = await TicketModel.findById(id).exec();
 
     if (!ticket) throw new ApolloError('ticket not found');
+
+    return ticket;
+  }
+
+  @Authorized()
+  @Mutation(() => Ticket)
+  static async createTicket(
+    @Arg('input') input: TicketInput,
+  ): Promise<Ticket> {
+    const ticket = new TicketModel(input);
+
+    try {
+      await ticket.save();
+    } catch (err: any) {
+      if (err.name === 'MongoError' && err.code === 11000) {
+        throw new ApolloError('duplicate value');
+      }
+    }
 
     return ticket;
   }
