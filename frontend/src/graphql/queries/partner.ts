@@ -7,6 +7,8 @@ export const PartnerQuery = gql`
       name
       url
       media
+      updatedAt
+      createdAt
     }
   }
 `;
@@ -18,6 +20,8 @@ export const PartnersQuery = gql`
       name
       url
       media
+      updatedAt
+      createdAt
     }
   }
 `;

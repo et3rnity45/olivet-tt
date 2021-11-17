@@ -1,15 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import {
-  ContentState,
-  convertFromHTML,
-  convertToRaw,
-  EditorState,
-} from "draft-js";
+import { ContentState, convertToRaw, EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import htmlToDraft from "html-to-draftjs";
 import toolbarOptions from "@Utils/toolbarOptions";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 type RichTextEditorProps = {
   value: string;
@@ -23,9 +19,7 @@ const RichTextEditor = ({
   const [editorState, setEditorState] = useState(
     value
       ? EditorState.createWithContent(
-          ContentState.createFromBlockArray(
-            convertFromHTML(value).contentBlocks
-          )
+          ContentState.createFromBlockArray(htmlToDraft(value).contentBlocks)
         )
       : EditorState.createEmpty()
   );
