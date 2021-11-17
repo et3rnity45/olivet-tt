@@ -21,7 +21,8 @@ router.post('/helloasso', (req, res) => {
     });
   }
   // eslint-disable-next-line no-console
-  console.log(req.headers);
+  console.log(req.get('origin'));
+  console.log(req.get('host'));
   return res.send(req.body);
 });
 
