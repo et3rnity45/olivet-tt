@@ -1,5 +1,5 @@
 import {
-  DeleteObjectRequest, ListObjectsV2Request, PutObjectRequest, GetObjectRequest,
+  DeleteObjectRequest, ListObjectsV2Request, PutObjectRequest,
 } from 'aws-sdk/clients/s3';
 import { FileUpload } from 'graphql-upload';
 import { v4 as uuid } from 'uuid';

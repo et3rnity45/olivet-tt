@@ -13,7 +13,7 @@ const Ranking = (): JSX.Element => {
     fullname: `${player.nom} ${player.prenom}`,
     point: Number(player.point.toFixed(1)),
     monthEvolution: Number((player.point - player.apoint).toFixed(1)),
-    yearEvolution: Number((player.point - player.valcla).toFixed(1)),
+    yearEvolution: Number((player.point - player.valinit).toFixed(1)),
   }));
 
   const columns = useMemo(

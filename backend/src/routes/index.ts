@@ -20,9 +20,6 @@ router.post('/helloasso', (req, res) => {
       await TicketResolver.createTicket(ticket);
     });
   }
-  // eslint-disable-next-line no-console
-  console.log(req.get('origin'));
-  console.log(req.get('host'));
   return res.send(req.body);
 });
 
