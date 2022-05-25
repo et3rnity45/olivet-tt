@@ -1,12 +1,11 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React from "react";
-import { Redirect, Route, RouteProps } from "react-router-dom";
+import React from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 
-const ProtectedRoute = ({ ...routeProps }: RouteProps): JSX.Element => {
-  if (localStorage.token) {
-    return <Route {...routeProps} />;
-  }
-  return <Redirect to={{ pathname: "/login" }} />;
+const ProtectedRoute = (): JSX.Element => {
+	if (!localStorage.token) {
+		return <Navigate to={{ pathname: '/login' }} replace />;
+	}
+	return <Outlet />;
 };
 
 export default ProtectedRoute;

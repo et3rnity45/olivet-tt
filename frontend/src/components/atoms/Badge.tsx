@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
 type BadgeProps = {
-  text: string;
+	text: string;
 };
 
 const Badge = ({ text }: BadgeProps): JSX.Element => {
-  return (
-    <span className="inline-block py-1 px-2 rounded bg-lightRed text-white text-xs font-medium uppercase tracking-widest mb-4">
-      {text}
-    </span>
-  );
+	return (
+		<span className='mb-4 inline-block rounded bg-lightRed py-1 px-2 text-xs font-medium uppercase tracking-widest text-white'>
+			{text}
+		</span>
+	);
 };
 
 export default Badge;

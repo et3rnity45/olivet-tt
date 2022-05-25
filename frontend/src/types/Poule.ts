@@ -1,11 +1,11 @@
-import Team from "./Team";
+import Team from './Team';
 
 type PouleType = {
-  id: string;
-  libequipe: string;
-  libdivision: string;
-  liendivision: string;
-  teams: [Team];
+	id: string;
+	libequipe: string;
+	libdivision: string;
+	liendivision: string;
+	teams: [Team];
 };
 
 export default PouleType;

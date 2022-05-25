@@ -30,11 +30,15 @@ input LoginInput {
 }
 
 type Mutation {
+  addMedia(file: Upload!): String!
   createArticle(file: Upload!, input: ArticleInput!): Article!
   createPartner(file: Upload!, input: PartnerInput!): Partner!
+  createTicket(input: TicketInput!): Ticket!
   createTrainer(file: Upload!, input: TrainerInput!): Trainer!
   deleteArticle(id: ID!): Article!
+  deleteMedia(media: String!): Boolean!
   deletePartner(id: ID!): Partner!
+  deleteTicket(id: ID!): Ticket!
   deleteTrainer(id: ID!): Trainer!
   deleteUser(id: ID!): User!
   register(input: UserInput!): Token!
@@ -42,6 +46,7 @@ type Mutation {
   updateAllPoules: [Poule!]!
   updateArticle(file: Upload, id: ID!, input: ArticleInput!): Article!
   updatePartner(file: Upload, id: ID!, input: PartnerInput!): Partner!
+  updateTicket(id: ID!, input: TicketInput!): Ticket!
   updateTrainer(file: Upload, id: ID!, input: TrainerInput!): Trainer!
   updateUser(id: ID!, input: UserInput!): User!
 }
@@ -88,6 +93,7 @@ type Poule {
   createdAt: DateTime!
   id: ID!
   libdivision: String!
+  libepr: String!
   libequipe: String!
   liendivision: String!
   teams: [Team!]
@@ -98,6 +104,7 @@ type Query {
   article(id: ID!): Article!
   articles: [Article!]!
   login(input: LoginInput!): Token!
+  medias: [String!]!
   newestArticles: [Article!]!
   partner(id: ID!): Partner!
   partners: [Partner!]!
@@ -105,6 +112,8 @@ type Query {
   players: [Player!]!
   poule(id: ID!): Poule!
   poules: [Poule!]!
+  ticket(id: ID!): Ticket!
+  tickets: [Ticket!]!
   trainer(id: ID!): Trainer!
   trainers: [Trainer!]!
   user(id: ID!): User!
@@ -126,6 +135,29 @@ type Team {
   pts: Float!
   updatedAt: DateTime!
   vic: Float!
+}
+
+type Ticket {
+  bracket: String!
+  createdAt: DateTime!
+  email: String!
+  firstname: String!
+  hasPaid: Boolean!
+  id: ID!
+  lastname: String!
+  licence: String!
+  phone: String!
+  updatedAt: DateTime!
+}
+
+input TicketInput {
+  bracket: String!
+  email: String!
+  firstname: String!
+  hasPaid: Boolean!
+  lastname: String!
+  licence: String!
+  phone: String!
 }
 
 type Token {

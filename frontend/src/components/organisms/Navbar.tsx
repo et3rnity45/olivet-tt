@@ -1,18 +1,18 @@
-import React from "react";
-import HamMenu from "@Components/molecules/HamMenu";
-import LeftNav from "@Components/molecules/LeftNav";
-import RightNav from "@Components/molecules/RightNav";
+import React from 'react';
+import HamMenu from '@/components/molecules/HamMenu';
+import LeftNav from '@/components/molecules/LeftNav';
+import RightNav from '@/components/molecules/RightNav';
 
 const NavBar = (): JSX.Element => {
-  return (
-    <header className="fixed top-0 left-0 flex items-center w-full h-20 z-50 bg-darkBlue text-white whitespace-nowrap">
-      <nav className="flex-grow flex justify-between items-center mx-6 sm:mx-8">
-        <LeftNav />
-        <RightNav />
-        <HamMenu />
-      </nav>
-    </header>
-  );
+	return (
+		<header className='fixed top-0 left-0 z-50 flex h-20 w-full items-center whitespace-nowrap bg-darkBlue text-white'>
+			<nav className='mx-6 flex flex-grow items-center justify-between sm:mx-8'>
+				<LeftNav />
+				<RightNav />
+				<HamMenu />
+			</nav>
+		</header>
+	);
 };
 
 export default NavBar;

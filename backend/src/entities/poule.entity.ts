@@ -9,6 +9,10 @@ export class Poule {
 
   @Field()
   @Prop({ trim: true, required: true })
+  libepr!: string;
+
+  @Field()
+  @Prop({ trim: true, required: true })
   libequipe!: string;
 
   @Field()

@@ -19,7 +19,7 @@ services:
       - web-client-build:/app/build
     environment:
       - NODE_ENV=production
-      - REACT_APP_API_URL=/graphql
+      - VITE_API_URL=/graphql
   mongodb:
     image: mongo:4.4.9
     volumes:

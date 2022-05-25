@@ -30,12 +30,14 @@ export default class PouleResolver {
     await TeamModel.deleteMany({});
 
     let poules = await getPoules();
-    poules = await Promise.all(poules.map(async (poule) => {
-      const teams: Team[] = await TeamModel.insertMany(await getTeamsWithResult(poule));
-      const newPoule: Poule = poule;
-      newPoule.teams = teams;
-      return newPoule;
-    }));
+    poules = await Promise.all(poules
+      .filter((poule) => poule.libepr.startsWith('FED_Championnat') && poule.libequipe.includes('Phase 2'))
+      .map(async (poule) => {
+        const teams: Team[] = await TeamModel.insertMany(await getTeamsWithResult(poule));
+        const newPoule: Poule = poule;
+        newPoule.teams = teams;
+        return newPoule;
+      }));
     const finalPoules = await PouleModel.insertMany(poules);
     return finalPoules;
   }
