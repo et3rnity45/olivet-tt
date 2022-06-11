@@ -16,7 +16,7 @@ export default class TicketInput implements Partial<Ticket> {
   phone!: string;
 
   @Field()
-  licence!: string;
+  licence!: number;
 
   @Field()
   hasPaid!: boolean;

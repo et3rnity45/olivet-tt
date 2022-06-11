@@ -6,7 +6,7 @@ type TicketType = {
 	firstname: string;
 	hasPaid: boolean;
 	lastname: string;
-	licence: string;
+	licence: number;
 	phone: string;
 	updatedAt: Date;
 };

@@ -21,7 +21,7 @@ const tournoi = [
 
 const navigation = [
 	{ name: 'Accueil', href: '/' },
-	{ name: 'Tournoi', href: '#', subNav: tournoi },
+	// { name: 'Tournoi', href: '#', subNav: tournoi },
 	{ name: 'Actualités', href: '/articles' },
 	{ name: 'Le club', href: '#', subNav: club },
 	{ name: 'Sportif', href: '#', subNav: sportif },

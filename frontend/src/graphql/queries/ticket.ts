@@ -11,6 +11,7 @@ export const TicketQuery = gql`
 			licence
 			phone
 			hasPaid
+			createdAt
 		}
 	}
 `;
@@ -26,6 +27,7 @@ export const TicketsQuery = gql`
 			licence
 			phone
 			hasPaid
+			createdAt
 		}
 	}
 `;

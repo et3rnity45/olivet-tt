@@ -9,6 +9,7 @@ export const PlayerQuery = gql`
 			point
 			apoint
 			valinit
+			valcla
 			clast
 		}
 	}
@@ -23,6 +24,7 @@ export const PlayersQuery = gql`
 			point
 			apoint
 			valinit
+			valcla
 			clast
 		}
 	}

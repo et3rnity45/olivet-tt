@@ -4,6 +4,8 @@ import {
 import { ApolloError } from 'apollo-server-express';
 import TicketInput from '../inputs/ticket.input';
 import { Ticket, TicketModel } from '../../entities/ticket.entity';
+import EntriesActionsEnum from '../types/EntriesActionsEnum';
+import BracketResolver from './bracket.resolver';
 
 @Resolver(Ticket)
 export default class TicketResolver {
@@ -25,7 +27,26 @@ export default class TicketResolver {
 
   @Authorized()
   @Mutation(() => Ticket)
-  static async createTicket(
+  async createTicket(
+    @Arg('input') input: TicketInput,
+  ): Promise<Ticket> {
+    const ticket = new TicketModel(input);
+
+    try {
+      await ticket.save();
+      BracketResolver.updateEntries(ticket.bracket, EntriesActionsEnum.REMOVE);
+    } catch (err: any) {
+      if (err.name === 'MongoError' && err.code === 11000) {
+        throw new ApolloError('duplicate value');
+      }
+    }
+
+    return ticket;
+  }
+
+  @Authorized()
+  @Mutation(() => Ticket)
+  static async createTicket2(
     @Arg('input') input: TicketInput,
   ): Promise<Ticket> {
     const ticket = new TicketModel(input);
@@ -60,6 +81,7 @@ export default class TicketResolver {
   async deleteTicket(@Arg('id', () => ID) id: string): Promise<Ticket> {
     const ticket = await TicketModel.findByIdAndDelete(id);
     if (!ticket) throw new ApolloError('ticket not found');
+    BracketResolver.updateEntries(ticket.bracket, EntriesActionsEnum.ADD);
 
     return ticket;
   }

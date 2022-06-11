@@ -11,11 +11,13 @@ import Contact from '@/pages/Contact';
 import Ranking from '@/pages/sportif/Ranking';
 import Teams from '@/pages/sportif/Teams';
 import Training from '@/pages/sportif/Training';
+import Brackets from '@/pages/tournoi/Brackets';
 import Login from '@/pages/Login';
 import ArticleUpdate from '@/pages/admin/article/ArticleUpdate';
 import ArticleTable from '@/pages/admin/article/ArticleTable';
 import PartnerUpdate from '@/pages/admin/partner/PartnerUpdate';
 import PartnerTable from '@/pages/admin/partner/PartnerTable';
+import TicketTable from '@/pages/admin/tournoi/TicketTable';
 
 const Page = (): JSX.Element => {
 	const activeTournament = false;
@@ -23,32 +25,41 @@ const Page = (): JSX.Element => {
 	return (
 		<Routes>
 			<Route path='/' element={<HomePage />} />
-			<Route path='/sportif/classement' element={<Ranking />} />
-			<Route path='/sportif/equipes' element={<Teams />} />
-			<Route path='/sportif/entrainements' element={<Training />} />
+			{activeTournament && (
+				<Route path='/tournoi'>
+					<Route path='tableaux' element={<Brackets />} />
+					<Route path='inscriptions' element={<Partners />} />
+					<Route path='reglement' element={<Partners />} />
+					<Route path='infos' element={<Partners />} />
+				</Route>
+			)}
+			<Route path='/articles'>
+				<Route path=':category' element={<Articles />} />
+				<Route path='' element={<Articles />} />
+			</Route>
+			<Route path='/article/:id' element={<Article />} />
+			<Route path='/sportif'>
+				<Route path='classement' element={<Ranking />} />
+				<Route path='equipes' element={<Teams />} />
+				<Route path='entrainements' element={<Training />} />
+			</Route>
 			<Route path='/partenaires' element={<Partners />} />
 			<Route path='/contact' element={<Contact />} />
-			<Route path='/articles/:category?' element={<Articles />} />
-			<Route path='/article/:id' element={<Article />} />
-			{activeTournament && (
-				<>
-					<Route path='/tournoi/tableaux' element={<Contact />} />
-					<Route path='/tournoi/inscriptions' element={<Contact />} />
-					<Route path='/tournoi/reglement' element={<Contact />} />
-					<Route path='/tournoi/infos' element={<Contact />} />
-				</>
-			)}
 			<Route path='/login' element={<Login />} />
-			<Route element={<ProtectedRoute />}>
-				<Route path='/admin' />
-				<Route path='/admin/articles' element={<ArticleTable />} />
-				<Route path='/admin/articles/create' element={<ArticleUpdate />} />
-				<Route path='/admin/articles/edit/:id' element={<ArticleUpdate />} />
-				<Route path='/admin/partners' element={<PartnerTable />} />
-				<Route path='/admin/partners/create' element={<PartnerUpdate />} />
-				<Route path='/admin/partners/edit/:id' element={<PartnerUpdate />} />
+
+			<Route path='/admin' element={<ProtectedRoute />}>
+				<Route path='' element={<TicketTable />} />
+				<Route path='articles' element={<ArticleTable />} />
+				<Route path='articles/create' element={<ArticleUpdate />} />
+				<Route path='articles/edit/:id' element={<ArticleUpdate />} />
+				<Route path='partners' element={<PartnerTable />} />
+				<Route path='partners/create' element={<PartnerUpdate />} />
+				<Route path='partners/edit/:id' element={<PartnerUpdate />} />
+				<Route path='tournoi'>
+					<Route path='tickets' element={<TicketTable />} />
+				</Route>
 			</Route>
-			<Route element={<NotFound />} />
+			<Route path='*' element={<NotFound />} />
 		</Routes>
 	);
 };

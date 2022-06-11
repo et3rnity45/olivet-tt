@@ -8,7 +8,8 @@ import PlayerType from '@/types/Player';
 type RowProps = {
 	index: number;
 	fullname: string;
-	valcla: string;
+	valinit: number;
+	valcla: number;
 	clast: string;
 	point: number;
 	monthEvolution: number;
@@ -49,7 +50,7 @@ const Ranking = (): JSX.Element => {
 				sortable: false,
 			},
 			{
-				name: 'Points menseuls',
+				name: 'Points mensuels',
 				selector: (row: RowProps) => row.point,
 				sortable: true,
 			},
@@ -77,6 +78,14 @@ const Ranking = (): JSX.Element => {
 		[]
 	);
 
+	const customStyles = {
+		headCells: {
+			style: {
+				textTransform: 'uppercase',
+			},
+		},
+	};
+
 	return (
 		<section className='py-16' id='planning'>
 			<div className='container mx-auto px-3'>
@@ -94,9 +103,9 @@ const Ranking = (): JSX.Element => {
 				)}
 				{data?.players && (
 					<DataTable
-						className='uppercase'
 						data={players}
 						columns={columns}
+						customStyles={customStyles}
 						striped
 						pagination
 						paginationPerPage={15}

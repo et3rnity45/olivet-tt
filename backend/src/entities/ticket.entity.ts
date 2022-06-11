@@ -23,8 +23,8 @@ export class Ticket {
   phone!: string;
 
   @Field()
-  @Prop({ trim: true, required: true })
-  licence!: string;
+  @Prop({ required: true })
+  licence!: number;
 
   @Field()
   @Prop({ required: true })

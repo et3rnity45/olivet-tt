@@ -5,6 +5,7 @@ type PlayerType = {
 	point: number;
 	apoint: number;
 	valinit: number;
+	valcla: number;
 	clast: string;
 	evolution?: number;
 };

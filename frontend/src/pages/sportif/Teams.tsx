@@ -54,7 +54,7 @@ const Teams = (): JSX.Element => {
 						{error.message}
 					</div>
 				) : null}
-				{data?.poules ? (
+				{data?.poules && (
 					<Tab.Group>
 						<Tab.List className='flex flex-wrap justify-center pt-8 uppercase'>
 							{data.poules.map((poule: PouleType, index: number) => (
@@ -88,7 +88,7 @@ const Teams = (): JSX.Element => {
 							))}
 						</Tab.Panels>
 					</Tab.Group>
-				) : null}
+				)}
 			</div>
 		</section>
 	);

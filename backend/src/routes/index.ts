@@ -13,11 +13,11 @@ router.post('/helloasso', (req, res) => {
         lastname: item.user.lastName as string,
         email: item.customFields[1].answer as string,
         phone: item.customFields[2].answer as string,
-        licence: item.customFields[0].answer as string,
-        bracket: item.name as string,
+        licence: item.customFields[0].answer as number,
+        bracket: item.name.substr(item.length - 1) as string,
         hasPaid: true,
       };
-      await TicketResolver.createTicket(ticket);
+      await TicketResolver.createTicket2(ticket);
     });
   }
   return res.send(req.body);
