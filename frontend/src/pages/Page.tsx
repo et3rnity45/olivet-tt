@@ -12,6 +12,10 @@ import Ranking from '@/pages/sportif/Ranking';
 import Teams from '@/pages/sportif/Teams';
 import Training from '@/pages/sportif/Training';
 import Brackets from '@/pages/tournoi/Brackets';
+import Inscriptions from '@/pages/tournoi/Inscriptions';
+import OnSiteInscription from '@/pages/tournoi/OnSiteInscription';
+import OnlineInscription from '@/pages/tournoi/OnlineInscription';
+import Infos from '@/pages/tournoi/Infos';
 import Login from '@/pages/Login';
 import ArticleUpdate from '@/pages/admin/article/ArticleUpdate';
 import ArticleTable from '@/pages/admin/article/ArticleTable';
@@ -20,7 +24,7 @@ import PartnerTable from '@/pages/admin/partner/PartnerTable';
 import TicketTable from '@/pages/admin/tournoi/TicketTable';
 
 const Page = (): JSX.Element => {
-	const activeTournament = false;
+	const activeTournament = true;
 
 	return (
 		<Routes>
@@ -28,9 +32,12 @@ const Page = (): JSX.Element => {
 			{activeTournament && (
 				<Route path='/tournoi'>
 					<Route path='tableaux' element={<Brackets />} />
-					<Route path='inscriptions' element={<Partners />} />
-					<Route path='reglement' element={<Partners />} />
-					<Route path='infos' element={<Partners />} />
+					<Route path='inscriptions'>
+						<Route path='' element={<Inscriptions />} />
+						<Route path='paiement-sur-place' element={<OnSiteInscription />} />
+						<Route path='paiement-en-ligne' element={<OnlineInscription />} />
+					</Route>
+					<Route path='infos' element={<Infos />} />
 				</Route>
 			)}
 			<Route path='/articles'>

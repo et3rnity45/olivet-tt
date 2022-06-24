@@ -35,19 +35,35 @@ const RightNav = (): JSX.Element => {
 											className='absolute left-0 z-40 mt-5 origin-top-left rounded bg-white text-lightBlack shadow-xl'
 										>
 											<ul className='flex flex-col py-2'>
-												{item.subNav.map((subItem) => (
-													<Fragment key={subItem.name}>
-														<div className='absolute -top-1 left-10 h-2 w-2 rotate-45 transform bg-white'></div>
-														<li>
-															<NavLink
-																to={subItem.href}
-																className='flex items-center py-2 px-4 uppercase text-lightBlack text-opacity-70 hover:text-lightRed'
-															>
-																{subItem.name}
-															</NavLink>
-														</li>
-													</Fragment>
-												))}
+												{item.subNav.map((subItem) => {
+													return subItem.isAsset ? (
+														<Fragment key={subItem.name}>
+															<div className='absolute -top-1 left-10 h-2 w-2 rotate-45 transform bg-white'></div>
+															<li>
+																<a
+																	href={subItem.href}
+																	target='_blank'
+																	rel='noreferrer'
+																	className='flex items-center py-2 px-4 uppercase text-lightBlack text-opacity-70 hover:text-lightRed'
+																>
+																	{subItem.name}
+																</a>
+															</li>
+														</Fragment>
+													) : (
+														<Fragment key={subItem.name}>
+															<div className='absolute -top-1 left-10 h-2 w-2 rotate-45 transform bg-white'></div>
+															<li>
+																<NavLink
+																	to={subItem.href}
+																	className='flex items-center py-2 px-4 uppercase text-lightBlack text-opacity-70 hover:text-lightRed'
+																>
+																	{subItem.name}
+																</NavLink>
+															</li>
+														</Fragment>
+													);
+												})}
 											</ul>
 
 											<img src='/solutions.jpg' alt='' />

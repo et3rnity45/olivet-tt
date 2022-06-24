@@ -68,21 +68,35 @@ const HamBox = (): JSX.Element => {
 												>
 													<Disclosure.Panel as='nav' className='pb-6'>
 														<ul>
-															{item.subNav.map((subItem) => (
-																<li className='flex' key={subItem.name}>
-																	<NavLink
-																		to={subItem.href}
-																		className={(navData) =>
-																			`w-full py-3 px-10 text-sm ${
-																				navData.isActive ? 'font-semibold' : ''
-																			}`
-																		}
-																		onClick={() => setMenuOpen(false)}
-																	>
-																		{subItem.name}
-																	</NavLink>
-																</li>
-															))}
+															{item.subNav.map((subItem) => {
+																return subItem.isAsset ? (
+																	<li className='flex' key={subItem.name}>
+																		<a
+																			href={subItem.href}
+																			target='_blank'
+																			rel='noreferrer'
+																			className='w-full py-3 px-10 text-sm'
+																			onClick={() => setMenuOpen(false)}
+																		>
+																			{subItem.name}
+																		</a>
+																	</li>
+																) : (
+																	<li className='flex' key={subItem.name}>
+																		<NavLink
+																			to={subItem.href}
+																			className={(navData) =>
+																				`w-full py-3 px-10 text-sm ${
+																					navData.isActive ? 'font-semibold' : ''
+																				}`
+																			}
+																			onClick={() => setMenuOpen(false)}
+																		>
+																			{subItem.name}
+																		</NavLink>
+																	</li>
+																);
+															})}
 														</ul>
 													</Disclosure.Panel>
 												</Transition>

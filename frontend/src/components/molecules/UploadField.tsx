@@ -69,7 +69,7 @@ const UploadField = ({ name, label, className, ...rest }: UploadFieldProps): JSX
 					<div className='flex text-sm text-gray-600'>
 						<label
 							htmlFor={name}
-							className='relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500'
+							className='relative cursor-pointer rounded-md bg-white font-medium text-red-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-red-500 focus-within:ring-offset-2 hover:text-red-500'
 						>
 							<span>Séléctionner un fichier</span>
 							<input id={name} type='file' className='sr-only' {...getInputProps()} {...rest} />

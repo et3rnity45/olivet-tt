@@ -14,7 +14,7 @@ router.post('/helloasso', (req, res) => {
         email: item.customFields[1].answer as string,
         phone: item.customFields[2].answer as string,
         licence: item.customFields[0].answer as number,
-        bracket: item.name.substr(item.length - 1) as string,
+        bracket: item.name.substring(item.length - 1) as string,
         hasPaid: true,
       };
       await TicketResolver.createTicket2(ticket);

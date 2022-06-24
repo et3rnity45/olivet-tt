@@ -231,16 +231,6 @@ const TicketTable = (): JSX.Element => {
 																		<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-500'>
 																			{dayjs(ticket.createdAt).format('D MMM YYYY')}
 																		</td>
-																		<td className='flex justify-evenly whitespace-nowrap px-6 py-4 text-right text-sm font-medium'>
-																			<button
-																				type='button'
-																				title='Supprimer'
-																				className='text-red-600 hover:text-red-900'
-																				onClick={() => handleTicketDelete(ticket.id)}
-																			>
-																				<TrashIcon className='h-5 w-5' />
-																			</button>
-																		</td>
 																	</tr>
 																)
 															)}
