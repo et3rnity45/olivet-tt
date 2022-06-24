@@ -190,9 +190,6 @@ const TicketTable = (): JSX.Element => {
 																		{heading}
 																	</th>
 																))}
-																<th scope='col' className='relative px-6 py-3'>
-																	<span className='sr-only'>Modifier</span>
-																</th>
 															</tr>
 														</thead>
 														<tbody className='relative divide-y divide-gray-200 bg-white'>
