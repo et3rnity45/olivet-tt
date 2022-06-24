@@ -106,7 +106,7 @@ const TicketTable = (): JSX.Element => {
 	}, [location.state]);
 
 	return (
-		<section className='mx-4 space-y-16 py-32'>
+		<section className='mx-4 space-y-16 bg-gray-200 py-32'>
 			<div className='container mx-auto'>
 				<h2 className='mb-6 lg:mb-12'>Liste des Participants</h2>
 				{loadingB && (
