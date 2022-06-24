@@ -11,18 +11,26 @@ const Inscriptions = (): JSX.Element => {
 				<div className='flex flex-col lg:flex-row'>
 					<Link
 						to='/tournoi/inscriptions/paiement-sur-place'
-						className='relative my-1 bg-darkBlue lg:m-6'
+						className='group relative my-1 overflow-hidden bg-darkBlue lg:m-6'
 					>
-						<img className='h-auto w-full' src={encart1} alt='Inscriptions en ligne' />
+						<img
+							className='h-auto w-full transition duration-400 ease-in-out group-hover:scale-110'
+							src={encart1}
+							alt='Inscriptions en ligne'
+						/>
 						<h3 className='position-center absolute w-3/4 text-center text-2xl font-bold uppercase tracking-wide text-white sm:text-3xl xl:text-4xl'>
 							Inscriptions avec paiement sur place
 						</h3>
 					</Link>
 					<Link
 						to='/tournoi/inscriptions/paiement-en-ligne'
-						className='relative my-1 bg-darkBlue lg:m-6'
+						className='group relative my-1 overflow-hidden bg-darkBlue lg:m-6'
 					>
-						<img className='h-auto w-full' src={encart2} alt='Inscriptions en ligne' />
+						<img
+							className='h-auto w-full transition duration-400 ease-in-out group-hover:scale-110'
+							src={encart2}
+							alt='Inscriptions en ligne'
+						/>
 						<h3 className='position-center absolute w-3/4 text-center text-2xl font-bold uppercase tracking-wide text-white sm:text-3xl xl:text-4xl'>
 							Inscriptions avec paiement en ligne
 						</h3>
