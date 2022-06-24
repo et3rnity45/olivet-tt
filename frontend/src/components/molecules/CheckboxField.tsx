@@ -26,7 +26,7 @@ const CheckboxField = ({
 					return (
 						<input
 							id={name}
-							className='mr-3 h-4 w-4 rounded border-gray-300 text-lightRed shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm'
+							className='mr-3 h-4 w-4 rounded border-gray-300 text-lightRed shadow-sm focus:border-red-500 focus:ring-red-500 disabled:bg-gray-200 sm:text-sm'
 							value={value}
 							onChange={onChange}
 							type='checkbox'

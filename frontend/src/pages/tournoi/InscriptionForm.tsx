@@ -1,10 +1,14 @@
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import Form from '@/components/organisms/Form';
-import TextField from '@/components/molecules/TextField';
-import Button from '@/components/atoms/Button';
+import { useQuery } from '@apollo/client';
 import { InscriptionInput } from '@/pages/tournoi/OnSiteInscription';
+import { BracketsQuery } from '@/graphql/queries/bracket';
 import CheckboxField from '@/components/molecules/CheckboxField';
+import TextField from '@/components/molecules/TextField';
+import Form from '@/components/organisms/Form';
+import Button from '@/components/atoms/Button';
+import { RefreshIcon } from '@heroicons/react/outline';
+import BracketType from '@/types/Bracket';
 
 type InscriptionFormProps = {
 	onSubmit: (data: InscriptionInput) => Promise<void>;
@@ -12,6 +16,7 @@ type InscriptionFormProps = {
 
 const InscriptionForm = ({ onSubmit }: InscriptionFormProps): JSX.Element => {
 	const methods = useForm<InscriptionInput>();
+	const { data, loading, error } = useQuery(BracketsQuery);
 
 	const handleSubmit = async (data: InscriptionInput) => {
 		await onSubmit(data)
@@ -62,36 +67,56 @@ const InscriptionForm = ({ onSubmit }: InscriptionFormProps): JSX.Element => {
 						placeholder='4512345'
 						required
 					/>
-					<div className='col-span-full grid grid-cols-6 gap-6'>
-						<fieldset className='col-span-full lg:col-span-3'>
-							<legend className='sr-only'>Tableaux du Samedi</legend>
-							<div className='text-base font-medium text-gray-900' aria-hidden='true'>
-								Tableaux du Samedi (3 max)
-							</div>
-							<div className='mt-2 space-y-2'>
-								<CheckboxField name='bracket-a' label='Tableau A' hint='500 - 1599' />
-								<CheckboxField name='bracket-b' label='Tableau B' hint='500 - 1899' />
-								<CheckboxField name='bracket-c' label='Tableau C' hint='500 - 2200' />
-								<CheckboxField name='bracket-d' label='Tableau D' hint='Open' />
-								<CheckboxField name='bracket-e' label='Tableau E' hint='Dames' />
-							</div>
-						</fieldset>
-						<fieldset className='col-span-full lg:col-span-3'>
-							<legend className='sr-only'>Tableaux du Dimanche</legend>
-							<div className='text-base font-medium text-gray-900' aria-hidden='true'>
-								Tableaux du Dimanche (3 max)
-							</div>
-							<div className='mt-2 space-y-2'>
-								<CheckboxField name='bracket-f' label='Tableau F' hint='500 - 699' />
-								<CheckboxField name='bracket-g' label='Tableau G' hint='500 - 899' />
-								<CheckboxField name='bracket-h' label='Tableau H' hint='500 - 1099' />
-								<CheckboxField name='bracket-i' label='Tableau I' hint='500 - 1299' />
-								<CheckboxField name='bracket-j' label='Tableau J' hint='500 - 1499' />
-								<CheckboxField name='bracket-k' label='Tableau K' hint='500 - 1699' />
-								<CheckboxField name='bracket-l' label='Tableau L' hint='Jeunes' />
-							</div>
-						</fieldset>
-					</div>
+					{loading && (
+						<div className='flex h-96 items-center justify-center'>
+							<RefreshIcon className='h-20 w-20 rotate-180 transform animate-spin' />
+						</div>
+					)}
+					{error && (
+						<div className='flex h-96 flex-col items-center justify-center text-center text-xl'>
+							<span className='mr-1 font-bold'>Erreur :</span>
+							{error.message}
+						</div>
+					)}
+					{data?.brackets && (
+						<div className='col-span-full grid grid-cols-6 gap-6'>
+							<fieldset className='col-span-full lg:col-span-3'>
+								<legend className='sr-only'>Tableaux du Samedi</legend>
+								<div className='text-base font-medium text-gray-900' aria-hidden='true'>
+									Tableaux du Samedi (3 max)
+								</div>
+								<div className='mt-2 space-y-2'>
+									{data.brackets.slice(0, 5).map((bracket: BracketType) => (
+										<CheckboxField
+											key={bracket.id}
+											name={`bracket-${bracket.letter}`}
+											label={`Tableau ${bracket.letter}`}
+											hint={bracket.name}
+										/>
+									))}
+								</div>
+							</fieldset>
+							<fieldset className='col-span-full lg:col-span-3'>
+								<legend className='sr-only'>Tableaux du Dimanche</legend>
+								<div className='text-base font-medium text-gray-900' aria-hidden='true'>
+									Tableaux du Dimanche (3 max)
+								</div>
+								<div className='mt-2 space-y-2'>
+									{data.brackets.slice(5).map((bracket: BracketType) => (
+										<CheckboxField
+											key={bracket.id}
+											name={`bracket-${bracket.letter}`}
+											label={`Tableau ${bracket.letter} ${
+												bracket.remainingEntries < 1 ? '(Complet)' : ''
+											}`}
+											hint={bracket.name}
+											disabled={bracket.remainingEntries < 1}
+										/>
+									))}
+								</div>
+							</fieldset>
+						</div>
+					)}
 				</Form.InputList>
 				<Form.ButtonList>
 					<Button type='submit' text='Envoyer' disabled={methods.formState.isSubmitting} />

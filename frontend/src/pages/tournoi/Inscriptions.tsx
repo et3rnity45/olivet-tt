@@ -7,7 +7,7 @@ const Inscriptions = (): JSX.Element => {
 	return (
 		<section className='mx-4 py-16' id='inscriptions'>
 			<div className='container mx-auto'>
-				<h2 className='mb-6 text-center lg:mb-12'>Les inscriptions</h2>
+				<h2 className='mb-6 text-center lg:mb-12'>Les Inscriptions</h2>
 				<div className='flex flex-col lg:flex-row'>
 					<Link
 						to='/tournoi/inscriptions/paiement-sur-place'

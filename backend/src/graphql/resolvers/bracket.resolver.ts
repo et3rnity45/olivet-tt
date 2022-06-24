@@ -65,13 +65,12 @@ export default class BracketResolver {
     return bracket;
   }
 
-  static async updateEntries(letter: string, action: EntriesActionsEnum): Promise<Bracket> {
+  static async updateEntries(letter: string, action: EntriesActionsEnum): Promise<void> {
     const bracket = await BracketModel.findOne({ letter });
-    if (!bracket) throw new ApolloError('bracket not found');
+    if (!bracket) return;
 
     const newEntries = bracket.remainingEntries + (action === EntriesActionsEnum.ADD ? 1 : -1);
-    const newBracket = await BracketModel.findOneAndUpdate({ letter },
+    await BracketModel.findOneAndUpdate({ letter },
       { remainingEntries: newEntries }, { new: true });
-    return newBracket;
   }
 }
