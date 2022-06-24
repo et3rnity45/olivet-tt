@@ -15,6 +15,7 @@ import TicketType from '@/types/Ticket';
 import classNames from '@/utils/classNames';
 
 const columns = ['#', 'Nom', 'N° de licence', 'Email', 'Tél', 'Réglement', "Date d'inscription"];
+const columns2 = ['#', 'Nom', 'Places', 'Places Restantes'];
 const columnsAll = [
 	'#',
 	'Nom',
@@ -105,7 +106,7 @@ const TicketTable = (): JSX.Element => {
 	}, [location.state]);
 
 	return (
-		<section className='mx-4 py-16'>
+		<section className='mx-4 space-y-16 py-32'>
 			<div className='container mx-auto'>
 				<h2 className='mb-6 lg:mb-12'>Liste des Participants</h2>
 				{loadingB && (
@@ -244,7 +245,8 @@ const TicketTable = (): JSX.Element => {
 								{dataB.brackets.map((bracket: BracketType) => (
 									<Tab.Panel key={bracket.id}>
 										<h3 className='mt-8 text-center text-2xl uppercase tracking-wide'>
-											{bracket.name} ({ticketsByBracket(dataT.tickets, bracket).length}/{bracket.entries})
+											{bracket.name} ({ticketsByBracket(dataT.tickets, bracket).length}/
+											{bracket.entries})
 										</h3>
 										<CSVLink
 											data={ticketsByBracket(dataT.tickets, bracket)}
@@ -334,6 +336,63 @@ const TicketTable = (): JSX.Element => {
 							</Tab.Panels>
 						)}
 					</Tab.Group>
+				)}
+			</div>
+			<div className='container mx-auto'>
+				<h2 className='mb-6 lg:mb-12'>Les Tableaux</h2>
+				{loadingB && (
+					<div className='flex h-96 items-center justify-center'>
+						<RefreshIcon className='h-20 w-20 rotate-180 transform animate-spin' />
+					</div>
+				)}
+				{errorB && (
+					<div className='flex h-96 w-full flex-col items-center justify-center text-center text-xl'>
+						<span className='mr-1 font-bold'>Erreur :</span>
+						{errorB.message}
+					</div>
+				)}
+				{dataB?.brackets && (
+					<div className='flex flex-col'>
+						<div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
+							<div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
+								<div className='overflow-hidden border-b border-gray-200 shadow sm:rounded-lg'>
+									<table className='min-w-full divide-y divide-gray-200'>
+										<thead className='bg-gray-50'>
+											<tr>
+												{columns2.map((heading) => (
+													<th
+														key={heading}
+														scope='col'
+														className='px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500'
+													>
+														{heading}
+													</th>
+												))}
+											</tr>
+										</thead>
+										<tbody className='relative divide-y divide-gray-200 bg-white'>
+											{dataB?.brackets.map((bracket: BracketType) => (
+												<tr key={bracket.id}>
+													<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-500'>
+														{bracket.letter}
+													</td>
+													<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-900'>
+														{bracket.name}
+													</td>
+													<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-900'>
+														{ticketsByBracket(dataT.tickets, bracket).length}/{bracket.entries}
+													</td>
+													<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-900'>
+														{bracket.remainingEntries}
+													</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
 				)}
 			</div>
 		</section>
