@@ -18,9 +18,9 @@ const InscriptionForm = ({ onSubmit }: InscriptionFormProps): JSX.Element => {
 	const methods = useForm<InscriptionInput>();
 	const { data, loading, error } = useQuery(BracketsQuery);
 
-	const handleSubmit = async (data: InscriptionInput) => {
+	const handleSubmit = async (data: InscriptionInput, e: any) => {
 		await onSubmit(data)
-			.then(() => methods.reset(data))
+			.then(() => e.target.reset())
 			.catch((err) => console.error(err));
 	};
 	return (

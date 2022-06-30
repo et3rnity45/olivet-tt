@@ -15,6 +15,21 @@ export const CreateTicket = gql`
 	}
 `;
 
+export const CreateTickets = gql`
+	mutation CreateTickets($input: [TicketInput!]!) {
+		createTickets(input: $input) {
+			id
+			bracket
+			firstname
+			lastname
+			email
+			licence
+			phone
+			hasPaid
+		}
+	}
+`;
+
 export const UpdateTicket = gql`
 	mutation UpdateTicket($id: ID!, $input: TicketInput!) {
 		updateTicket(id: $id, input: $input) {

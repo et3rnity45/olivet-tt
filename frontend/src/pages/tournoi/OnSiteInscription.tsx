@@ -1,9 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { Dialog, Transition } from '@headlessui/react';
-import { CreateTicket } from '@/graphql/mutations/ticket';
+import { CreateTickets } from '@/graphql/mutations/ticket';
 import InscriptionForm from '@/pages/tournoi/InscriptionForm';
 import Modal from '@/components/organisms/Modal';
+import { options } from 'joi';
+import TicketType from '@/types/Ticket';
 
 export type ArticleInput = {
 	email: string;
@@ -26,7 +27,7 @@ const OnSiteInscription = (): JSX.Element => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [title, setTitle] = useState('');
 	const [modalContent, setModalContent] = useState('');
-	const [createTicket] = useMutation(CreateTicket);
+	const [createTickets] = useMutation(CreateTickets);
 
 	const handleSubmit = async (inscriptionInput: InscriptionInput) => {
 		const { firstname, lastname, email, phone, licence, ...brackets } = inscriptionInput;
@@ -54,6 +55,18 @@ const OnSiteInscription = (): JSX.Element => {
 				'Votre inscription a été soumise avec succès. Vous allez recevoir un e-mail validant votre ' +
 					'participation au tournoi.'
 			);
+			const tickets = selectedBrackets.map((bracket) => {
+				return {
+					firstname,
+					lastname,
+					email,
+					phone,
+					licence: parseInt(licence),
+					bracket,
+					hasPaid: false,
+				};
+			});
+			await createTickets({ variables: { input: tickets } });
 		}
 		setIsOpen(true);
 	};

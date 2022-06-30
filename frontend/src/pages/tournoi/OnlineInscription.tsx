@@ -31,7 +31,7 @@ const OnlineInscription = (): JSX.Element => {
 				<iframe
 					id='haWidget'
 					className='h-screen w-full'
-					src='https://www.helloasso.com/associations/usm-olivet-tennis-de-table/evenements/tournoi-olivet-2022-test/widget'
+					src='https://www.helloasso.com/associations/usm-olivet-tennis-de-table/evenements/tournoi-olivet-2022/widget'
 				/>
 			</div>
 		</section>
