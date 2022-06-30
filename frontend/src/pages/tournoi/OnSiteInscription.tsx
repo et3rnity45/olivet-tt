@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 import { Dialog, Transition } from '@headlessui/react';
 import { CreateTicket } from '@/graphql/mutations/ticket';
 import InscriptionForm from '@/pages/tournoi/InscriptionForm';
+import Modal from '@/components/organisms/Modal';
 
 export type ArticleInput = {
 	email: string;
@@ -18,51 +19,43 @@ export type InscriptionInput = {
 	phone: string;
 };
 
+const saturdayBrackets = ['A', 'B', 'C', 'D', 'E'];
+const sundayBrackets = ['F', 'G', 'H', 'I', 'J', 'K', 'L'];
+
 const OnSiteInscription = (): JSX.Element => {
-	const [createTicket] = useMutation(CreateTicket);
 	const [isOpen, setIsOpen] = useState(false);
-	const [isOpen2, setIsOpen2] = useState(false);
-
-	const closeModal = () => {
-		setIsOpen(false);
-	};
-
-	const openModal = () => {
-		setIsOpen(true);
-	};
-
-	const closeModal2 = () => {
-		setIsOpen2(false);
-	};
-
-	const openModal2 = () => {
-		setIsOpen2(true);
-	};
+	const [title, setTitle] = useState('');
+	const [modalContent, setModalContent] = useState('');
+	const [createTicket] = useMutation(CreateTicket);
 
 	const handleSubmit = async (inscriptionInput: InscriptionInput) => {
 		const { firstname, lastname, email, phone, licence, ...brackets } = inscriptionInput;
-		const countedBrackets = [];
+		const selectedBrackets: string[] = [];
 		for (const [key, value] of Object.entries(brackets)) {
 			if (value) {
-				const input = {
-					firstname,
-					lastname,
-					email,
-					phone,
-					licence: parseInt(licence),
-					bracket: key.substring(key.length - 1).toUpperCase(),
-					hasPaid: false,
-				};
-				await createTicket({ variables: { input } });
-				countedBrackets.push(input.bracket);
+				selectedBrackets.push(key.substring(key.length - 1).toUpperCase());
 			}
 		}
-
-		if (countedBrackets.length > 0) {
-			openModal();
+		if (selectedBrackets.length < 1) {
+			setTitle('Erreur dans le formulaire');
+			setModalContent('Vous devez séléctionner au moins un tableau !');
+		} else if (
+			saturdayBrackets.reduce((a, c) => a + (selectedBrackets.includes(c) ? 1 : 0), 0) > 3 ||
+			sundayBrackets.reduce((a, c) => a + (selectedBrackets.includes(c) ? 1 : 0), 0) > 3
+		) {
+			setTitle('Erreur dans le formulaire');
+			setModalContent('Vous ne pouvez pas séléctionner plus de 3 tableaux par jour !');
+		} else if (selectedBrackets.includes('K') && selectedBrackets.includes('L')) {
+			setTitle('Erreur dans le formulaire');
+			setModalContent('Vous ne pouvez pas séléctionner les tableaux L & K en même temps !');
 		} else {
-			openModal2();
+			setTitle('Inscription validée');
+			setModalContent(
+				'Votre inscription a été soumise avec succès. Vous allez recevoir un e-mail validant votre ' +
+					'participation au tournoi.'
+			);
 		}
+		setIsOpen(true);
 	};
 
 	return (
@@ -74,6 +67,16 @@ const OnSiteInscription = (): JSX.Element => {
 						Remplissez ce formulaire avec vos informations et les tableaux auxquels vous souhaitez
 						participer. Vous effectuerez le paiement des tableaux sur place en espèce ou en chèque.
 					</p>
+					<p className='mb-3'>
+						Vous êtes autorisés à participer à
+						<span className='ml-1 font-semibold'>3 tableaux maximum par jour</span>. A noter,
+						<span className='ml-1 font-semibold'>
+							il est impossible de participer à la fois au tableau -1699 et au tableau Jeunes
+						</span>
+						. Les tableaux du samedi sont limités à 48 participants hormis le tableau dames (24).
+						Les tableaux du dimanche sont limités à 24 participants hormis le tableau -1699 pts
+						(36).
+					</p>
 					<p className='mb-5'>
 						Votre inscription est confirmée lorsque vous recevez un mail de notre part !
 					</p>
@@ -81,108 +84,9 @@ const OnSiteInscription = (): JSX.Element => {
 				</div>
 			</section>
 
-			<Transition appear show={isOpen} as={Fragment}>
-				<Dialog as='div' className='relative z-10' onClose={closeModal}>
-					<Transition.Child
-						as={Fragment}
-						enter='ease-out duration-300'
-						enterFrom='opacity-0'
-						enterTo='opacity-100'
-						leave='ease-in duration-200'
-						leaveFrom='opacity-100'
-						leaveTo='opacity-0'
-					>
-						<div className='fixed inset-0 bg-black bg-opacity-25' />
-					</Transition.Child>
-
-					<div className='fixed inset-0 overflow-y-auto'>
-						<div className='flex min-h-full items-center justify-center p-4 text-center'>
-							<Transition.Child
-								as={Fragment}
-								enter='ease-out duration-300'
-								enterFrom='opacity-0 scale-95'
-								enterTo='opacity-100 scale-100'
-								leave='ease-in duration-200'
-								leaveFrom='opacity-100 scale-100'
-								leaveTo='opacity-0 scale-95'
-							>
-								<Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
-									<Dialog.Title as='h3' className='text-lg font-medium leading-6 text-gray-900'>
-										Inscription validée
-									</Dialog.Title>
-									<div className='mt-2'>
-										<p className='text-sm text-gray-500'>
-											Votre inscription a été soumise avec succès. Vous allez recevoir un e-mail
-											validant votre participation au tournoi.
-										</p>
-									</div>
-
-									<div className='mt-4'>
-										<button
-											type='button'
-											className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
-											onClick={closeModal}
-										>
-											Compris !
-										</button>
-									</div>
-								</Dialog.Panel>
-							</Transition.Child>
-						</div>
-					</div>
-				</Dialog>
-			</Transition>
-
-			<Transition appear show={isOpen2} as={Fragment}>
-				<Dialog as='div' className='relative z-10' onClose={closeModal2}>
-					<Transition.Child
-						as={Fragment}
-						enter='ease-out duration-300'
-						enterFrom='opacity-0'
-						enterTo='opacity-100'
-						leave='ease-in duration-200'
-						leaveFrom='opacity-100'
-						leaveTo='opacity-0'
-					>
-						<div className='fixed inset-0 bg-black bg-opacity-25' />
-					</Transition.Child>
-
-					<div className='fixed inset-0 overflow-y-auto'>
-						<div className='flex min-h-full items-center justify-center p-4 text-center'>
-							<Transition.Child
-								as={Fragment}
-								enter='ease-out duration-300'
-								enterFrom='opacity-0 scale-95'
-								enterTo='opacity-100 scale-100'
-								leave='ease-in duration-200'
-								leaveFrom='opacity-100 scale-100'
-								leaveTo='opacity-0 scale-95'
-							>
-								<Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
-									<Dialog.Title as='h3' className='text-lg font-medium leading-6 text-gray-900'>
-										Erreur dans le formulaire
-									</Dialog.Title>
-									<div className='mt-2'>
-										<p className='text-sm text-gray-500'>
-											Vous devez séléctionner au moins un tableau !
-										</p>
-									</div>
-
-									<div className='mt-4'>
-										<button
-											type='button'
-											className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
-											onClick={closeModal2}
-										>
-											Compris !
-										</button>
-									</div>
-								</Dialog.Panel>
-							</Transition.Child>
-						</div>
-					</div>
-				</Dialog>
-			</Transition>
+			<Modal title={title} isOpen={isOpen} setIsOpen={setIsOpen}>
+				{modalContent}
+			</Modal>
 		</>
 	);
 };

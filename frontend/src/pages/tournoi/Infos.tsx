@@ -28,8 +28,8 @@ const Infos = (): JSX.Element => {
 							</a>
 						</p>
 						<p className='mb-3 lg:mb-5'>
-							Si vous venez de Paris en voiture prenez l’A6 pour rejoindre l’A71 en direction de
-							Bordeaux. Ensuite, récupérez l’A10 et sortez à Orléans Centre pour rejoindre Olivet.
+							Si vous venez de Paris en voiture, prenez l’A10 en direction de Bordeaux. Ensuite
+							récupérer l’A71 et sortez à Orléans centre pour rejoindre Olivet.
 						</p>
 					</div>
 				</div>
