@@ -48,6 +48,15 @@ const OnSiteInscription = (): JSX.Element => {
 		} else if (selectedBrackets.includes('K') && selectedBrackets.includes('L')) {
 			setTitle('Erreur dans le formulaire');
 			setModalContent('Vous ne pouvez pas séléctionner les tableaux L & K en même temps !');
+		} else if (selectedBrackets.includes('F') && selectedBrackets.includes('H')) {
+			setTitle('Erreur dans le formulaire');
+			setModalContent('Vous ne pouvez pas séléctionner les tableaux F & H en même temps !');
+		} else if (selectedBrackets.includes('G') && selectedBrackets.includes('I')) {
+			setTitle('Erreur dans le formulaire');
+			setModalContent('Vous ne pouvez pas séléctionner les tableaux G & I en même temps !');
+		} else if (selectedBrackets.includes('J') && selectedBrackets.includes('K')) {
+			setTitle('Erreur dans le formulaire');
+			setModalContent('Vous ne pouvez pas séléctionner les tableaux J & K en même temps !');
 		} else {
 			setTitle('Inscription validée');
 			setModalContent(
