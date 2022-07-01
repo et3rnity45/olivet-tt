@@ -82,7 +82,9 @@ const InscriptionForm = ({ onSubmit }: InscriptionFormProps): JSX.Element => {
 										<CheckboxField
 											key={bracket.id}
 											id={`brackets.bracket${bracket.letter}`}
-											label={`Tableau ${bracket.letter}`}
+											label={`Tableau ${bracket.letter} ${
+												bracket.remainingEntries < 1 ? '(Complet)' : ''
+											}`}
 											helperText={bracket.name}
 											disabled={bracket.remainingEntries < 1}
 										/>

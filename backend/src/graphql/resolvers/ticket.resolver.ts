@@ -5,6 +5,7 @@ import { ApolloError } from 'apollo-server-express';
 import sendMail from '../../utils/mailer';
 import TicketInput from '../inputs/ticket.input';
 import { Ticket, TicketModel } from '../../entities/ticket.entity';
+import { BracketModel } from '../../entities/bracket.entity';
 import EntriesActionsEnum from '../types/EntriesActionsEnum';
 import BracketResolver from './bracket.resolver';
 
@@ -45,7 +46,6 @@ export default class TicketResolver {
     return ticket;
   }
 
-  @Authorized()
   @Mutation(() => Ticket)
   async createTickets(
     @Arg('input', () => [TicketInput]) tickets: TicketInput[],
@@ -64,12 +64,16 @@ export default class TicketResolver {
       return ticket;
     });
 
+    const bracketsLetter = tickets.map((ticket) => ticket.bracket);
+
+    const brackets = await BracketModel.find({ letter: { $in: bracketsLetter } }).exec();
+
     const html = `
-      Bonjour, <br> 
-      Votre inscription au tournoi d'Olivet 2022 est confirmée. <br>
-      Vous êtes désormais inscrit aux tableaux suivants : <br>
+      Bonjour ${tickets[0].firstname},<br> 
+      Votre inscription au tournoi d'Olivet 2022 est confirmée.<br>
+      Vous êtes désormais inscrit aux tableaux suivants :<br>
       <ul>
-        ${tickets.map((ticket) => `<li>Tableau ${ticket.bracket}</li>`).join('')}
+        ${brackets.map((bracket) => `<li>Tableau ${bracket.letter} (${bracket.name})</li>`).join('')}
       </ul>`;
 
     sendMail(tickets[0].email, html);
