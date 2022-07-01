@@ -30,14 +30,7 @@ const ArticleForm = ({ formId, defaultValues, onSubmit }: ArticleFormProps): JSX
 				<FormProvider {...methods}>
 					<Form onSubmit={methods.handleSubmit(handleSubmit)}>
 						<Form.InputList>
-							<TextField
-								className='col-span-full lg:col-span-4'
-								name='title'
-								label='Titre'
-								type='text'
-								placeholder='Résultats par équipes - Journée X'
-								required
-							/>
+							<TextField id='title' label='Titre' className='col-span-full lg:col-span-4' />
 							<SelectField
 								className='col-span-6 lg:col-span-3'
 								name='category'
@@ -57,11 +50,9 @@ const ArticleForm = ({ formId, defaultValues, onSubmit }: ArticleFormProps): JSX
 							<LongTextField className='col-span-full' name='content' label='Contenu' />
 						</Form.InputList>
 						<Form.ButtonList>
-							<Button
-								type='submit'
-								text={formId ? 'Modifier' : 'Ajouter'}
-								disabled={methods.formState.isSubmitting}
-							/>
+							<Button type='submit' disabled={methods.formState.isSubmitting}>
+								{formId ? 'Modifier' : 'Ajouter'}
+							</Button>
 						</Form.ButtonList>
 					</Form>
 				</FormProvider>

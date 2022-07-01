@@ -29,20 +29,16 @@ const PartnerForm = ({ formId, defaultValues, onSubmit }: PartnerFormProps): JSX
 					<Form onSubmit={methods.handleSubmit(handleSubmit)}>
 						<Form.InputList>
 							<TextField
-								className='col-span-full lg:col-span-4'
-								name='name'
+								id='name'
 								label='Nom'
-								type='text'
+								className='col-span-full lg:col-span-4'
 								placeholder="Ville d'olivet"
-								required
 							/>
 							<TextField
-								className='col-span-full lg:col-span-4'
-								name='url'
+								id='url'
 								label='Lien'
-								type='text'
+								className='col-span-full lg:col-span-4'
 								placeholder='http://www.olivet.fr/'
-								required
 							/>
 							<UploadField
 								className='col-span-full lg:col-span-4'
@@ -52,11 +48,9 @@ const PartnerForm = ({ formId, defaultValues, onSubmit }: PartnerFormProps): JSX
 							/>
 						</Form.InputList>
 						<Form.ButtonList>
-							<Button
-								type='submit'
-								text={formId ? 'Modifier' : 'Ajouter'}
-								disabled={methods.formState.isSubmitting}
-							/>
+							<Button type='submit' disabled={methods.formState.isSubmitting}>
+								{formId ? 'Modifier' : 'Ajouter'}
+							</Button>
 						</Form.ButtonList>
 					</Form>
 				</FormProvider>
