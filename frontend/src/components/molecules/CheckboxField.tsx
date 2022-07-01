@@ -1,43 +1,48 @@
 import React, { InputHTMLAttributes } from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
-import Label from '@/components/atoms/Label';
+import { useFormContext } from 'react-hook-form';
 
 interface CheckboxFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-	name: string;
+	id: string;
 	label: string;
-	hint: string;
+	placeholder?: string;
+	helperText?: string;
+	type?: string;
+	readOnly?: boolean;
+	validation?: any;
 	className?: string;
 }
 
 const CheckboxField = ({
-	name,
+	id,
 	label,
-	hint,
+	placeholder = '',
+	helperText = '',
+	readOnly = false,
+	validation,
 	className,
 	...rest
 }: CheckboxFieldProps): JSX.Element => {
-	const methods = useFormContext();
+	const { register } = useFormContext();
 	return (
-		<div className={`flex ${className}`}>
-			<Controller
-				name={name}
-				control={methods.control}
-				render={({ field: { value, onChange } }) => {
-					return (
-						<input
-							id={name}
-							className='mr-3 h-4 w-4 rounded border-gray-300 text-lightRed shadow-sm focus:border-red-500 focus:ring-red-500 disabled:bg-gray-200 sm:text-sm'
-							value={value}
-							onChange={onChange}
-							type='checkbox'
-							{...rest}
-						/>
-					);
-				}}
-			/>
-			<div>
-				<Label htmlFor={name} text={label} />
-				<p className='text-sm text-gray-500'>{hint}</p>
+		<div className={className}>
+			<div className='relative mt-1 flex rounded-md shadow-sm'>
+				<input
+					{...register(id, validation)}
+					{...rest}
+					type='checkbox'
+					name={id}
+					id={id}
+					readOnly={readOnly}
+					className='mr-3 h-4 w-4 rounded border-gray-300 text-lightRed shadow-sm focus:border-red-500 focus:ring-red-500 disabled:bg-gray-200 sm:text-sm'
+					placeholder={placeholder}
+					aria-describedby={id}
+				/>
+				<div>
+					<label htmlFor={id} className='block text-sm font-normal text-gray-700'>
+						{label}
+					</label>
+					{helperText !== '' && <p className='text-xs text-gray-500'>{helperText}</p>}
+				</div>
 			</div>
 		</div>
 	);

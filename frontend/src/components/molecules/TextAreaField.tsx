@@ -1,6 +1,5 @@
 import React, { TextareaHTMLAttributes } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import Label from '@/components/atoms/Label';
 
 interface TextAreaFieldProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 	name: string;
@@ -12,7 +11,9 @@ const TextAreaField = ({ name, label, className, ...rest }: TextAreaFieldProps):
 	const methods = useFormContext();
 	return (
 		<div className={className}>
-			<Label htmlFor={name} text={label} />
+			<label htmlFor={name} className='block text-sm font-normal text-gray-700'>
+				{label}
+			</label>
 			<Controller
 				name={name}
 				control={methods.control}

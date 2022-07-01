@@ -3,8 +3,6 @@ import { useMutation } from '@apollo/client';
 import { CreateTickets } from '@/graphql/mutations/ticket';
 import InscriptionForm from '@/pages/tournoi/InscriptionForm';
 import Modal from '@/components/organisms/Modal';
-import { options } from 'joi';
-import TicketType from '@/types/Ticket';
 
 export type ArticleInput = {
 	email: string;
@@ -18,6 +16,7 @@ export type InscriptionInput = {
 	licence: string;
 	email: string;
 	phone: string;
+	brackets: string[];
 };
 
 const saturdayBrackets = ['A', 'B', 'C', 'D', 'E'];
@@ -30,7 +29,7 @@ const OnSiteInscription = (): JSX.Element => {
 	const [createTickets] = useMutation(CreateTickets);
 
 	const handleSubmit = async (inscriptionInput: InscriptionInput) => {
-		const { firstname, lastname, email, phone, licence, ...brackets } = inscriptionInput;
+		const { firstname, lastname, email, phone, licence, brackets } = inscriptionInput;
 		const selectedBrackets: string[] = [];
 		for (const [key, value] of Object.entries(brackets)) {
 			if (value) {
@@ -67,8 +66,11 @@ const OnSiteInscription = (): JSX.Element => {
 				};
 			});
 			await createTickets({ variables: { input: tickets } });
+			setIsOpen(true);
+			return true;
 		}
 		setIsOpen(true);
+		return false;
 	};
 
 	return (

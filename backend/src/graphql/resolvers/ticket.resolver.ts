@@ -2,6 +2,7 @@ import {
   Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
 import { ApolloError } from 'apollo-server-express';
+import sendMail from '../../utils/mailer';
 import TicketInput from '../inputs/ticket.input';
 import { Ticket, TicketModel } from '../../entities/ticket.entity';
 import EntriesActionsEnum from '../types/EntriesActionsEnum';
@@ -42,6 +43,37 @@ export default class TicketResolver {
     }
 
     return ticket;
+  }
+
+  @Authorized()
+  @Mutation(() => Ticket)
+  async createTickets(
+    @Arg('input', () => [TicketInput]) tickets: TicketInput[],
+  ): Promise<Ticket> {
+    const createdTickets = await tickets.map(async (input: TicketInput): Promise<Ticket> => {
+      const ticket = new TicketModel(input);
+      try {
+        await ticket.save();
+        BracketResolver.updateEntries(ticket.bracket, EntriesActionsEnum.REMOVE);
+      } catch (err: any) {
+        if (err.name === 'MongoError' && err.code === 11000) {
+          throw new ApolloError('duplicate value');
+        }
+      }
+
+      return ticket;
+    });
+
+    const html = `
+      Bonjour, <br> 
+      Votre inscription au tournoi d'Olivet 2022 est confirmée. <br>
+      Vous êtes désormais inscrit aux tableaux suivants : <br>
+      <ul>
+        ${tickets.map((ticket) => `<li>Tableau ${ticket.bracket}</li>`).join('')}
+      </ul>`;
+
+    sendMail(tickets[0].email, html);
+    return createdTickets[0];
   }
 
   @Authorized()

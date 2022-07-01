@@ -1,7 +1,6 @@
 import React, { InputHTMLAttributes, useCallback, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
-import Label from '@/components/atoms/Label';
 
 interface UploadFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 	name: string;
@@ -36,7 +35,9 @@ const UploadField = ({ name, label, className, ...rest }: UploadFieldProps): JSX
 
 	return (
 		<div className={className}>
-			<Label htmlFor={name} text={label} />
+			<label htmlFor={name} className='block text-sm font-normal text-gray-700'>
+				{label}
+			</label>
 			<div
 				{...getRootProps()}
 				className={`mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-16 pb-20 ${

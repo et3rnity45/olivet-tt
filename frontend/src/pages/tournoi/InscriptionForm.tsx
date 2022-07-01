@@ -1,5 +1,7 @@
 import React from 'react';
+import * as yup from 'yup';
 import { FormProvider, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useQuery } from '@apollo/client';
 import { InscriptionInput } from '@/pages/tournoi/OnSiteInscription';
 import { BracketsQuery } from '@/graphql/queries/bracket';
@@ -11,61 +13,51 @@ import { RefreshIcon } from '@heroicons/react/outline';
 import BracketType from '@/types/Bracket';
 
 type InscriptionFormProps = {
-	onSubmit: (data: InscriptionInput) => Promise<void>;
+	onSubmit: (data: InscriptionInput) => Promise<boolean>;
 };
 
-const InscriptionForm = ({ onSubmit }: InscriptionFormProps): JSX.Element => {
-	const methods = useForm<InscriptionInput>();
-	const { data, loading, error } = useQuery(BracketsQuery);
+const phoneRegExp =
+	/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-	const handleSubmit = async (data: InscriptionInput, e: any) => {
+const schema = yup.object().shape({
+	firstname: yup.string().required('Ce champ est obligatoire'),
+	lastname: yup.string().required('Ce champ est obligatoire'),
+	licence: yup.string().required('Ce champ est obligatoire'),
+	email: yup.string().email("L'email doit être valide").required('Ce champ est obligatoire'),
+	phone: yup
+		.string()
+		.matches(phoneRegExp, 'Le numéro doit être valide')
+		.required('Ce champ est obligatoire'),
+});
+
+const InscriptionForm = ({ onSubmit }: InscriptionFormProps): JSX.Element => {
+	const { data, loading, error } = useQuery(BracketsQuery);
+	const methods = useForm<InscriptionInput>({ mode: 'onTouched', resolver: yupResolver(schema) });
+
+	const handleSubmit = async (data: InscriptionInput) => {
 		await onSubmit(data)
-			.then(() => e.target.reset())
+			.then((success) => {
+				console.log(success);
+				if (success) methods.reset();
+			})
 			.catch((err) => console.error(err));
 	};
 	return (
 		<FormProvider {...methods}>
-			<Form onSubmit={methods.handleSubmit(handleSubmit)}>
+			<form onSubmit={methods.handleSubmit(handleSubmit)}>
 				<Form.InputList>
+					<TextField id='firstname' label='Prénom' className='col-span-full lg:col-span-3' />
+					<TextField id='lastname' label='Nom' className='col-span-full lg:col-span-3' />
+					<TextField id='email' label='E-mail' className='col-span-full lg:col-span-3' />
 					<TextField
-						className='col-span-full lg:col-span-3'
-						name='firstname'
-						label='Prénom'
-						type='text'
-						placeholder='Jacques'
-						required
-					/>
-					<TextField
-						className='col-span-full lg:col-span-3'
-						name='lastname'
-						label='Nom'
-						type='text'
-						placeholder='Dupont'
-						required
-					/>
-					<TextField
-						className='col-span-full lg:col-span-3'
-						name='email'
-						label='E-mail'
-						type='email'
-						placeholder='jacques.dupont@gmail.com'
-						required
-					/>
-					<TextField
-						className='col-span-full lg:col-span-3'
-						name='phone'
+						id='phone'
 						label='Numéro de téléphone'
-						type='tel'
-						placeholder='01 23 45 67 89'
-						required
+						className='col-span-full lg:col-span-3'
 					/>
 					<TextField
-						className='col-span-full lg:col-span-3'
-						name='licence'
+						id='licence'
 						label='Numéro de licence'
-						type='text'
-						placeholder='4512345'
-						required
+						className='col-span-full lg:col-span-3'
 					/>
 					{loading && (
 						<div className='flex h-96 items-center justify-center'>
@@ -89,9 +81,10 @@ const InscriptionForm = ({ onSubmit }: InscriptionFormProps): JSX.Element => {
 									{data.brackets.slice(0, 5).map((bracket: BracketType) => (
 										<CheckboxField
 											key={bracket.id}
-											name={`bracket-${bracket.letter}`}
+											id={`brackets.bracket${bracket.letter}`}
 											label={`Tableau ${bracket.letter}`}
-											hint={bracket.name}
+											helperText={bracket.name}
+											disabled={bracket.remainingEntries < 1}
 										/>
 									))}
 								</div>
@@ -105,11 +98,11 @@ const InscriptionForm = ({ onSubmit }: InscriptionFormProps): JSX.Element => {
 									{data.brackets.slice(5).map((bracket: BracketType) => (
 										<CheckboxField
 											key={bracket.id}
-											name={`bracket-${bracket.letter}`}
+											id={`brackets.bracket${bracket.letter}`}
 											label={`Tableau ${bracket.letter} ${
 												bracket.remainingEntries < 1 ? '(Complet)' : ''
 											}`}
-											hint={bracket.name}
+											helperText={bracket.name}
 											disabled={bracket.remainingEntries < 1}
 										/>
 									))}
@@ -119,9 +112,11 @@ const InscriptionForm = ({ onSubmit }: InscriptionFormProps): JSX.Element => {
 					)}
 				</Form.InputList>
 				<Form.ButtonList>
-					<Button type='submit' text='Envoyer' disabled={methods.formState.isSubmitting} />
+					<Button type='submit' disabled={methods.formState.isSubmitting}>
+						Envoyer
+					</Button>
 				</Form.ButtonList>
-			</Form>
+			</form>
 		</FormProvider>
 	);
 };

@@ -1,6 +1,5 @@
 import React, { InputHTMLAttributes } from 'react';
 import { useFormContext } from 'react-hook-form';
-import Label from '@/components/atoms/Label';
 
 interface SelectFieldProps extends InputHTMLAttributes<HTMLSelectElement> {
 	name: string;
@@ -18,7 +17,9 @@ const SelectField = ({
 	const methods = useFormContext();
 	return (
 		<div className={className}>
-			<Label htmlFor={name} text={label} />
+			<label htmlFor={name} className='block text-sm font-normal text-gray-700'>
+				{label}
+			</label>
 			<select
 				id={name}
 				{...methods.register(name)}

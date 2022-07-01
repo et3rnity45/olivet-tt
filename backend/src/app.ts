@@ -4,6 +4,7 @@ import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
 import { graphqlUploadExpress } from 'graphql-upload';
 import { buildSchema } from 'type-graphql';
+import Nodemailer from 'nodemailer';
 import { Payload, verifyToken } from './utils/auth';
 import authChecker from './config/auth-checker';
 import restRoutes from './routes';
@@ -31,6 +32,18 @@ export default async function initServer(): Promise<void> {
       },
     });
     await server.start();
+
+    const transporter = Nodemailer.createTransport({
+      host: 'ssl0.ovh.net',
+      port: 587,
+      secure: false,
+      requireTLS: true,
+      auth: {
+        user: 'contact@olivet-tt.fr',
+        pass: 'TimoBoll45160!',
+      },
+      logger: true,
+    });
 
     const app = express();
 

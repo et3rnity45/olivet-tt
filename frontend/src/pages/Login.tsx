@@ -1,8 +1,8 @@
 import React from 'react';
-import Joi from 'joi';
+import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { joiResolver } from '@hookform/resolvers/joi';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useLazyQuery } from '@apollo/client';
 import logo from '@/assets/logo/olivet-tt-black.png';
 import Input from '@/components/atoms/LoginInput';
@@ -14,17 +14,12 @@ type LoginForm = {
 	password: string;
 };
 
-const loginSchema = Joi.object({
-	email: Joi.string()
-		.email({ tlds: { allow: false } })
-		.required()
-		.messages({
-			'string.empty': "L'email doit être renseigné.",
-			'string.email': "L'email doit être valide.",
-		}),
-	password: Joi.string().required().messages({
-		'string.empty': 'Le mot de passe doit être renseigné.',
-	}),
+const schema = yup.object().shape({
+	email: yup.string().email('Need to be a valid email').required('Email is required'),
+	password: yup
+		.string()
+		.required('Password is required')
+		.min(4, 'Password must be at least 4 characters long'),
 });
 
 const Login = (): JSX.Element => {
@@ -41,7 +36,7 @@ const Login = (): JSX.Element => {
 		reset,
 		formState: { errors },
 	} = useForm<LoginForm>({
-		resolver: joiResolver(loginSchema),
+		resolver: yupResolver(schema),
 	});
 
 	const onSubmit: SubmitHandler<LoginForm> = (input) => {

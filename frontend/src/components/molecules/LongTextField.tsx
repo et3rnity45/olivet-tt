@@ -1,7 +1,6 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import RichTextEditor from '@/components/atoms/RichTextEditor';
-import Label from '@/components/atoms/Label';
 
 type LongTextFiledProps = {
 	name: string;
@@ -13,7 +12,9 @@ const LongTextField = ({ name, label, className }: LongTextFiledProps): JSX.Elem
 	const methods = useFormContext();
 	return (
 		<div className={className}>
-			<Label htmlFor={name} text={label} />
+			<label htmlFor={name} className='block text-sm font-normal text-gray-700'>
+				{label}
+			</label>
 			<div className='mt-1 border border-gray-300 shadow-sm'>
 				<Controller
 					name={name}
