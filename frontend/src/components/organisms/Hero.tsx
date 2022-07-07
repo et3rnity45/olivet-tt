@@ -1,14 +1,15 @@
 import React from 'react';
 import heroBackground from '@/assets/background/hero-banner.jpg';
 import waveBottom from '@/assets/background/wave-bottom.svg';
+import heroTournoi from '@/assets/background/banner-tournoi.png';
 
 const Hero = (): JSX.Element => {
 	return (
 		<section id='hero' className='relative bg-darkBlue'>
-			<img className='h-auto w-full' src={heroBackground} alt='Bannière Olivet Tennis de Table' />
-			<h1 className='position-center absolute whitespace-nowrap text-2xl font-bold uppercase tracking-wide text-white md:text-4xl lg:text-6xl xl:text-8xl'>
+			<img className='max-h-[800px] w-full object-cover' src={heroTournoi} alt='Bannière Olivet Tennis de Table' />
+			{/* <h1 className='position-center absolute whitespace-nowrap text-2xl font-bold uppercase tracking-wide text-white md:text-4xl lg:text-6xl xl:text-8xl'>
 				Olivet Tennis de Table
-			</h1>
+			</h1> */}
 			<img
 				src={waveBottom}
 				alt='Wave Bottom'

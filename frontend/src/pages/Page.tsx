@@ -11,6 +11,7 @@ import Contact from '@/pages/Contact';
 import Ranking from '@/pages/sportif/Ranking';
 import Teams from '@/pages/sportif/Teams';
 import Training from '@/pages/sportif/Training';
+import Tournoi from '@/pages/tournoi/Tournoi';
 import Brackets from '@/pages/tournoi/Brackets';
 import Inscriptions from '@/pages/tournoi/Inscriptions';
 import OnSiteInscription from '@/pages/tournoi/OnSiteInscription';
@@ -31,6 +32,7 @@ const Page = (): JSX.Element => {
 			<Route path='/' element={<HomePage />} />
 			{activeTournament && (
 				<Route path='/tournoi'>
+					<Route path='' element={<Tournoi />} />
 					<Route path='tableaux' element={<Brackets />} />
 					<Route path='inscriptions'>
 						<Route path='' element={<Inscriptions />} />
