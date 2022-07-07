@@ -76,7 +76,7 @@ export default class TicketResolver {
         ${brackets.map((bracket) => `<li>Tableau ${bracket.letter} (${bracket.name})</li>`).join('')}
       </ul>`;
 
-    sendMail(tickets[0].email, html);
+    // sendMail(tickets[0].email, html);
     return createdTickets[0];
   }
 
