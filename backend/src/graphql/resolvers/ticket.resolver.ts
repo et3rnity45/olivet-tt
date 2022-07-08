@@ -93,6 +93,7 @@ export default class TicketResolver {
 
     try {
       await ticket.save();
+      BracketResolver.updateEntries(ticket.bracket, EntriesActionsEnum.REMOVE);
     } catch (err: any) {
       if (err.name === 'MongoError' && err.code === 11000) {
         throw new ApolloError('duplicate value');
