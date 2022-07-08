@@ -95,7 +95,9 @@ const TicketTable = (): JSX.Element => {
 				return p;
 			}, {})
 		);
-		return filteredTickets.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+		return filteredTickets.sort(
+			(a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+		);
 	};
 
 	useEffect(() => {
