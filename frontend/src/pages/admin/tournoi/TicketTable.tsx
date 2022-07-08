@@ -87,7 +87,7 @@ const TicketTable = (): JSX.Element => {
 	};
 
 	const filteredTickets = (tickets: TicketType[]): TicketTypeWithCount[] => {
-		return Object.values(
+		const filteredTickets: TicketTypeWithCount[] = Object.values(
 			tickets.reduce((p: any, v: TicketType) => {
 				const old = p[v.licence];
 				if (!old) p[v.licence] = { ...v, count: 1 };
@@ -95,6 +95,7 @@ const TicketTable = (): JSX.Element => {
 				return p;
 			}, {})
 		);
+		return filteredTickets.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
 	};
 
 	useEffect(() => {
