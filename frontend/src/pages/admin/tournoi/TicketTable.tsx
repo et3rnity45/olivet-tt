@@ -109,37 +109,27 @@ const TicketTable = (): JSX.Element => {
 	}, [location.state]);
 
 	return (
-		<section className='mx-4 space-y-16 bg-gray-200 py-32'>
-			<div className='container mx-auto'>
-				<h2 className='mb-6 lg:mb-12'>Liste des Participants</h2>
-				{loadingB && (
-					<div className='flex h-96 items-center justify-center'>
-						<RefreshIcon className='h-20 w-20 rotate-180 transform animate-spin' />
-					</div>
-				)}
-				{errorB && (
-					<div className='flex h-96 w-full flex-col items-center justify-center text-center text-xl'>
-						<span className='mr-1 font-bold'>Erreur :</span>
-						{errorB.message}
-					</div>
-				)}
-				{dataB?.brackets && (
-					<Tab.Group>
-						<Tab.List className='flex flex-wrap justify-center pt-8 uppercase'>
-							<Tab
-								key='all'
-								className={({ selected }) =>
-									classNames(
-										'text-sx mx-2 mb-2 cursor-pointer p-2 uppercase outline-none md:text-sm',
-										selected ? 'bg-lightBlue text-white' : 'hover:bg-gray-200'
-									)
-								}
-							>
-								Global
-							</Tab>
-							{dataB.brackets.map((bracket: BracketType) => (
+		<section className='space-y-16 bg-gray-200 px-4 py-32'>
+			{(loadingB || loadingT) && (
+				<div className='flex h-96 items-center justify-center'>
+					<RefreshIcon className='h-20 w-20 rotate-180 transform animate-spin' />
+				</div>
+			)}
+			{(errorB || errorT) && (
+				<div className='flex h-96 w-full flex-col items-center justify-center text-center text-xl'>
+					<span className='mr-1 font-bold'>Erreur :</span>
+					{errorB && errorB.message}
+					{errorT && errorT.message}
+				</div>
+			)}
+			{dataB?.brackets && dataT?.tickets && (
+				<>
+					<div className='container mx-auto'>
+						<h2 className='mb-6 lg:mb-12'>Liste des Participants</h2>
+						<Tab.Group>
+							<Tab.List className='flex flex-wrap justify-center pt-8 uppercase'>
 								<Tab
-									key={bracket.id}
+									key='all'
 									className={({ selected }) =>
 										classNames(
 											'text-sx mx-2 mb-2 cursor-pointer p-2 uppercase outline-none md:text-sm',
@@ -147,22 +137,22 @@ const TicketTable = (): JSX.Element => {
 										)
 									}
 								>
-									Tableau {bracket.letter}
+									Global
 								</Tab>
-							))}
-						</Tab.List>
-						{loadingT && (
-							<div className='flex h-96 items-center justify-center'>
-								<RefreshIcon className='h-20 w-20 rotate-180 transform animate-spin' />
-							</div>
-						)}
-						{errorT && (
-							<div className='flex h-96 w-full flex-col items-center justify-center text-center text-xl'>
-								<span className='mr-1 font-bold'>Erreur :</span>
-								{errorT.message}
-							</div>
-						)}
-						{dataT?.tickets && (
+								{dataB.brackets.map((bracket: BracketType) => (
+									<Tab
+										key={bracket.id}
+										className={({ selected }) =>
+											classNames(
+												'text-sx mx-2 mb-2 cursor-pointer p-2 uppercase outline-none md:text-sm',
+												selected ? 'bg-lightBlue text-white' : 'hover:bg-gray-200'
+											)
+										}
+									>
+										Tableau {bracket.letter}
+									</Tab>
+								))}
+							</Tab.List>
 							<Tab.Panels>
 								<Tab.Panel key='all'>
 									<h3 className='mt-8 text-center text-2xl uppercase tracking-wide'>
@@ -334,67 +324,54 @@ const TicketTable = (): JSX.Element => {
 									</Tab.Panel>
 								))}
 							</Tab.Panels>
-						)}
-					</Tab.Group>
-				)}
-			</div>
-			<div className='container mx-auto'>
-				<h2 className='mb-6 lg:mb-12'>Les Tableaux</h2>
-				{loadingB && (
-					<div className='flex h-96 items-center justify-center'>
-						<RefreshIcon className='h-20 w-20 rotate-180 transform animate-spin' />
+						</Tab.Group>
 					</div>
-				)}
-				{errorB && (
-					<div className='flex h-96 w-full flex-col items-center justify-center text-center text-xl'>
-						<span className='mr-1 font-bold'>Erreur :</span>
-						{errorB.message}
-					</div>
-				)}
-				{dataB?.brackets && (
-					<div className='flex flex-col'>
-						<div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
-							<div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
-								<div className='overflow-hidden border-b border-gray-200 shadow sm:rounded-lg'>
-									<table className='min-w-full divide-y divide-gray-200'>
-										<thead className='bg-gray-50'>
-											<tr>
-												{columns2.map((heading) => (
-													<th
-														key={heading}
-														scope='col'
-														className='px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500'
-													>
-														{heading}
-													</th>
-												))}
-											</tr>
-										</thead>
-										<tbody className='relative divide-y divide-gray-200 bg-white'>
-											{dataB?.brackets.map((bracket: BracketType) => (
-												<tr key={bracket.id}>
-													<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-500'>
-														{bracket.letter}
-													</td>
-													<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-900'>
-														{bracket.name}
-													</td>
-													<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-900'>
-														{ticketsByBracket(dataT.tickets, bracket).length}/{bracket.entries}
-													</td>
-													<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-900'>
-														{bracket.remainingEntries}
-													</td>
+					<div className='container mx-auto'>
+						<h2 className='mb-6 lg:mb-12'>Les Tableaux</h2>
+						<div className='flex flex-col'>
+							<div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
+								<div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
+									<div className='overflow-hidden border-b border-gray-200 shadow sm:rounded-lg'>
+										<table className='min-w-full divide-y divide-gray-200'>
+											<thead className='bg-gray-50'>
+												<tr>
+													{columns2.map((heading) => (
+														<th
+															key={heading}
+															scope='col'
+															className='px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500'
+														>
+															{heading}
+														</th>
+													))}
 												</tr>
-											))}
-										</tbody>
-									</table>
+											</thead>
+											<tbody className='relative divide-y divide-gray-200 bg-white'>
+												{dataB?.brackets.map((bracket: BracketType) => (
+													<tr key={bracket.id}>
+														<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-500'>
+															{bracket.letter}
+														</td>
+														<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-900'>
+															{bracket.name}
+														</td>
+														<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-900'>
+															{ticketsByBracket(dataT.tickets, bracket).length}/{bracket.entries}
+														</td>
+														<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-900'>
+															{bracket.remainingEntries}
+														</td>
+													</tr>
+												))}
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				)}
-			</div>
+				</>
+			)}
 		</section>
 	);
 };
