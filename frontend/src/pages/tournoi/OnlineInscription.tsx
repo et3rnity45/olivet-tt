@@ -12,10 +12,20 @@ const OnlineInscription = (): JSX.Element => {
 					vous participez.
 				</p>
 				<p className='mb-5'>
-					Les paiements se font via HelloAsso qui est une plateforme de paiement sécurisé. Hello
-					Asso vous envoie automatiquement un billet avec un QR code par mail mais{' '}
+					Les paiements se font via HelloAsso qui est une plateforme de paiement sécurisé. HelloAsso
+					vous envoie automatiquement un billet avec un QR code par mail mais{' '}
 					<span className='font-bold'> vous n’avez pas besoin</span> de nous le fournir le jour du
 					tournoi. Nous vous demanderons simplement votre licence.
+				</p>
+				<p className='mb-3'>
+					Vous êtes autorisés à participer à
+					<span className='ml-1 font-semibold'>3 tableaux maximum par jour</span>. A noter,
+					<span className='ml-1 font-semibold'>
+						il est impossible de participer à la fois aux tableaux K et L ainsi qu&apos;aux tableaux
+						commencant à la même heure (tableaux F & H, tableaux G & I, tableaux J & K)
+					</span>
+					. Les tableaux du samedi sont limités à 48 participants hormis le tableau dames (24). Les
+					tableaux du dimanche sont limités à 24 participants hormis le tableau -1699 pts (36).
 				</p>
 				<p className='mb-16 text-lg font-semibold'>
 					Si le tableau auquel vous souhaitez vous inscrire ne s’affiche pas c’est que celui-ci est
