@@ -1,24 +1,24 @@
 import reglement from '@/assets/pdf/Règlement-Officiel-2022.pdf';
 
 const tournoi = [
-	{ name: 'Tableaux', href: '/tournoi/tableaux' },
-	{ name: 'Inscriptions', href: '/tournoi/inscriptions' },
+	{ name: 'Tableaux', href: '/tournoi/tableaux', isAsset: false },
+	{ name: 'Inscriptions', href: '/tournoi/inscriptions', isAsset: false },
 	{ name: 'Réglement', href: reglement, isAsset: true },
-	{ name: 'Infos Pratiques', href: '/tournoi/infos' },
+	{ name: 'Infos Pratiques', href: '/tournoi/infos', isAsset: false },
 ];
 
 const club = [
-	{ name: 'Bureau', href: '/club/bureau' },
-	{ name: 'Historique', href: '/club/historique' },
-	{ name: 'Projet du club', href: '/club/projet' },
+	{ name: 'Bureau', href: '/club/bureau', isAsset: false },
+	{ name: 'Historique', href: '/club/historique', isAsset: false },
+	{ name: 'Projet du club', href: '/club/projet', isAsset: false },
 ];
 
 const sportif = [
-	{ name: 'Entraînements', href: '/sportif/entrainements' },
-	{ name: 'Stages', href: '/articles/stage' },
-	{ name: 'Compétitions', href: '/articles/competition' },
-	{ name: 'Classement', href: '/sportif/classement' },
-	{ name: 'Equipes', href: '/sportif/equipes' },
+	{ name: 'Entraînements', href: '/sportif/entrainements', isAsset: false },
+	{ name: 'Stages', href: '/articles/stage', isAsset: false },
+	{ name: 'Compétitions', href: '/articles/competition', isAsset: false },
+	{ name: 'Classement', href: '/sportif/classement', isAsset: false },
+	{ name: 'Equipes', href: '/sportif/equipes', isAsset: false },
 ];
 
 const navigation = [
