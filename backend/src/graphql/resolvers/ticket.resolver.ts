@@ -64,17 +64,26 @@ export default class TicketResolver {
       return ticket;
     });
 
-    const bracketsLetter = tickets.map((ticket) => ticket.bracket);
-
+    const bracketsLetter: string[] = tickets.map((ticket) => ticket.bracket);
     const brackets = await BracketModel.find({ letter: { $in: bracketsLetter } }).exec();
+    const confirmedBrackets = brackets.filter((bracket) => bracket.remainingEntries > 0);
+    const waitingList = brackets.filter((bracket) => bracket.remainingEntries < 1);
 
-    const html = `
+    let html = `
       Bonjour ${tickets[0].firstname},<br> 
       Votre inscription au tournoi d'Olivet 2022 est confirmée.<br>
       Vous êtes désormais inscrit aux tableaux suivants :<br>
       <ul>
-        ${brackets.map((bracket) => `<li>Tableau ${bracket.letter} (${bracket.name})</li>`).join('')}
+        ${confirmedBrackets.map((bracket) => `<li>Tableau ${bracket.letter} (${bracket.name})</li>`).join('')}
       </ul>`;
+    if (waitingList.length > 0) {
+      html += `
+      <br>
+      Vous êtes sur liste d'attente pour les tableaux suivants :<br>
+      <ul>
+        ${waitingList.map((bracket) => `<li>Tableau ${bracket.letter} (${bracket.name})</li>`).join('')}
+      </ul>`;
+    }
 
     try {
       sendMail(tickets[0].email, html);

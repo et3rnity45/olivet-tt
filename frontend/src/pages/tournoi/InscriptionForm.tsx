@@ -83,10 +83,9 @@ const InscriptionForm = ({ onSubmit }: InscriptionFormProps): JSX.Element => {
 											key={bracket.id}
 											id={`brackets.bracket${bracket.letter}`}
 											label={`Tableau ${bracket.letter} ${
-												bracket.remainingEntries < 1 ? '(Complet)' : ''
+												bracket.remainingEntries < 1 ? '(Liste d\'attente)' : ''
 											}`}
 											helperText={bracket.name}
-											disabled={bracket.remainingEntries < 1}
 										/>
 									))}
 								</div>
@@ -102,10 +101,9 @@ const InscriptionForm = ({ onSubmit }: InscriptionFormProps): JSX.Element => {
 											key={bracket.id}
 											id={`brackets.bracket${bracket.letter}`}
 											label={`Tableau ${bracket.letter} ${
-												bracket.remainingEntries < 1 ? '(Complet)' : ''
+												bracket.remainingEntries < 1 ? '(Liste d\'attente)' : ''
 											}`}
 											helperText={bracket.name}
-											disabled={bracket.remainingEntries < 1}
 										/>
 									))}
 								</div>
