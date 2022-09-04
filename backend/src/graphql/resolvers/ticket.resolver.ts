@@ -152,6 +152,7 @@ export default class TicketResolver {
         console.log(ticket.bracket);
         return true;
       }
+      console.log(player.valcla, bracket.maxPoints);
       return player.valcla > bracket.maxPoints;
     });
 
