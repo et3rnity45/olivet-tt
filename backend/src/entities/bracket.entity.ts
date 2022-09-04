@@ -31,6 +31,10 @@ export class Bracket {
   start!: string;
 
   @Field()
+  @Prop({ required: true })
+  maxPoints!: number;
+
+  @Field()
   @Prop({ trim: true, required: true })
   prize1!: string;
 

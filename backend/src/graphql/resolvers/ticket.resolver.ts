@@ -8,6 +8,7 @@ import { Ticket, TicketModel } from '../../entities/ticket.entity';
 import { BracketModel } from '../../entities/bracket.entity';
 import EntriesActionsEnum from '../types/EntriesActionsEnum';
 import BracketResolver from './bracket.resolver';
+import { getPlayerInfo } from '../../utils/FFTTApiRequest';
 
 @Resolver(Ticket)
 export default class TicketResolver {
@@ -134,5 +135,19 @@ export default class TicketResolver {
     BracketResolver.updateEntries(ticket.bracket, EntriesActionsEnum.ADD);
 
     return ticket;
+  }
+
+  @Authorized()
+  @Query(() => [Ticket])
+  async checkAllTickets(): Promise<Ticket[]> {
+    const tickets = await TicketModel.find().exec();
+    const filteredTickets = tickets.filter(async (ticket) => {
+      const player = await getPlayerInfo(ticket.licence.toString());
+      const bracket = await BracketModel.findOne({ letter: ticket.bracket });
+      if (!bracket) throw new ApolloError('bracket not found');
+      return player.valcla > bracket.maxPoints;
+    });
+
+    return filteredTickets;
   }
 }

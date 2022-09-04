@@ -19,6 +19,9 @@ export default class BracketInput implements Partial<Bracket> {
   start!: string;
 
   @Field()
+  maxPoints!: number;
+
+  @Field()
   prize1!: string;
 
   @Field()

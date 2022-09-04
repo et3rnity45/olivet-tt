@@ -45,7 +45,7 @@ const callApi = async (route: string, addParams: Record<string, unknown>): Promi
   return apiResponse;
 };
 
-const getPlayerInfo = async (licence: string): Promise<Player> => {
+export const getPlayerInfo = async (licence: string): Promise<Player> => {
   const response = await callApi('xml_joueur.php', { licence });
   const player: Player = response.liste.joueur;
 
