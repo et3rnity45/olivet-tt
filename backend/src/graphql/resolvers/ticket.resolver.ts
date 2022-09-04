@@ -143,8 +143,15 @@ export default class TicketResolver {
     const tickets = await TicketModel.find().exec();
     const filteredTickets = tickets.filter(async (ticket) => {
       const player = await getPlayerInfo(ticket.licence.toString());
+      if (!player) {
+        console.log(ticket.licence);
+        return true;
+      }
       const bracket = await BracketModel.findOne({ letter: ticket.bracket });
-      if (!bracket) throw new ApolloError('bracket not found');
+      if (!bracket) {
+        console.log(ticket.bracket);
+        return true;
+      }
       return player.valcla > bracket.maxPoints;
     });
 
