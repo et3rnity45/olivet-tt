@@ -141,19 +141,22 @@ export default class TicketResolver {
   @Query(() => [Ticket])
   async checkAllTickets(): Promise<Ticket[]> {
     const tickets = await TicketModel.find().exec();
-    const filteredTickets = tickets.filter(async (ticket) => {
+    const filteredTickets: Ticket[] = [];
+    tickets.forEach(async (ticket) => {
       const player = await getPlayerInfo(ticket.licence.toString());
       if (!player) {
         console.log(ticket.licence);
-        return true;
+        return;
       }
       const bracket = await BracketModel.findOne({ letter: ticket.bracket });
       if (!bracket) {
         console.log(ticket.bracket);
-        return true;
+        return;
       }
-      console.log(player.valcla, bracket.maxPoints);
-      return player.valcla > bracket.maxPoints;
+      if (player.valcla > bracket.maxPoints) {
+        console.log(player.valcla, bracket.maxPoints);
+        filteredTickets.push(ticket);
+      }
     });
 
     return filteredTickets;
