@@ -91,6 +91,7 @@ const TicketTable = (): JSX.Element => {
 			tickets.reduce((p: any, v: TicketType) => {
 				const bracket = brackets.filter((bracket) => bracket.letter === v.bracket);
 				const old = p[v.licence];
+				console.log(bracket);
 				if (!old) {
 					p[v.licence] = { ...v, brackets: v.bracket, price: v.hasPaid ? 0 : bracket[0].price };
 				} else {
