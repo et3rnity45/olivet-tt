@@ -15,12 +15,8 @@ export default class TicketResolver {
   @Query(() => [Ticket])
   async tickets(): Promise<Ticket[]> {
     const tickets = await TicketModel.find().exec();
-    const ticketsWithPrice = await Promise.all(tickets.map(async (ticket) => {
-      const bracket = await BracketModel.findOne({ letter: ticket.bracket });
-      return { ...ticket, price: bracket?.price };
-    }));
 
-    return ticketsWithPrice;
+    return tickets;
   }
 
   @Query(() => Ticket)

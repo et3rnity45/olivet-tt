@@ -86,15 +86,16 @@ const TicketTable = (): JSX.Element => {
 		return tickets.filter((ticket) => ticket.bracket === bracket.letter);
 	};
 
-	const filteredTickets = (tickets: TicketType[]): TicketTypeWithCount[] => {
+	const filteredTickets = (tickets: TicketType[], brackets: BracketType[]): TicketTypeWithCount[] => {
 		const filteredTickets: TicketTypeWithCount[] = Object.values(
 			tickets.reduce((p: any, v: TicketType) => {
+				const bracket = brackets.filter((bracket) => bracket.letter === v.bracket);
 				const old = p[v.licence];
 				if (!old) {
-					p[v.licence] = { ...v, brackets: v.bracket, price: v.hasPaid ? 0 : v.price };
+					p[v.licence] = { ...v, brackets: v.bracket, price: v.hasPaid ? 0 : bracket[0].price };
 				} else {
 					p[v.licence].brackets += v.bracket;
-					p[v.licence].price += v.hasPaid ? 0 : v.price;
+					p[v.licence].price += v.hasPaid ? 0 : bracket[0].price;
 				}
 				return p;
 			}, {})
@@ -160,10 +161,10 @@ const TicketTable = (): JSX.Element => {
 							<Tab.Panels>
 								<Tab.Panel key='all'>
 									<h3 className='mt-8 text-center text-2xl uppercase tracking-wide'>
-										Tout les participants ({filteredTickets(dataT.tickets).length})
+										Tout les participants ({filteredTickets(dataT.tickets, dataB.brackets).length})
 									</h3>
 									<CSVLink
-										data={filteredTickets(dataT.tickets)}
+										data={filteredTickets(dataT.tickets, dataB.brackets)}
 										headers={headersAll}
 										filename={'Global-Tournoi-Olivet-2022.csv'}
 										className='mb-4 inline-flex transform items-center rounded bg-lightBlue px-5 py-2 text-white transition duration-400 ease-in-out hover:-translate-y-1'
@@ -190,7 +191,7 @@ const TicketTable = (): JSX.Element => {
 															</tr>
 														</thead>
 														<tbody className='relative divide-y divide-gray-200 bg-white'>
-															{filteredTickets(dataT.tickets).map(
+															{filteredTickets(dataT.tickets, dataB.brackets).map(
 																(ticket: TicketTypeWithCount, idx: number) => (
 																	<tr key={ticket.id}>
 																		<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-500'>
