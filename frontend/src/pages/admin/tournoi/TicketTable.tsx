@@ -40,15 +40,15 @@ const headersAll = [
 	{ label: 'Prénom', key: 'firstname' },
 	{ label: 'Nom', key: 'lastname' },
 	{ label: 'Licence', key: 'licence' },
-	{ label: 'Tableaux', key: 'count' },
+	{ label: 'Tableaux', key: 'brackets' },
 	{ label: 'Email', key: 'email' },
 	{ label: 'Tél', key: 'phone' },
-	{ label: 'Réglement', key: 'hasPaid' },
+	{ label: 'Réglement', key: 'price' },
 	{ label: "Date d'inscription", key: 'createdAt' },
 ];
 
 interface TicketTypeWithCount extends TicketType {
-	count: number;
+	brackets: string;
 }
 
 const TicketTable = (): JSX.Element => {
@@ -90,8 +90,12 @@ const TicketTable = (): JSX.Element => {
 		const filteredTickets: TicketTypeWithCount[] = Object.values(
 			tickets.reduce((p: any, v: TicketType) => {
 				const old = p[v.licence];
-				if (!old) p[v.licence] = { ...v, count: 1 };
-				else p[v.licence].count++;
+				if (!old) {
+					p[v.licence] = { ...v, brackets: v.bracket, price: v.hasPaid ? 0 : v.price };
+				} else {
+					p[v.licence].brackets += v.bracket;
+					p[v.licence].price += v.hasPaid ? 0 : v.price;
+				}
 				return p;
 			}, {})
 		);
@@ -200,7 +204,7 @@ const TicketTable = (): JSX.Element => {
 																			{ticket.licence}
 																		</td>
 																		<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-500'>
-																			{ticket.count}
+																			{ticket.brackets.length}
 																		</td>
 																		<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-500'>
 																			{ticket.email}

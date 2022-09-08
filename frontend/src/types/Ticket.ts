@@ -8,6 +8,7 @@ type TicketType = {
 	lastname: string;
 	licence: number;
 	phone: string;
+	price: number;
 	updatedAt: Date;
 };
 
