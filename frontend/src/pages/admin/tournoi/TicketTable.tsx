@@ -90,7 +90,6 @@ const TicketTable = (): JSX.Element => {
 		const filteredTickets: TicketTypeWithCount[] = Object.values(
 			tickets.reduce((p: any, v: TicketType) => {
 				const old = p[v.licence];
-				console.log(v.price);
 				if (!old) {
 					p[v.licence] = { ...v, brackets: v.bracket, price: v.hasPaid ? 0 : v.price };
 				} else {

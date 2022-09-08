@@ -15,8 +15,12 @@ export default class TicketResolver {
   @Query(() => [Ticket])
   async tickets(): Promise<Ticket[]> {
     const tickets = await TicketModel.find().exec();
+    const ticketsWithPrice = await Promise.all(tickets.map(async (ticket) => {
+      const bracket = await BracketModel.findOne({ letter: ticket.bracket });
+      return { ...ticket, price: bracket?.price };
+    }));
 
-    return tickets;
+    return ticketsWithPrice;
   }
 
   @Query(() => Ticket)
@@ -145,16 +149,13 @@ export default class TicketResolver {
     tickets.forEach(async (ticket) => {
       const player = await getPlayerInfo(ticket.licence.toString());
       if (!player) {
-        console.log(ticket.licence);
         return;
       }
       const bracket = await BracketModel.findOne({ letter: ticket.bracket });
       if (!bracket) {
-        console.log(ticket.bracket);
         return;
       }
       if (player.valcla > bracket.maxPoints) {
-        console.log(player.valcla, bracket.maxPoints);
         filteredTickets.push(ticket);
       }
     });
