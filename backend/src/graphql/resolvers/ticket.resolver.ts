@@ -178,7 +178,7 @@ export default class TicketResolver {
           if (!bracket) return;
           const old = p[v.licence];
           if (!old) {
-            p[v.licence] = { ...v, brackets: bracket, price: v.hasPaid ? 0 : bracket.price };
+            p[v.licence] = { ...v, brackets: [bracket], price: v.hasPaid ? 0 : bracket.price };
           } else {
             p[v.licence].brackets.push(bracket);
             p[v.licence].price += v.hasPaid ? 0 : bracket.price;
