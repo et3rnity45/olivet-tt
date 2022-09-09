@@ -12,7 +12,7 @@ import BracketResolver from './bracket.resolver';
 import { getPlayerInfo } from '../../utils/FFTTApiRequest';
 import TicketWithBrackets from '../types/ticketWithBrackets';
 
-@Resolver()
+@Resolver(Ticket)
 export default class TicketResolver {
   @Query(() => [Ticket])
   async tickets(): Promise<Ticket[]> {
@@ -162,7 +162,7 @@ export default class TicketResolver {
   }
 
   @Authorized()
-  @Query(() => [Ticket])
+  @Query(() => [TicketWithBrackets])
   async sendAllMails(): Promise<TicketWithBrackets[]> {
     const tickets = await TicketModel.find().exec();
     const brackets = await BracketModel.find().exec();
