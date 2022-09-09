@@ -12,7 +12,7 @@ import BracketResolver from './bracket.resolver';
 import { getPlayerInfo } from '../../utils/FFTTApiRequest';
 import TicketWithBrackets from '../types/ticketWithBrackets';
 
-@Resolver(Ticket)
+@Resolver()
 export default class TicketResolver {
   @Query(() => [Ticket])
   async tickets(): Promise<Ticket[]> {
