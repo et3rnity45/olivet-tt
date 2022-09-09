@@ -12,7 +12,7 @@ import BracketResolver from './bracket.resolver';
 import { getPlayerInfo } from '../../utils/FFTTApiRequest';
 import TicketWithBrackets from '../types/ticketWithBrackets';
 
-@Resolver(Ticket)
+@Resolver()
 export default class TicketResolver {
   @Query(() => [Ticket])
   async tickets(): Promise<Ticket[]> {
@@ -175,6 +175,15 @@ export default class TicketResolver {
       brackets: _.map(v, 'bracket'),
     })).value();
 
-    return groupedTickets;
+    const finalTickets = groupedTickets.map((ticket) => {
+      const innerBrackets = ticket.brackets.map((br) => {
+        const bra: Bracket | undefined = brackets.find((b) => b.letter === br);
+        if (!bra) throw new ApolloError('bracket not found');
+        return bra;
+      });
+      return { ...ticket, brackets: innerBrackets };
+    });
+
+    return finalTickets;
   }
 }

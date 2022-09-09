@@ -1,5 +1,5 @@
-import { Bracket } from 'entities/bracket.entity';
 import { ObjectType, Field } from 'type-graphql';
+import { Bracket } from '../../entities/bracket.entity';
 
 @ObjectType()
 export default class TicketWithBrackets {
@@ -15,6 +15,6 @@ export default class TicketWithBrackets {
   @Field()
   licence!: string;
 
-  @Field()
-  brackets!: string[];
+  @Field(() => [Bracket])
+  brackets!: Bracket[];
 }
