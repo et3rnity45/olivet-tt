@@ -1,8 +1,7 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-param-reassign */
 import {
   Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
+import * as _ from 'lodash';
 import { ApolloError } from 'apollo-server-express';
 import sendMail from '../../utils/mailer';
 import TicketInput from '../inputs/ticket.input';
@@ -11,10 +10,7 @@ import { Bracket, BracketModel } from '../../entities/bracket.entity';
 import EntriesActionsEnum from '../types/EntriesActionsEnum';
 import BracketResolver from './bracket.resolver';
 import { getPlayerInfo } from '../../utils/FFTTApiRequest';
-
-interface TicketWithBracket extends Ticket {
-  brackets: Bracket[];
-}
+import TicketWithBrackets from '../types/ticketWithBrackets';
 
 @Resolver(Ticket)
 export default class TicketResolver {
@@ -167,30 +163,18 @@ export default class TicketResolver {
 
   @Authorized()
   @Query(() => [Ticket])
-  async sendAllMails(): Promise<TicketWithBracket[]> {
-    const ticketsBDD = await TicketModel.find().exec();
-    const bracketsBDD = await BracketModel.find().exec();
+  async sendAllMails(): Promise<TicketWithBrackets[]> {
+    const tickets = await TicketModel.find().exec();
+    const brackets = await BracketModel.find().exec();
 
-    const ticketsByPlayer = (tickets: Ticket[], brackets: Bracket[]): TicketWithBracket[] => {
-      const filteredTickets: TicketWithBracket[] = Object.values(
-        tickets.reduce((p: any, v: Ticket) => {
-          const bracket = brackets.find((b) => b.letter === v.bracket);
-          if (!bracket) return;
-          const old = p[v.licence];
-          if (!old) {
-            p[v.licence] = { ...v, brackets: [bracket], price: v.hasPaid ? 0 : bracket.price };
-          } else {
-            p[v.licence].brackets.push(bracket);
-            p[v.licence].price += v.hasPaid ? 0 : bracket.price;
-          }
-          return p;
-        }, {}),
-      );
-      return filteredTickets.sort(
-        (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
-      );
-    };
+    const groupedTickets = _.chain(tickets).groupBy('licence').map((v, i) => ({
+      licence: i,
+      firstname: _.get(_.find(v, 'firstname'), 'firstname'),
+      lastname: _.get(_.find(v, 'lastname'), 'lastname'),
+      email: _.get(_.find(v, 'email'), 'email'),
+      brackets: _.map(v, 'bracket'),
+    })).value();
 
-    return ticketsByPlayer(ticketsBDD, bracketsBDD);
+    return groupedTickets;
   }
 }
