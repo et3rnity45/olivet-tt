@@ -1,7 +1,7 @@
 import reglement from '@/assets/pdf/Règlement-Officiel-2022.pdf';
 
 const tournoi = [
-	{ name: 'Tableaux', href: '/tournoi/tableaux', isAsset: false },
+	// { name: 'Tableaux', href: '/tournoi/tableaux', isAsset: false },
 	{ name: 'Inscriptions', href: '/tournoi/inscriptions', isAsset: false },
 	{ name: 'Réglement', href: reglement, isAsset: true },
 	{ name: 'Infos Pratiques', href: '/tournoi/infos', isAsset: false },

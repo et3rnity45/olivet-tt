@@ -33,7 +33,7 @@ const Page = (): JSX.Element => {
 			{activeTournament && (
 				<Route path='/tournoi'>
 					<Route path='' element={<Tournoi />} />
-					<Route path='tableaux' element={<Brackets />} />
+					{/* <Route path='tableaux' element={<Brackets />} /> */}
 					<Route path='inscriptions'>
 						<Route path='' element={<Inscriptions />} />
 						<Route path='paiement-sur-place' element={<OnSiteInscription />} />
