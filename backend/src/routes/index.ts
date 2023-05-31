@@ -4,8 +4,9 @@ import TicketInput from '../graphql/inputs/ticket.input';
 
 const router = Router();
 router.post('/helloasso', (req, res) => {
-  const { data } = req.body;
-  console.log(data);
+  console.log(req);
+  console.log(req.body);
+  //  const { data } = req.body;
   // if (data.eventType === 'Order') {
   //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   //   data.items.forEach(async (item: any) => {
