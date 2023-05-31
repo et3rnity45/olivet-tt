@@ -13,7 +13,7 @@ const Infos = (): JSX.Element => {
 					<div className='m-3'>
 						<h3 className='mb-3 text-xl md:text-2xl lg:mb-6 lg:text-3xl'>Dates et lieu</h3>
 						<p className='mb-3 lg:mb-5'>
-							Le tournoi se déroulera les 10 & 11 septembre 2022 au Gymnase de l’Orbellière à Olivet
+							Le tournoi se déroulera les 09 & 10 septembre 2023 au Gymnase de l’Orbellière à Olivet
 							!
 						</p>
 						<p className='mb-3 lg:mb-5'>
@@ -28,8 +28,8 @@ const Infos = (): JSX.Element => {
 							</a>
 						</p>
 						<p className='mb-3 lg:mb-5'>
-							Si vous venez de Paris en voiture, prenez l’A10 en direction de Bordeaux. Ensuite
-							récupérer l’A71 et sortez à Orléans centre pour rejoindre Olivet.
+							Si vous venez de Paris en voiture, prenez l&apos;A10 en direction de Bordeaux. Ensuite
+							récupérer l&apos;A71 et sortez à Orléans centre pour rejoindre Olivet.
 						</p>
 					</div>
 				</div>
@@ -38,14 +38,14 @@ const Infos = (): JSX.Element => {
 					<div className='m-3'>
 						<h3 className='mb-3 text-xl md:text-2xl lg:mb-6 lg:text-3xl'>Nous contacter</h3>
 						<p className='mb-3 lg:mb-5'>
-							Contactez <span className='font-semibold'>Jérôme Robichon</span> qui s’occupe de
-							l’organisation du tournoi :
+							Contactez <span className='font-semibold'>Julien Pawlowicz</span> qui s&apos;occupe de
+							l&apos;organisation du tournoi :
 						</p>
 						<p className='mb-3 lg:mb-5'>
 							<a href='mailto:jerome.robichon@orange.fr' className='mr-1 text-lighterRed underline'>
-								jerome.robichon@orange.fr
+								julien.pawlowicz@gmail.com
 							</a>
-							– 06 38 53 95 65
+							- 06 48 78 29 10
 						</p>
 						<p className='mb-3 lg:mb-5'>
 							Contactez <span className='font-semibold'>Olivet Tennis de Table</span> :
@@ -57,7 +57,7 @@ const Infos = (): JSX.Element => {
 							>
 								usmo.tennisdetable@wanadoo.fr
 							</a>
-							– 02 38 66 86 88
+							- 02 38 66 86 88
 						</p>
 					</div>
 				</div>
@@ -67,12 +67,12 @@ const Infos = (): JSX.Element => {
 						<h3 className='mb-3 text-xl md:text-2xl lg:mb-6 lg:text-3xl'>Qui sommes-nous ?</h3>
 						<p className='mb-3 lg:mb-5'>
 							Olivet Tennis de Table, fort de ses 385 licenciés, est un club qui se veut performant
-							et convivial ! C’est avec cet état d’esprit que nous organisons la troisième édition
-							de notre tournoi de national B. Cette compétition à taille humaine est l’occasion de
-							débuter la saison face à de nombreux joueurs de son niveau.
+							et convivial ! C&apos;est avec cet état d&apos;esprit que nous organisons la sixième
+							édition de notre tournoi de national B. Cette compétition à taille humaine est
+							l&apos;occasion de débuter la saison face à de nombreux joueurs de son niveau.
 						</p>
 						<p className='mb-3 lg:mb-5'>
-							N’hésitez pas à nous suivre sur
+							N&apos;hésitez pas à nous suivre sur
 							<a
 								href='https://www.facebook.com/usmolivetennisdetable/'
 								target='_blank'

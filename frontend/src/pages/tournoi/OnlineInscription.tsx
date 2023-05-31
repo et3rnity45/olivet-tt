@@ -13,9 +13,8 @@ const OnlineInscription = (): JSX.Element => {
 				</p>
 				<p className='mb-5'>
 					Les paiements se font via HelloAsso qui est une plateforme de paiement sécurisé. HelloAsso
-					vous envoie automatiquement un billet avec un QR code par mail mais{' '}
-					<span className='font-bold'> vous n’avez pas besoin</span> de nous le fournir le jour du
-					tournoi. Nous vous demanderons simplement votre licence.
+					vous envoie automatiquement un mail de confirmation après le paiement qui confirme votre
+					inscription au tournoi.
 				</p>
 				<p className='mb-3'>
 					Vous êtes autorisés à participer à
@@ -27,7 +26,7 @@ const OnlineInscription = (): JSX.Element => {
 					. Les tableaux du samedi sont limités à 48 participants hormis le tableau dames (24). Les
 					tableaux du dimanche sont limités à 24 participants hormis le tableau -1699 pts (36).
 				</p>
-				<p className='mb-16 text-lg font-semibold'>
+				{/* <p className='mb-16 text-lg font-semibold'>
 					Si le tableau auquel vous souhaitez vous inscrire ne s’affiche pas c’est que celui-ci est
 					complet ! Rendez-vous dans la rubrique «
 					<Link
@@ -37,11 +36,11 @@ const OnlineInscription = (): JSX.Element => {
 						Inscriptions avec paiement sur place
 					</Link>
 					» pour vous inscrire sur la liste d’attente.
-				</p>
+				</p> */}
 				<iframe
 					id='haWidget'
-					className='h-screen w-full'
-					src='https://www.helloasso.com/associations/usm-olivet-tennis-de-table/evenements/tournoi-olivet-2022/widget'
+					className='mt-12 h-screen w-full'
+					src='https://www.helloasso.com/associations/usm-olivet-tennis-de-table/evenements/tournoi-olivet-2023/widget'
 				/>
 			</div>
 		</section>

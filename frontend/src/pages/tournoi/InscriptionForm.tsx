@@ -37,7 +37,6 @@ const InscriptionForm = ({ onSubmit }: InscriptionFormProps): JSX.Element => {
 	const handleSubmit = async (data: InscriptionInput) => {
 		await onSubmit(data)
 			.then((success) => {
-				console.log(success);
 				if (success) methods.reset();
 			})
 			.catch((err) => console.error(err));

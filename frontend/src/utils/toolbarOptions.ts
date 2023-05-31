@@ -7,7 +7,6 @@ const uploadCallback = async (file: File): Promise<unknown> => {
 		mutation: AddMedia,
 		variables: { file },
 	});
-	console.log(response);
 	return new Promise((resolve) => {
 		resolve({
 			data: {

@@ -65,8 +65,6 @@ const RightNav = (): JSX.Element => {
 													);
 												})}
 											</ul>
-
-											<img src='/solutions.jpg' alt='' />
 										</Popover.Panel>
 									</Transition>
 								</>

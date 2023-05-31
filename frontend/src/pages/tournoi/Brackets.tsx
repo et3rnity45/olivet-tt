@@ -9,7 +9,7 @@ const Brackets = (): JSX.Element => {
 				<h2 className='mb-6 text-center lg:mb-12'>Les Tableaux</h2>
 				<div className='flex flex-wrap space-y-16'>
 					<p className='text-base lg:text-lg'>
-						Découvrez les 12 tableaux du tournoi d’Olivet 2022 adaptés à tous les niveaux. Vous êtes
+						Découvrez les 12 tableaux du tournoi d’Olivet 2023 adaptés à tous les niveaux. Vous êtes
 						autorisés à participer à{' '}
 						<span className='font-semibold'>3 tableaux maximum par jour</span>. A noter,{' '}
 						<span className='font-semibold'>

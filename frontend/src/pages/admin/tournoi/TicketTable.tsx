@@ -86,17 +86,15 @@ const TicketTable = (): JSX.Element => {
 		return tickets.filter((ticket) => ticket.bracket === bracket.letter);
 	};
 
-	const filteredTickets = (tickets: TicketType[], brackets: BracketType[]): TicketTypeWithCount[] => {
+	const filteredTickets = (tickets: TicketType[]): TicketTypeWithCount[] => {
 		const filteredTickets: TicketTypeWithCount[] = Object.values(
 			tickets.reduce((p: any, v: TicketType) => {
-				const bracket = brackets.filter((bracket) => bracket.letter === v.bracket);
 				const old = p[v.licence];
-				console.log(bracket);
 				if (!old) {
-					p[v.licence] = { ...v, brackets: v.bracket, price: v.hasPaid ? 0 : bracket[0].price };
+					p[v.licence] = { ...v, brackets: v.bracket, price: v.hasPaid ? 0 : 8 };
 				} else {
 					p[v.licence].brackets += v.bracket;
-					p[v.licence].price += v.hasPaid ? 0 : bracket[0].price;
+					p[v.licence].price += v.hasPaid ? 0 : 8;
 				}
 				return p;
 			}, {})
@@ -162,12 +160,12 @@ const TicketTable = (): JSX.Element => {
 							<Tab.Panels>
 								<Tab.Panel key='all'>
 									<h3 className='mt-8 text-center text-2xl uppercase tracking-wide'>
-										Tout les participants ({filteredTickets(dataT.tickets, dataB.brackets).length})
+										Tout les participants ({filteredTickets(dataT.tickets).length})
 									</h3>
 									<CSVLink
-										data={filteredTickets(dataT.tickets, dataB.brackets)}
+										data={filteredTickets(dataT.tickets)}
 										headers={headersAll}
-										filename={'Global-Tournoi-Olivet-2022.csv'}
+										filename={'Global-Tournoi-Olivet-2023.csv'}
 										className='mb-4 inline-flex transform items-center rounded bg-lightBlue px-5 py-2 text-white transition duration-400 ease-in-out hover:-translate-y-1'
 									>
 										<DownloadIcon className='mr-2 h-5 w-5' />
@@ -192,7 +190,7 @@ const TicketTable = (): JSX.Element => {
 															</tr>
 														</thead>
 														<tbody className='relative divide-y divide-gray-200 bg-white'>
-															{filteredTickets(dataT.tickets, dataB.brackets).map(
+															{filteredTickets(dataT.tickets).map(
 																(ticket: TicketTypeWithCount, idx: number) => (
 																	<tr key={ticket.id}>
 																		<td className='whitespace-nowrap px-6 py-4 text-sm text-gray-500'>
