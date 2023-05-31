@@ -30,6 +30,7 @@ export async function initServer(): Promise<void> {
     app.use(
       graphQLPath,
       cors<cors.CorsRequest>(),
+      json(),
       expressMiddleware(server, {
         context: async ({ req }): Promise<Payload> => {
           const token = req.headers.authorization || '';
