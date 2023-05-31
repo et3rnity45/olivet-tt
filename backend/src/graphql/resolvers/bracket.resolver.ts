@@ -1,7 +1,7 @@
 import {
   Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
-import { ApolloError } from 'apollo-server-express';
+import { GraphQLError } from 'graphql';
 import BracketInput from '../inputs/bracket.input';
 import { Bracket, BracketModel } from '../../entities/bracket.entity';
 import EntriesActionsEnum from '../types/EntriesActionsEnum';
@@ -19,7 +19,7 @@ export default class BracketResolver {
   async bracket(@Arg('id', () => ID) id: string): Promise<Bracket> {
     const bracket = await BracketModel.findById(id).exec();
 
-    if (!bracket) throw new ApolloError('bracket not found');
+    if (!bracket) throw new GraphQLError('bracket not found');
 
     return bracket;
   }
@@ -35,7 +35,7 @@ export default class BracketResolver {
       await bracket.save();
     } catch (err: any) {
       if (err.name === 'MongoError' && err.code === 11000) {
-        throw new ApolloError('duplicate value');
+        throw new GraphQLError('duplicate value');
       }
     }
 
@@ -46,12 +46,12 @@ export default class BracketResolver {
   @Mutation(() => Bracket)
   async updateBracket(
     @Arg('id', () => ID) id: string,
-      @Arg('input') input: BracketInput,
+    @Arg('input') input: BracketInput,
   ): Promise<Bracket> {
     const bracket = await BracketModel.findByIdAndUpdate(id, input, {
       new: true,
     });
-    if (!bracket) throw new ApolloError('bracket not found');
+    if (!bracket) throw new GraphQLError('bracket not found');
 
     return bracket;
   }
@@ -60,7 +60,7 @@ export default class BracketResolver {
   @Mutation(() => Bracket)
   async deleteBracket(@Arg('id', () => ID) id: string): Promise<Bracket> {
     const bracket = await BracketModel.findByIdAndDelete(id);
-    if (!bracket) throw new ApolloError('bracket not found');
+    if (!bracket) throw new GraphQLError('bracket not found');
 
     return bracket;
   }

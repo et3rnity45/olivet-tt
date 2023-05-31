@@ -2,7 +2,7 @@ import {
   Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
 import * as _ from 'lodash';
-import { ApolloError } from 'apollo-server-express';
+import { GraphQLError } from 'graphql';
 import sendMail from '../../utils/mailer';
 import TicketInput from '../inputs/ticket.input';
 import { Ticket, TicketModel } from '../../entities/ticket.entity';
@@ -25,7 +25,7 @@ export default class TicketResolver {
   async ticket(@Arg('id', () => ID) id: string): Promise<Ticket> {
     const ticket = await TicketModel.findById(id).exec();
 
-    if (!ticket) throw new ApolloError('ticket not found');
+    if (!ticket) throw new GraphQLError('Ticket not found');
 
     return ticket;
   }
@@ -42,7 +42,7 @@ export default class TicketResolver {
       BracketResolver.updateEntries(ticket.bracket, EntriesActionsEnum.REMOVE);
     } catch (err: any) {
       if (err.name === 'MongoError' && err.code === 11000) {
-        throw new ApolloError('duplicate value');
+        throw new GraphQLError('Duplicate value');
       }
     }
 
@@ -60,7 +60,7 @@ export default class TicketResolver {
         BracketResolver.updateEntries(ticket.bracket, EntriesActionsEnum.REMOVE);
       } catch (err: any) {
         if (err.name === 'MongoError' && err.code === 11000) {
-          throw new ApolloError('duplicate value');
+          throw new GraphQLError('Duplicate value');
         }
       }
 
@@ -74,7 +74,7 @@ export default class TicketResolver {
 
     let html = `
       Bonjour ${tickets[0].firstname},<br> 
-      Votre inscription au tournoi d'Olivet 2022 est confirmée.<br>
+      Votre inscription au tournoi d'Olivet 2023 est confirmée.<br>
       Vous êtes désormais inscrit aux tableaux suivants :<br>
       <ul>
         ${confirmedBrackets.map((bracket) => `<li>Tableau ${bracket.letter} (${bracket.name})</li>`).join('')}
@@ -91,7 +91,7 @@ export default class TicketResolver {
     try {
       sendMail(tickets[0].email, html);
     } catch (e) {
-      console.log(`Error while sending email : ${e}`);
+      sendMail('qliger.perso@gmail.com', html);
     }
     return createdTickets[0];
   }
@@ -108,7 +108,7 @@ export default class TicketResolver {
       BracketResolver.updateEntries(ticket.bracket, EntriesActionsEnum.REMOVE);
     } catch (err: any) {
       if (err.name === 'MongoError' && err.code === 11000) {
-        throw new ApolloError('duplicate value');
+        throw new GraphQLError('Duplicate value');
       }
     }
 
@@ -119,12 +119,12 @@ export default class TicketResolver {
   @Mutation(() => Ticket)
   async updateTicket(
     @Arg('id', () => ID) id: string,
-      @Arg('input') input: TicketInput,
+    @Arg('input') input: TicketInput,
   ): Promise<Ticket> {
     const ticket = await TicketModel.findByIdAndUpdate(id, input, {
       new: true,
     });
-    if (!ticket) throw new ApolloError('ticket not found');
+    if (!ticket) throw new GraphQLError('Ticket not found');
 
     return ticket;
   }
@@ -133,7 +133,7 @@ export default class TicketResolver {
   @Mutation(() => Ticket)
   async deleteTicket(@Arg('id', () => ID) id: string): Promise<Ticket> {
     const ticket = await TicketModel.findByIdAndDelete(id);
-    if (!ticket) throw new ApolloError('ticket not found');
+    if (!ticket) throw new GraphQLError('Ticket not found');
     BracketResolver.updateEntries(ticket.bracket, EntriesActionsEnum.ADD);
 
     return ticket;
@@ -178,7 +178,7 @@ export default class TicketResolver {
     const finalTickets = groupedTickets.map((ticket) => {
       const innerBrackets = ticket.brackets.map((br) => {
         const bra: Bracket | undefined = brackets.find((b) => b.letter === br);
-        if (!bra) throw new ApolloError('bracket not found');
+        if (!bra) throw new GraphQLError('Bracket not found');
         return bra;
       });
       return { ...ticket, brackets: innerBrackets };

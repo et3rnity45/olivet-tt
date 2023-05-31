@@ -2,7 +2,7 @@ import {
   Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
-import { ApolloError } from 'apollo-server-express';
+import { GraphQLError } from 'graphql';
 import ArticleInput from '../inputs/article.input';
 import { Article, ArticleModel } from '../../entities/article.entity';
 import { uploadFile, deleteFile } from '../../utils/UploadFile';
@@ -36,7 +36,7 @@ export default class ArticleResolver {
   @Mutation(() => Article)
   async createArticle(
     @Arg('input') input: ArticleInput,
-      @Arg('file', () => GraphQLUpload) file: FileUpload,
+    @Arg('file', () => GraphQLUpload) file: FileUpload,
   ): Promise<Article> {
     const media = await uploadFile(file);
     const article = new ArticleModel({ ...input, media });
@@ -46,7 +46,7 @@ export default class ArticleResolver {
     } catch (err: any) {
       if (err.name === 'MongoError' && err.code === 11000) {
         deleteFile(article.media);
-        throw new ApolloError('duplicate value');
+        throw new GraphQLError('Duplicate value');
       }
     }
 
@@ -57,11 +57,11 @@ export default class ArticleResolver {
   @Mutation(() => Article)
   async updateArticle(
     @Arg('id', () => ID) id: string,
-      @Arg('input') input: ArticleInput,
-      @Arg('file', () => GraphQLUpload, { nullable: true }) file?: FileUpload,
+    @Arg('input') input: ArticleInput,
+    @Arg('file', () => GraphQLUpload, { nullable: true }) file?: FileUpload,
   ): Promise<Article> {
     const currentArticle = await ArticleModel.findById(id).exec();
-    if (!currentArticle) throw new ApolloError('article not found');
+    if (!currentArticle) throw new GraphQLError('article not found');
 
     let { media } = currentArticle;
     if (file) {
@@ -69,6 +69,7 @@ export default class ArticleResolver {
       media = await uploadFile(file);
     }
     const article = await ArticleModel.findByIdAndUpdate(id, { ...input, media }, { new: true });
+    if (!article) throw new GraphQLError('article not found');
 
     return article;
   }
@@ -77,7 +78,7 @@ export default class ArticleResolver {
   @Mutation(() => Article)
   async deleteArticle(@Arg('id', () => ID) id: string): Promise<Article> {
     const article = await ArticleModel.findByIdAndDelete(id);
-    if (!article) throw new ApolloError('article not found');
+    if (!article) throw new GraphQLError('article not found');
     await deleteFile(article.media);
 
     return article;

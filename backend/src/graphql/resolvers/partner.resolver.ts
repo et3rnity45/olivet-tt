@@ -2,7 +2,7 @@ import {
   Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
-import { ApolloError } from 'apollo-server-express';
+import { GraphQLError } from 'graphql';
 import PartnerInput from '../inputs/partner.input';
 import { Partner, PartnerModel } from '../../entities/partner.entity';
 import { uploadFile, deleteFile } from '../../utils/UploadFile';
@@ -29,7 +29,7 @@ export default class PartnerResolver {
   @Mutation(() => Partner)
   async createPartner(
     @Arg('input') input: PartnerInput,
-      @Arg('file', () => GraphQLUpload) file: FileUpload,
+    @Arg('file', () => GraphQLUpload) file: FileUpload,
   ): Promise<Partner> {
     const media = await uploadFile(file);
     const partner = new PartnerModel({ ...input, media });
@@ -39,7 +39,7 @@ export default class PartnerResolver {
     } catch (err: any) {
       if (err.name === 'MongoError' && err.code === 11000) {
         deleteFile(partner.media);
-        throw new ApolloError('duplicate value');
+        throw new GraphQLError('duplicate value');
       }
     }
 
@@ -50,11 +50,11 @@ export default class PartnerResolver {
   @Mutation(() => Partner)
   async updatePartner(
     @Arg('id', () => ID) id: string,
-      @Arg('input') input: PartnerInput,
-      @Arg('file', () => GraphQLUpload, { nullable: true }) file?: FileUpload,
+    @Arg('input') input: PartnerInput,
+    @Arg('file', () => GraphQLUpload, { nullable: true }) file?: FileUpload,
   ): Promise<Partner> {
     const currentPartner = await PartnerModel.findById(id);
-    if (!currentPartner) throw new ApolloError('partner not found');
+    if (!currentPartner) throw new GraphQLError('partner not found');
 
     let { media } = currentPartner;
     if (file) {
@@ -62,6 +62,7 @@ export default class PartnerResolver {
       media = await uploadFile(file);
     }
     const partner = await PartnerModel.findByIdAndUpdate(id, { ...input, media }, { new: true });
+    if (!partner) throw new GraphQLError('article not found');
 
     return partner;
   }
@@ -70,7 +71,7 @@ export default class PartnerResolver {
   @Mutation(() => Partner)
   async deletePartner(@Arg('id', () => ID) id: string): Promise<Partner> {
     const partner = await PartnerModel.findByIdAndDelete(id);
-    if (!partner) throw new ApolloError('partner not found');
+    if (!partner) throw new GraphQLError('partner not found');
     await deleteFile(partner.media);
 
     return partner;

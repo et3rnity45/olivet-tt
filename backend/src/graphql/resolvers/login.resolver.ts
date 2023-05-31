@@ -2,7 +2,7 @@ import {
   Resolver, Query, Arg, Mutation, Authorized,
 } from 'type-graphql';
 import * as argon2 from 'argon2';
-import { AuthenticationError } from 'apollo-server';
+import { GraphQLError } from 'graphql';
 import { generateToken } from '../../utils/auth';
 import { UserModel } from '../../entities/user.entity';
 import LoginInput from '../inputs/login.input';
@@ -16,10 +16,24 @@ export default class LoginResolver {
     const { email, password } = input;
 
     const user = await UserModel.findOne({ email }).exec();
-    if (!user) throw new AuthenticationError('Email inconnu.');
+    if (!user) {
+      throw new GraphQLError('Email inconnu.', {
+        extensions: {
+          code: 'UNAUTHENTICATED',
+          http: { status: 401 },
+        },
+      });
+    }
 
     const correctPassword = await argon2.verify(user.password, password);
-    if (!correctPassword) throw new AuthenticationError('Mot de passe incorrect.');
+    if (!user) {
+      throw new GraphQLError('Mot de passe incorrect.', {
+        extensions: {
+          code: 'UNAUTHENTICATED',
+          http: { status: 401 },
+        },
+      });
+    }
 
     return { token: generateToken(user) };
   }

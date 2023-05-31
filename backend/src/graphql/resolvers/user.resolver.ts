@@ -1,7 +1,7 @@
 import {
   Resolver, Query, Arg, ID, Mutation, Authorized,
 } from 'type-graphql';
-import { ApolloError } from 'apollo-server-express';
+import { GraphQLError } from 'graphql';
 import UserInput from '../inputs/user.input';
 import { User, UserModel } from '../../entities/user.entity';
 
@@ -20,7 +20,7 @@ export default class UserResolver {
   async user(@Arg('id', () => ID) id: string): Promise<User> {
     const user = await UserModel.findById(id).exec();
 
-    if (!user) throw new ApolloError('user not found');
+    if (!user) throw new GraphQLError('user not found');
 
     return user;
   }
@@ -29,12 +29,12 @@ export default class UserResolver {
   @Mutation(() => User)
   async updateUser(
     @Arg('id', () => ID) id: string,
-      @Arg('input') input: UserInput,
+    @Arg('input') input: UserInput,
   ): Promise<User> {
     const user = await UserModel.findByIdAndUpdate(id, input, {
       new: true,
     });
-    if (!user) throw new ApolloError('user not found');
+    if (!user) throw new GraphQLError('user not found');
 
     return user;
   }
@@ -43,7 +43,7 @@ export default class UserResolver {
   @Mutation(() => User)
   async deleteUser(@Arg('id', () => ID) id: string): Promise<User> {
     const user = await UserModel.findByIdAndDelete(id);
-    if (!user) throw new ApolloError('user not found');
+    if (!user) throw new GraphQLError('user not found');
 
     return user;
   }

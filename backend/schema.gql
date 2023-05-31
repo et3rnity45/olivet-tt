@@ -19,6 +19,34 @@ input ArticleInput {
   title: String!
 }
 
+type Bracket {
+  createdAt: DateTime!
+  entries: Float!
+  id: ID!
+  letter: String!
+  maxPoints: Float!
+  name: String!
+  price: Float!
+  prize1: String!
+  prize2: String!
+  prize3: String!
+  remainingEntries: Float!
+  start: String!
+  updatedAt: DateTime!
+}
+
+input BracketInput {
+  entries: Float!
+  letter: String!
+  maxPoints: Float!
+  name: String!
+  price: Float!
+  prize1: String!
+  prize2: String!
+  prize3: String!
+  start: String!
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -32,10 +60,14 @@ input LoginInput {
 type Mutation {
   addMedia(file: Upload!): String!
   createArticle(file: Upload!, input: ArticleInput!): Article!
+  createBracket(input: BracketInput!): Bracket!
   createPartner(file: Upload!, input: PartnerInput!): Partner!
   createTicket(input: TicketInput!): Ticket!
+  createTicket2(input: TicketInput!): Ticket!
+  createTickets(input: [TicketInput!]!): Ticket!
   createTrainer(file: Upload!, input: TrainerInput!): Trainer!
   deleteArticle(id: ID!): Article!
+  deleteBracket(id: ID!): Bracket!
   deleteMedia(media: String!): Boolean!
   deletePartner(id: ID!): Partner!
   deleteTicket(id: ID!): Ticket!
@@ -45,8 +77,10 @@ type Mutation {
   updateAllPlayers: [Player!]!
   updateAllPoules: [Poule!]!
   updateArticle(file: Upload, id: ID!, input: ArticleInput!): Article!
+  updateBracket(id: ID!, input: BracketInput!): Bracket!
   updatePartner(file: Upload, id: ID!, input: PartnerInput!): Partner!
   updateTicket(id: ID!, input: TicketInput!): Ticket!
+  updateTournament(id: ID!, input: TournamentInput!): Tournament!
   updateTrainer(file: Upload, id: ID!, input: TrainerInput!): Trainer!
   updateUser(id: ID!, input: UserInput!): User!
 }
@@ -103,6 +137,9 @@ type Poule {
 type Query {
   article(id: ID!): Article!
   articles: [Article!]!
+  bracket(id: ID!): Bracket!
+  brackets: [Bracket!]!
+  checkAllTickets: [Ticket!]!
   login(input: LoginInput!): Token!
   medias: [String!]!
   newestArticles: [Article!]!
@@ -112,8 +149,11 @@ type Query {
   players: [Player!]!
   poule(id: ID!): Poule!
   poules: [Poule!]!
+  sendAllMails: [TicketWithBrackets!]!
   ticket(id: ID!): Ticket!
   tickets: [Ticket!]!
+  tournament(id: ID!): Tournament!
+  tournaments: [Tournament!]!
   trainer(id: ID!): Trainer!
   trainers: [Trainer!]!
   user(id: ID!): User!
@@ -145,7 +185,7 @@ type Ticket {
   hasPaid: Boolean!
   id: ID!
   lastname: String!
-  licence: String!
+  licence: Float!
   phone: String!
   updatedAt: DateTime!
 }
@@ -156,12 +196,35 @@ input TicketInput {
   firstname: String!
   hasPaid: Boolean!
   lastname: String!
-  licence: String!
+  licence: Float!
   phone: String!
+}
+
+type TicketWithBrackets {
+  brackets: [Bracket!]!
+  email: String!
+  firstname: String!
+  lastname: String!
+  licence: String!
 }
 
 type Token {
   token: String!
+}
+
+type Tournament {
+  createdAt: DateTime!
+  helloAssoForm: String!
+  id: ID!
+  isActive: Boolean!
+  name: String!
+  rulesFile: String!
+  updatedAt: DateTime!
+}
+
+input TournamentInput {
+  isActive: Boolean!
+  name: String!
 }
 
 type Trainer {
