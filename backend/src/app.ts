@@ -5,7 +5,7 @@ import { expressMiddleware } from '@apollo/server/express4';
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
-import { json } from 'body-parser';
+import { json, urlencoded } from 'body-parser';
 import { graphqlUploadExpress } from 'graphql-upload';
 import { buildSchema } from 'type-graphql';
 import { Payload, verifyToken } from './utils/auth';
@@ -30,7 +30,6 @@ export async function initServer(): Promise<void> {
     app.use(
       graphQLPath,
       cors<cors.CorsRequest>(),
-      json(),
       expressMiddleware(server, {
         context: async ({ req }): Promise<Payload> => {
           const token = req.headers.authorization || '';
@@ -43,6 +42,8 @@ export async function initServer(): Promise<void> {
       maxFileSize: 30000000,
       maxFiles: 5,
     }));
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json());
     app.use('/webhooks', restRoutes);
 
     console.log(`🚀 Server ready at http://localhost:${PORT}${graphQLPath}`);
