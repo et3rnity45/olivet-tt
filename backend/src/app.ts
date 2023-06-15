@@ -2,10 +2,11 @@
 import Nodemailer from 'nodemailer';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
-import { json, urlencoded } from 'body-parser';
+import { json } from 'body-parser';
 import { graphqlUploadExpress } from 'graphql-upload';
 import { buildSchema } from 'type-graphql';
 import { Payload, verifyToken } from './utils/auth';
@@ -25,6 +26,7 @@ export async function initServer(): Promise<void> {
         emitSchemaFile: true,
         authChecker,
       }),
+      plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
     });
     await server.start();
     app.use(
@@ -33,8 +35,12 @@ export async function initServer(): Promise<void> {
       json(),
       expressMiddleware(server, {
         context: async ({ req }): Promise<Payload> => {
-          const token = req.headers.authorization || '';
-          return verifyToken(token);
+          const header = req.headers.authorization;
+          if (header) {
+            const token = header.replace('Bearer ', '');
+            return verifyToken(token);
+          }
+          return { user: undefined };
         },
       }),
     );
@@ -55,13 +61,13 @@ export async function initServer(): Promise<void> {
 
 export async function initMailer(): Promise<void> {
   Nodemailer.createTransport({
-    host: 'ssl0.ovh.net',
+    host: process.env.MAIL_HOST as string,
     port: 587,
     secure: false,
     requireTLS: true,
     auth: {
-      user: 'contact@olivet-tt.fr',
-      pass: 'TimoBoll45160!',
+      user: process.env.MAIL_USER as string,
+      pass: process.env.MAIL_PASSWORD as string,
     },
     logger: true,
   });
