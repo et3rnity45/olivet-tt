@@ -20,8 +20,8 @@ const OnlineInscription = (): JSX.Element => {
 					Vous êtes autorisés à participer à
 					<span className='ml-1 font-semibold'>3 tableaux maximum par jour</span>. A noter,
 					<span className='ml-1 font-semibold'>
-						il est impossible de participer à la fois aux tableaux K et L ainsi qu&apos;aux tableaux
-						commencant à la même heure (tableaux F & H, tableaux G & I, tableaux J & K)
+						il est impossible de participer à deux tableaux
+						commençant à la même heure (tableaux F & H, tableaux G & I, tableaux J & K)
 					</span>
 					. Les tableaux du samedi sont limités à 48 participants hormis le tableau dames (24). Les
 					tableaux du dimanche sont limités à 24 participants hormis le tableau -1699 pts (36).

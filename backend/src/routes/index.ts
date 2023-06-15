@@ -2,10 +2,13 @@ import { Router } from 'express';
 import TicketResolver from '../graphql/resolvers/ticket.resolver';
 import TicketInput from '../graphql/inputs/ticket.input';
 
+const EVENT_TYPE = 'Order';
+const FORM_SLUG = 'olivet-tt-fete-du-club-2023';
+
 const router = Router();
 router.post('/helloasso', (req, res) => {
   const { data, eventType } = req.body;
-  if (eventType === 'Order') {
+  if (eventType === EVENT_TYPE && data.formSlug === FORM_SLUG) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data.items.forEach(async (item: any) => {
       const ticket: TicketInput = {

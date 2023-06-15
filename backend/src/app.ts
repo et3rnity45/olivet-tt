@@ -38,9 +38,13 @@ export async function initServer(): Promise<void> {
           const header = req.headers.authorization;
           if (header) {
             const token = header.replace('Bearer ', '');
-            return verifyToken(token);
+            try {
+              return verifyToken(token);
+            } catch (err) {
+              return {};
+            }
           }
-          return { user: undefined };
+          return {};
         },
       }),
     );

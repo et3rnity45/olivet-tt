@@ -245,7 +245,7 @@ const TicketTable = (): JSX.Element => {
 										<CSVLink
 											data={ticketsByBracket(dataT.tickets, bracket)}
 											headers={headers}
-											filename={`Tableau-${bracket.letter}-Tournoi-Olivet-2022.csv`}
+											filename={`Tableau-${bracket.letter}-Tournoi-Olivet-2023.csv`}
 											className='mb-4 inline-flex transform items-center rounded bg-lightBlue px-5 py-2 text-white transition duration-400 ease-in-out hover:-translate-y-1'
 										>
 											<DownloadIcon className='mr-2 h-5 w-5' />

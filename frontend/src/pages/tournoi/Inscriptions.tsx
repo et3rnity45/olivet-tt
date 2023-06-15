@@ -11,7 +11,7 @@ const Inscriptions = (): JSX.Element => {
 				<div className='flex flex-col lg:flex-row'>
 					<Link
 						to='/tournoi/inscriptions/paiement-sur-place'
-						className='group relative my-1 overflow-hidden bg-darkBlue lg:m-6'
+						className='group relative my-1 overflow-hidden bg-darkBlue lg:m-6 pointer-events-none'
 					>
 						<img
 							className='h-auto w-full transition duration-400 ease-in-out group-hover:scale-110'
