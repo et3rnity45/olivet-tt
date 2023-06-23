@@ -3,7 +3,7 @@ import TicketResolver from '../graphql/resolvers/ticket.resolver';
 import TicketInput from '../graphql/inputs/ticket.input';
 
 const EVENT_TYPE = 'Order';
-const FORM_SLUG = 'olivet-tt-fete-du-club-2023';
+const FORM_SLUG = 'tournoi-olivet-2023';
 
 const router = Router();
 router.post('/helloasso', (req, res) => {
