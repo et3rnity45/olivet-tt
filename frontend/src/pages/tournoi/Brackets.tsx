@@ -1,5 +1,5 @@
 import React from 'react';
-import affiche from '@/assets/background/tableaux-dimanche.png';
+import affiche from '@/assets/background/affiche-2023.png';
 
 const Brackets = (): JSX.Element => {
 	return (
