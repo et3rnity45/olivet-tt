@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { RefreshIcon } from '@heroicons/react/outline';
 import { TrainersQuery } from '@/graphql/queries/trainer';
 import TrainerType from '@/types/Trainer';
-import planning from '@/assets/background/planning-2022.png';
+import planning from '@/assets/background/planning-2023.png';
 import getMediaUrl from '@/utils/mediaUrl';
 
 const Training = (): JSX.Element => {

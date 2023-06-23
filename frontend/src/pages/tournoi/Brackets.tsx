@@ -1,6 +1,5 @@
 import React from 'react';
-import tableauxSamedi from '@/assets/background/tableaux-samedi.png';
-import tableauxDimanche from '@/assets/background/tableaux-dimanche.png';
+import affiche from '@/assets/background/tableaux-dimanche.png';
 
 const Brackets = (): JSX.Element => {
 	return (
@@ -9,23 +8,18 @@ const Brackets = (): JSX.Element => {
 				<h2 className='mb-6 text-center lg:mb-12'>Les Tableaux</h2>
 				<div className='flex flex-wrap space-y-16'>
 					<p className='text-base lg:text-lg'>
-						Découvrez les 12 tableaux du tournoi d&apos;Olivet 2023 adaptés à tous les niveaux. Vous êtes
-						autorisés à participer à{' '}
+						Découvrez les 12 tableaux du tournoi d&apos;Olivet 2023 adaptés à tous les niveaux. Vous
+						êtes autorisés à participer à{' '}
 						<span className='font-semibold'>3 tableaux maximum par jour</span>. A noter,{' '}
 						<span className='font-semibold'>
-							il est impossible de participer à deux tableaux commençant à la même heure 
-							(tableaux F & H, tableaux G & I, tableaux J & K).
+							il est impossible de participer à deux tableaux commençant à la même heure (tableaux F
+							& H, tableaux G & I, tableaux J & K).
 						</span>
 						. Les tableaux du samedi sont limités à 48 participants hormis le tableau dames (24).
 						Les tableaux du dimanche sont limités à 24 participants hormis le tableau -1699 pts
 						(36).
 					</p>
-					<img className='h-auto w-full rounded' src={tableauxSamedi} alt='Inscriptions en ligne' />
-					<img
-						className='h-auto w-full rounded'
-						src={tableauxDimanche}
-						alt='Inscriptions en ligne'
-					/>
+					<img className='h-auto w-full rounded' src={affiche} alt='Affiche tournoi 2023' />
 				</div>
 			</div>
 		</section>
