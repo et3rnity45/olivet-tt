@@ -1,12 +1,15 @@
 import React from 'react';
-import heroBackground from '@/assets/background/hero-banner.jpg';
 import waveBottom from '@/assets/background/wave-bottom.svg';
-import heroTournoi from '@/assets/background/banner-tournoi.png';
+import heroTournoi from '@/assets/background/Banniere_Tournoi_2023.png';
 
 const Hero = (): JSX.Element => {
 	return (
 		<section id='hero' className='relative bg-darkBlue'>
-			<img className='max-h-[800px] w-full object-cover' src={heroTournoi} alt='Bannière Olivet Tennis de Table' />
+			<img
+				className='max-h-[800px] w-full object-cover'
+				src={heroTournoi}
+				alt='Bannière Olivet Tennis de Table'
+			/>
 			{/* <h1 className='position-center absolute whitespace-nowrap text-2xl font-bold uppercase tracking-wide text-white md:text-4xl lg:text-6xl xl:text-8xl'>
 				Olivet Tennis de Table
 			</h1> */}
