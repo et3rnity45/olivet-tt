@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { CSVLink } from 'react-csv';
 import { useMutation, useQuery } from '@apollo/client';
-import { DownloadIcon, RefreshIcon, TrashIcon } from '@heroicons/react/outline';
+import { DownloadIcon, TrashIcon } from '@heroicons/react/outline';
 import { Tab } from '@headlessui/react';
 import { TicketsQuery } from '@/graphql/queries/ticket';
 import { DeleteTicket } from '@/graphql/mutations/ticket';
@@ -13,6 +13,7 @@ import { BracketsQuery } from '@/graphql/queries/bracket';
 import BracketType from '@/types/Bracket';
 import TicketType from '@/types/Ticket';
 import classNames from '@/utils/classNames';
+import Loading from '@/components/atoms/Loading';
 
 const columns = ['#', 'Nom', 'N° de licence', 'Email', 'Tél', 'Réglement', "Date d'inscription"];
 const columns2 = ['#', 'Nom', 'Places', 'Places Restantes'];
@@ -114,11 +115,7 @@ const TicketTable = (): JSX.Element => {
 
 	return (
 		<section className='space-y-16 bg-gray-200 px-4 py-32'>
-			{(loadingB || loadingT) && (
-				<div className='flex h-96 items-center justify-center'>
-					<RefreshIcon className='h-20 w-20 rotate-180 transform animate-spin' />
-				</div>
-			)}
+			{(loadingB || loadingT) && <Loading />}
 			{(errorB || errorT) && (
 				<div className='flex h-96 w-full flex-col items-center justify-center text-center text-xl'>
 					<span className='mr-1 font-bold'>Erreur :</span>

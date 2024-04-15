@@ -8,7 +8,8 @@ import Article from '@/pages/Article';
 import Articles from '@/pages/Articles';
 import Partners from '@/pages/Partners';
 import Contact from '@/pages/Contact';
-import Ranking from '@/pages/sportif/Ranking';
+import Statistics from '@/pages/sportif/Statistics';
+import Players from '@/pages/sportif/Players';
 import Teams from '@/pages/sportif/Teams';
 import Training from '@/pages/sportif/Training';
 import Tournoi from '@/pages/tournoi/Tournoi';
@@ -48,7 +49,8 @@ const Page = (): JSX.Element => {
 			</Route>
 			<Route path='/article/:id' element={<Article />} />
 			<Route path='/sportif'>
-				<Route path='classement' element={<Ranking />} />
+				<Route path='statistiques' element={<Statistics />} />
+				<Route path='joueurs' element={<Players />} />
 				<Route path='equipes' element={<Teams />} />
 				<Route path='entrainements' element={<Training />} />
 			</Route>

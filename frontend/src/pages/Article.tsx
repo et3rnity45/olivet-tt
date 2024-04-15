@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import { ArticleQuery } from '@/graphql/queries/article';
 import ArticleContent from '@/components/organisms/ArticleContent';
 import NotFound from '@/pages/NotFound';
+import Loading from '@/components/atoms/Loading';
 
 const Article = (): JSX.Element => {
 	const { id } = useParams<{ id: string }>();
@@ -14,7 +15,7 @@ const Article = (): JSX.Element => {
 	return (
 		<section className='mx-4 py-8 lg:py-16' id='article'>
 			<div className='article-container mx-auto'>
-				{loading && <p>Chargement ...</p>}
+				{loading && <Loading />}
 				{error && <NotFound />}
 				{data?.article && <ArticleContent article={data?.article} />}
 			</div>

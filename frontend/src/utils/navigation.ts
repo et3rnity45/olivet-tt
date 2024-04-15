@@ -17,8 +17,9 @@ const sportif = [
 	{ name: 'Entraînements', href: '/sportif/entrainements', isAsset: false },
 	{ name: 'Stages', href: '/articles/stage', isAsset: false },
 	{ name: 'Compétitions', href: '/articles/competition', isAsset: false },
-	{ name: 'Classement', href: '/sportif/classement', isAsset: false },
+	{ name: 'Joueurs', href: '/sportif/joueurs', isAsset: false },
 	{ name: 'Equipes', href: '/sportif/equipes', isAsset: false },
+	{ name: 'Statistiques', href: '/sportif/statistiques', isAsset: false },
 ];
 
 const navigation = [

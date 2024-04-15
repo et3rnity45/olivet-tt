@@ -9,8 +9,8 @@ import CheckboxField from '@/components/molecules/CheckboxField';
 import TextField from '@/components/molecules/TextField';
 import Form from '@/components/organisms/Form';
 import Button from '@/components/atoms/Button';
-import { RefreshIcon } from '@heroicons/react/outline';
 import BracketType from '@/types/Bracket';
+import Loading from '@/components/atoms/Loading';
 
 type InscriptionFormProps = {
 	onSubmit: (data: InscriptionInput) => Promise<boolean>;
@@ -58,11 +58,7 @@ const InscriptionForm = ({ onSubmit }: InscriptionFormProps): JSX.Element => {
 						label='Numéro de licence'
 						className='col-span-full lg:col-span-3'
 					/>
-					{loading && (
-						<div className='flex h-96 items-center justify-center'>
-							<RefreshIcon className='h-20 w-20 rotate-180 transform animate-spin' />
-						</div>
-					)}
+					{loading && <Loading />}
 					{error && (
 						<div className='flex h-96 flex-col items-center justify-center text-center text-xl'>
 							<span className='mr-1 font-bold'>Erreur :</span>

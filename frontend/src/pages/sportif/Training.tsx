@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { RefreshIcon } from '@heroicons/react/outline';
 import { TrainersQuery } from '@/graphql/queries/trainer';
 import TrainerType from '@/types/Trainer';
 import planning from '@/assets/background/planning-2023.png';
 import getMediaUrl from '@/utils/mediaUrl';
+import Loading from '@/components/atoms/Loading';
 
 const Training = (): JSX.Element => {
 	const { loading, error, data } = useQuery(TrainersQuery);
@@ -38,17 +38,13 @@ const Training = (): JSX.Element => {
 			<section className='py-16' id='entraineur'>
 				<div className='container mx-auto px-3'>
 					<h2 className='mb-8 lg:mb-16'>Nos Entraîneurs</h2>
-					{loading ? (
-						<div className='flex h-96 items-center justify-center'>
-							<RefreshIcon className='h-20 w-20 rotate-180 transform animate-spin' />
-						</div>
-					) : null}
-					{error ? (
+					{loading && <Loading />}
+					{error && (
 						<div className='flex h-96 flex-col items-center justify-center text-center text-xl'>
 							<span className='mr-1 font-bold'>Erreur :</span>
 							{error.message}
 						</div>
-					) : null}
+					)}
 					<div className='flex flex-col items-center justify-evenly md:flex-row md:items-stretch'>
 						{data?.trainers ? <>{trainerList}</> : null}
 					</div>

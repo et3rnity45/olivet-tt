@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { RefreshIcon } from '@heroicons/react/outline';
 import { useQuery } from '@apollo/client';
 import { ArticlesQuery } from '@/graphql/queries/article';
 import ArticleCard from '@/components/molecules/ArticleCard';
 import CategoryEnum from '@/types/CategoryEnum';
 import Article from '@/types/Article';
 import FilterControl from '@/components/molecules/FilterControl';
+import Loading from '@/components/atoms/Loading';
 
 const spring = {
 	type: 'spring',
@@ -44,11 +44,7 @@ const Articles = (): JSX.Element => {
 					options={Object.values(CategoryEnum)}
 					className='pl-5'
 				/>
-				{loading && (
-					<div className='flex h-96 items-center justify-center'>
-						<RefreshIcon className='h-20 w-20 rotate-180 transform animate-spin' />
-					</div>
-				)}
+				{loading && <Loading />}
 				{error && (
 					<div className='flex h-96 flex-col items-center justify-center text-center text-xl'>
 						<span className='mr-1 font-bold'>Erreur :</span>

@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import dayjs from 'dayjs';
 import { useMutation, useQuery } from '@apollo/client';
-import { PencilIcon, PlusIcon, RefreshIcon, TrashIcon } from '@heroicons/react/outline';
+import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/outline';
 import ArticleType from '@/types/Article';
 import { ArticlesQuery } from '@/graphql/queries/article';
 import { DeleteArticle } from '@/graphql/mutations/article';
 import { NavLink, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Loading from '@/components/atoms/Loading';
 
 const columns = ['#', 'Titre', 'Catégorie', 'Mise à jour', 'Date de création'];
 
@@ -41,11 +42,7 @@ const ArticleTable = (): JSX.Element => {
 		<section className='mx-4 py-16'>
 			<div className='container mx-auto'>
 				<h2 className='mb-6 lg:mb-12'>Liste des Articles</h2>
-				{loading && (
-					<div className='flex h-96 items-center justify-center'>
-						<RefreshIcon className='h-20 w-20 rotate-180 transform animate-spin' />
-					</div>
-				)}
+				{loading && <Loading />}
 				{error && (
 					<div className='flex h-96 w-full flex-col items-center justify-center text-center text-xl'>
 						<span className='mr-1 font-bold'>Erreur :</span>

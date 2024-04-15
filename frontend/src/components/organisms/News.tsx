@@ -1,10 +1,11 @@
 import React from 'react';
-import { ArrowRightIcon, RefreshIcon } from '@heroicons/react/outline';
+import { ArrowRightIcon } from '@heroicons/react/outline';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import Article from '@/types/Article';
 import ArticleCard from '@/components/molecules/ArticleCard';
 import { NewestArticles } from '@/graphql/queries/article';
+import Loading from '@/components/atoms/Loading';
 
 const News = (): JSX.Element => {
 	const { loading, error, data } = useQuery(NewestArticles);
@@ -14,11 +15,7 @@ const News = (): JSX.Element => {
 			<div className='container mx-auto px-4'>
 				<h2>Actualité du Club</h2>
 				<hr className='my-10 text-lightWhite' />
-				{loading && (
-					<div className='flex h-96 items-center justify-center'>
-						<RefreshIcon className='h-20 w-20 rotate-180 transform animate-spin' />
-					</div>
-				)}
+				{loading && <Loading />}
 				{error && (
 					<div className='flex h-96 flex-col items-center justify-center text-center text-xl'>
 						<span className='mr-1 font-bold'>Erreur :</span>
