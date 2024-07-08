@@ -1,6 +1,6 @@
 import React from 'react';
 import waveBottom from '@/assets/background/wave-bottom.svg';
-import heroTournoi from '@/assets/background/banniere_olivet.png';
+import heroTournoi from '@/assets/background/banniere_olivet_2024.jpg';
 
 const Hero = (): JSX.Element => {
 	return (
