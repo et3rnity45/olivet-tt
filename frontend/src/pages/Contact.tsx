@@ -1,7 +1,7 @@
 import React from 'react';
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline';
 import { ReactComponent as Facebook } from '@/assets/icons/facebook.svg';
-import { ReactComponent as Youtube } from '@/assets/icons/youtube.svg';
+import { ReactComponent as Instagram } from '@/assets/icons/instagram.svg';
 
 const coordinates = {
 	mail: 'olivet-tt@orange.fr',
@@ -10,15 +10,12 @@ const coordinates = {
 	address: '199 Rue des Cireries',
 	city: '45160 Olivet',
 	facebook: 'https://www.facebook.com/usmolivetennisdetable/',
-	youtube: '#',
+	instagram: 'https://www.instagram.com/olivet_tt/',
 };
 
 const trainers = [
 	{
 		name: 'Guillaume le Guigner',
-	},
-	{
-		name: 'Antoine Biston',
 	},
 ];
 
@@ -77,8 +74,8 @@ const Contact = (): JSX.Element => {
 								</a>
 							</li>
 							<li className='mr-3'>
-								<a href={coordinates.youtube} target='_blank' rel='noreferrer'>
-									<Youtube height='24' width='24' className='text-gray hover:text-lightRed' />
+								<a href={coordinates.instagram} target='_blank' rel='noreferrer'>
+									<Instagram height='24' width='24' className='text-gray hover:text-lightRed' />
 								</a>
 							</li>
 						</ul>
