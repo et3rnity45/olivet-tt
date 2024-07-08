@@ -8,26 +8,26 @@ const Tournoi = (): JSX.Element => {
 	return (
 		<section className='mx-4 py-16' id='brackets'>
 			<div className='container mx-auto max-w-screen-xl'>
-				<h2 className='mb-3 text-center lg:mb-6'>Tournoi Olivet 2023</h2>
+				<h2 className='mb-3 text-center lg:mb-6'>Tournoi Olivet 2024</h2>
 				<h3 className='mb-6 text-center text-xl font-bold text-gray-600 md:text-2xl lg:mb-12 lg:text-3xl'>
-					12 tableaux et plus de 2000€ de dotation les 09 & 10 septembre !
+					12 tableaux et plus de 2000€ de dotation les 14 & 15 septembre !
 				</h3>
 				<div className='grid grid-cols-1 gap-16 pt-12 lg:pt-24 xl:grid-cols-2'>
 					<div className='my-auto space-y-5 xl:space-y-10'>
 						<h4 className='mb-6 text-center text-lg font-bold md:text-xl lg:mb-12 lg:text-2xl'>
-							Tournoi Olivet 2023 !
+							Tournoi Olivet 2024 !
 						</h4>
 						<p className='lg:text-lg'>
-							Olivet Tennis de Table est fier d&apos;organiser la sixième édition de son tournoi de{' '}
+							Olivet Tennis de Table est fier d&apos;organiser la septième édition de son tournoi de{' '}
 							<span className='font-semibold'>Nationale B et ses 2000€ de dotation</span>.
 						</p>
 						<p className='lg:text-lg'>
 							Après le succès des quatre premières éditions, c&apos;est reparti pour 2 jours de
-							compétition les <span className='font-semibold'>09 & 10 septembre 2023 !</span>
+							compétition les <span className='font-semibold'>14 & 15 septembre 2024 !</span>
 						</p>
 						<p className='lg:text-lg'>
 							Avec <span className='font-semibold'>12 tableaux</span>, vous pourrez vous mesurer aux
-							adversaires de votre niveau en ce début de saison 2023/2024. Un rendez-vous convivial
+							adversaires de votre niveau en ce début de saison 2024/2025. Un rendez-vous convivial
 							avec de nombreuses animations et la possibilité de se restaurer.
 						</p>
 						<p className='mb-6 lg:mb-10 lg:text-lg'>

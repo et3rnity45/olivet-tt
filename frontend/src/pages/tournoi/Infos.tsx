@@ -13,7 +13,7 @@ const Infos = (): JSX.Element => {
 					<div className='m-3'>
 						<h3 className='mb-3 text-xl md:text-2xl lg:mb-6 lg:text-3xl'>Dates et lieu</h3>
 						<p className='mb-3 lg:mb-5'>
-							Le tournoi se déroulera les 09 & 10 septembre 2023 au Gymnase de l’Orbellière à Olivet
+							Le tournoi se déroulera les 14 & 15 septembre 2024 au Gymnase de l’Orbellière à Olivet
 							!
 						</p>
 						<p className='mb-3 lg:mb-5'>

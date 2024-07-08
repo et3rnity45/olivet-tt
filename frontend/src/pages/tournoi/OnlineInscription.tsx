@@ -20,8 +20,8 @@ const OnlineInscription = (): JSX.Element => {
 					Vous êtes autorisés à participer à
 					<span className='ml-1 font-semibold'>3 tableaux maximum par jour</span>. A noter,
 					<span className='ml-1 font-semibold'>
-						il est impossible de participer à deux tableaux
-						commençant à la même heure (tableaux F & H, tableaux G & I, tableaux J & K)
+						il est impossible de participer à deux tableaux commençant à la même heure (tableaux F &
+						H, tableaux G & I, tableaux J & K)
 					</span>
 					. Les tableaux du samedi sont limités à 48 participants hormis le tableau dames (24). Les
 					tableaux du dimanche sont limités à 24 participants hormis le tableau -1699 pts (36).
@@ -40,7 +40,7 @@ const OnlineInscription = (): JSX.Element => {
 				<iframe
 					id='haWidget'
 					className='mt-12 h-screen w-full'
-					src='https://www.helloasso.com/associations/usm-olivet-tennis-de-table/evenements/tournoi-olivet-2023/widget'
+					src='https://www.helloasso.com/associations/usm-olivet-tennis-de-table/evenements/tournoi-national-b-olivet-2024/widget'
 				/>
 			</div>
 		</section>

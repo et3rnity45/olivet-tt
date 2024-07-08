@@ -1,5 +1,5 @@
 import React from 'react';
-import affiche from '@/assets/background/affiche-2023_v2.png';
+import affiche from '@/assets/background/affiche-2024.png';
 
 const Brackets = (): JSX.Element => {
 	return (
@@ -8,7 +8,7 @@ const Brackets = (): JSX.Element => {
 				<h2 className='mb-6 text-center lg:mb-12'>Les Tableaux</h2>
 				<div className='flex flex-wrap space-y-16'>
 					<p className='text-base lg:text-lg'>
-						Découvrez les 12 tableaux du tournoi d&apos;Olivet 2023 adaptés à tous les niveaux. Vous
+						Découvrez les 12 tableaux du tournoi d&apos;Olivet 2024 adaptés à tous les niveaux. Vous
 						êtes autorisés à participer à{' '}
 						<span className='font-semibold'>3 tableaux maximum par jour</span>. A noter,{' '}
 						<span className='font-semibold'>
@@ -19,7 +19,7 @@ const Brackets = (): JSX.Element => {
 						Les tableaux du dimanche sont limités à 24 participants hormis le tableau -1699 pts
 						(36).
 					</p>
-					<img className='h-auto w-full rounded' src={affiche} alt='Affiche tournoi 2023' />
+					<img className='h-auto w-full rounded' src={affiche} alt='Affiche tournoi 2024' />
 				</div>
 			</div>
 		</section>

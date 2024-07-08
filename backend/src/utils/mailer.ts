@@ -1,7 +1,10 @@
 /* eslint-disable no-console */
 import nodemailer from 'nodemailer';
 
-export default async function sendMail(to: string, html: string): Promise<void> {
+export default async function sendMail(
+  to: string,
+  html: string
+): Promise<void> {
   const transporter = nodemailer.createTransport({
     host: process.env.MAIL_HOST,
     port: 587,
@@ -17,7 +20,7 @@ export default async function sendMail(to: string, html: string): Promise<void> 
   const info = await transporter.sendMail({
     from: '"USM Olivet TT" <contact@olivet-tt.fr>',
     to,
-    subject: 'Inscription Tournoi Olivet 2022',
+    subject: 'Inscription Tournoi Olivet 2024',
     html,
   });
 }

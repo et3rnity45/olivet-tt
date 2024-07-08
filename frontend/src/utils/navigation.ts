@@ -1,4 +1,4 @@
-import reglement from '@/assets/pdf/Règlement-Officiel-2023.pdf';
+import reglement from '@/assets/pdf/Règlement-Officiel-2024.pdf';
 
 const tournoi = [
 	{ name: 'Tableaux', href: '/tournoi/tableaux', isAsset: false },
