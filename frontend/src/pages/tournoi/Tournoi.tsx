@@ -22,7 +22,7 @@ const Tournoi = (): JSX.Element => {
 							<span className='font-semibold'>Nationale B et ses 2000€ de dotation</span>.
 						</p>
 						<p className='lg:text-lg'>
-							Après le succès des quatre premières éditions, c&apos;est reparti pour 2 jours de
+							Après le succès des précèdentes éditions, c&apos;est reparti pour 2 jours de
 							compétition les <span className='font-semibold'>14 & 15 septembre 2024 !</span>
 						</p>
 						<p className='lg:text-lg'>

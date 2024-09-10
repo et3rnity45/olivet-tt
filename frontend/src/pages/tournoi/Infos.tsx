@@ -51,11 +51,8 @@ const Infos = (): JSX.Element => {
 							Contactez <span className='font-semibold'>Olivet Tennis de Table</span> :
 						</p>
 						<p className='mb-3 lg:mb-5'>
-							<a
-								href='mailto:usmo.tennisdetable@wanadoo.fr'
-								className='mr-1 text-lighterRed underline'
-							>
-								usmo.tennisdetable@wanadoo.fr
+							<a href='mailto:olivet-tt@orange.fr' className='mr-1 text-lighterRed underline'>
+								olivet-tt@orange.fr
 							</a>
 							- 02 38 66 86 88
 						</p>
@@ -67,7 +64,7 @@ const Infos = (): JSX.Element => {
 						<h3 className='mb-3 text-xl md:text-2xl lg:mb-6 lg:text-3xl'>Qui sommes-nous ?</h3>
 						<p className='mb-3 lg:mb-5'>
 							Olivet Tennis de Table, fort de ses 385 licenciés, est un club qui se veut performant
-							et convivial ! C&apos;est avec cet état d&apos;esprit que nous organisons la sixième
+							et convivial ! C&apos;est avec cet état d&apos;esprit que nous organisons la septième
 							édition de notre tournoi de national B. Cette compétition à taille humaine est
 							l&apos;occasion de débuter la saison face à de nombreux joueurs de son niveau.
 						</p>
