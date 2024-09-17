@@ -2,7 +2,8 @@ import reglement from '@/assets/pdf/Reglement-Officiel-2024.pdf';
 
 const tournoi = [
 	{ name: 'Tableaux', href: '/tournoi/tableaux', isAsset: false },
-	{ name: 'Inscriptions', href: '/tournoi/inscriptions/paiement-en-ligne', isAsset: false },
+	{ name: 'Résultats', href: '/tournoi/resultats', isAsset: false },
+	//{ name: 'Inscriptions', href: '/tournoi/inscriptions/paiement-en-ligne', isAsset: false },
 	{ name: 'Réglement', href: reglement, isAsset: true },
 	{ name: 'Infos Pratiques', href: '/tournoi/infos', isAsset: false },
 ];

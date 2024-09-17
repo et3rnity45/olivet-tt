@@ -17,6 +17,7 @@ import Brackets from '@/pages/tournoi/Brackets';
 import Inscriptions from '@/pages/tournoi/Inscriptions';
 import OnSiteInscription from '@/pages/tournoi/OnSiteInscription';
 import OnlineInscription from '@/pages/tournoi/OnlineInscription';
+import Results from '@/pages/tournoi/Results';
 import Infos from '@/pages/tournoi/Infos';
 import Login from '@/pages/Login';
 import ArticleUpdate from '@/pages/admin/article/ArticleUpdate';
@@ -41,6 +42,7 @@ const Page = (): JSX.Element => {
 						<Route path='paiement-en-ligne' element={<OnlineInscription />} />
 					</Route>
 					<Route path='infos' element={<Infos />} />
+					<Route path='resultats' element={<Results />} />
 				</Route>
 			)}
 			<Route path='/articles'>
